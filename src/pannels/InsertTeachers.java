@@ -47,7 +47,7 @@ public class InsertTeachers extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Inscripción de administrador en el sistema");
+        jLabel9.setText("Inscripción de docente en el sistema");
 
         jLabel1.setText("Nombres");
 

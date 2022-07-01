@@ -8,12 +8,14 @@ import javax.swing.JLabel;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
 import pannels.ShowAdmins;
+import pannels.ShowTeachers;
 
 
 public class ConfigFrame extends javax.swing.JFrame {
     private LoginFrame loginframe = new LoginFrame();
-    private JLabel lblMainLogo = loginframe.getLogoLabel();
-    private int logoWidth, logoHeight;
+    private final JLabel lblMainLogo = loginframe.getLogoLabel();
+    private final int logoWidth;
+    private final int logoHeight;
     
     public ConfigFrame(JFrame frame) {
         initComponents();
@@ -155,6 +157,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnCambiarLogo3.setText("Imprimir carta de trabajo");
 
         btnCambiarLogo4.setText("Mostrar docentes ");
+        btnCambiarLogo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarLogo4ActionPerformed(evt);
+            }
+        });
 
         btnCambiarLogo5.setText("Mostrar inasistencias");
 
@@ -199,6 +206,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Iniciar control de asistencia");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnAtras.setBackground(new java.awt.Color(204, 0, 51));
         btnAtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -224,15 +236,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addComponent(lblClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -333,6 +344,20 @@ public class ConfigFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnShowAdminsActionPerformed
+
+    private void btnCambiarLogo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLogo4ActionPerformed
+       ShowTeachers ST = new ShowTeachers();
+       ST.setLocationRelativeTo(this);
+       ST.setVisible(true);
+    }//GEN-LAST:event_btnCambiarLogo4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      App app = new App();
+      app.setLocationRelativeTo(this);
+      app.setVisible(true);
+      this.dispose();
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     public void updateAlllogos(){

@@ -42,4 +42,38 @@ public class AutenticationController {
         }
         return message;
     } 
+    
+    
+    public static String autenticateUser(String ci, String password){
+        
+        if(ci.isEmpty() || password.isEmpty()){
+            return "Debe llenar todos los campos";
+        }
+        
+        Connection connection  = env.ConnectionDB.getConnection();
+        String message = "";
+        
+        ResultSet rs= null;
+        try {
+            String sql = ("SELECT * FROM `users` WHERE ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ci);
+            rs = st.executeQuery();
+     
+            if(rs.next()){
+                if(!rs.getString("password").equals(password)){
+                    message = "La contraseña suministrada es incorrecta";
+                }else{
+                    message = rs.getString("id");
+                }
+            }else{
+                message = "El usuario suministrado no está registrado"; 
+            }
+            
+        } catch (HeadlessException | SQLException e) {
+           return e.getMessage();
+        }
+        return message;
+    } 
+    
 }
