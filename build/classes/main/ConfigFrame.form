@@ -280,7 +280,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnCambiarLogo3" max="32767" attributes="0"/>
+                          <Component id="printConstancia" max="32767" attributes="0"/>
                           <Component id="btnCambiarLogo5" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -297,7 +297,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCambiarLogo3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="printConstancia" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnShowAdmins" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -311,10 +311,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnCambiarLogo3">
+            <Component class="javax.swing.JButton" name="printConstancia">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Imprimir carta de trabajo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printConstanciaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCambiarLogo4">
               <Properties>

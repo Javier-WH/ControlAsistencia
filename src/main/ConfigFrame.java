@@ -1,12 +1,17 @@
 package main;
 
 
+import java.awt.HeadlessException;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
+import pannels.PrintPage;
 import pannels.ShowAdmins;
 import pannels.ShowTeachers;
 
@@ -16,6 +21,8 @@ public class ConfigFrame extends javax.swing.JFrame {
     private final JLabel lblMainLogo = loginframe.getLogoLabel();
     private final int logoWidth;
     private final int logoHeight;
+    
+    private PrintPage constancia = new PrintPage();
     
     public ConfigFrame(JFrame frame) {
         initComponents();
@@ -43,7 +50,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnInsertAdmins = new javax.swing.JButton();
         btnInsertTeacher = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        btnCambiarLogo3 = new javax.swing.JButton();
+        printConstancia = new javax.swing.JButton();
         btnCambiarLogo4 = new javax.swing.JButton();
         btnCambiarLogo5 = new javax.swing.JButton();
         btnShowAdmins = new javax.swing.JButton();
@@ -154,7 +161,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Reportes"));
 
-        btnCambiarLogo3.setText("Imprimir carta de trabajo");
+        printConstancia.setText("Imprimir carta de trabajo");
+        printConstancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printConstanciaActionPerformed(evt);
+            }
+        });
 
         btnCambiarLogo4.setText("Mostrar docentes ");
         btnCambiarLogo4.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +191,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCambiarLogo3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(printConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCambiarLogo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -192,7 +204,7 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCambiarLogo3)
+                    .addComponent(printConstancia)
                     .addComponent(btnShowAdmins))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -337,12 +349,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ShowAdmins sa = new ShowAdmins();
         sa.setLocationRelativeTo(this);
-        sa.setVisible(true);
-        
-        
-        
-        
-        
+        sa.setVisible(true);        
     }//GEN-LAST:event_btnShowAdminsActionPerformed
 
     private void btnCambiarLogo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLogo4ActionPerformed
@@ -359,6 +366,28 @@ public class ConfigFrame extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void printConstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printConstanciaActionPerformed
+        
+        
+        try {
+            
+            PrinterJob pj = PrinterJob.getPrinterJob();
+            pj.setPrintable(constancia);
+            
+            if(pj.printDialog()){
+                pj.print();
+            }
+            
+        } catch (HeadlessException | PrinterException e) {
+            
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_printConstanciaActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -372,7 +401,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCambiarLogo;
     private javax.swing.JButton btnCambiarLogo1;
-    private javax.swing.JButton btnCambiarLogo3;
     private javax.swing.JButton btnCambiarLogo4;
     private javax.swing.JButton btnCambiarLogo5;
     private javax.swing.JButton btnInsertAdmins;
@@ -387,5 +415,6 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblClose1;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JButton printConstancia;
     // End of variables declaration//GEN-END:variables
 }
