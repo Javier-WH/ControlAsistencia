@@ -15,6 +15,9 @@ public class Enviroment {
     private static String dbUser = "root";
     private static String dbPassword = "";
     private static String logoIconPath = System.getProperty("user.dir") + "\\src\\images\\logo.png";
+    private static String BackgroundPath =  System.getProperty("user.dir") + "\\src\\images\\plazaBolivar1.jpg";
+    private static String titlePath =  System.getProperty("user.dir") + "\\src\\images\\title.png";
+     private static String logoCartaTrabajoPath =  System.getProperty("user.dir") + "\\src\\images\\logoCartaTrabajo.png";
     
     
     public static String getDbUser(){
@@ -68,7 +71,8 @@ public class Enviroment {
     public static String getLogoPath(){
         return logoIconPath;
     }
-     public static void setLogoPath(){
+    
+    public static void setLogoPath(){
         logoIconPath = System.getProperty("user.dir") + "\\src\\images\\logo.png";
     }
     
@@ -80,7 +84,39 @@ public class Enviroment {
         return new ImageIcon(new ImageIcon(getLogoPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
     }
     
+    ////////////////////////////////////////////////background image
     
-   
     
-}
+    public static String getBackgroundPath(){
+        return BackgroundPath;
+    }
+
+    public static void setBackgroundPath(String Path) {
+        BackgroundPath = Path;
+    }
+    
+    public static ImageIcon getBackgroundIcon(int width, int height){
+        return new ImageIcon(new ImageIcon(getBackgroundPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+    }
+
+    /////////////////////////
+    
+    public static String getTitlePath(){
+        return titlePath;
+    }
+    
+      public static ImageIcon getTitleIcon(int width, int height){
+        return new ImageIcon(new ImageIcon(getTitlePath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+    }
+      
+      ////////////////////////////////
+
+       public static String getLogoCartaTrabajoPath(){
+        return logoCartaTrabajoPath;
+    }
+    
+      public static ImageIcon getLogoCartaTrabajo(int width, int height){
+        return new ImageIcon(new ImageIcon(getLogoCartaTrabajoPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+    }
+}////////////////////////////
+    

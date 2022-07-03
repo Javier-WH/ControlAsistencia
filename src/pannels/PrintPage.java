@@ -1,11 +1,15 @@
 
 package pannels;
 
+import java.awt.ComponentOrientation;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 
 public class PrintPage extends javax.swing.JFrame implements Printable{
@@ -14,6 +18,12 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
     public PrintPage() {
         initComponents();
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
+        lblLogoCartaTrabajo.setIcon(env.Enviroment.getLogoCartaTrabajo(lblLogoCartaTrabajo.getWidth(), lblLogoCartaTrabajo.getHeight()));
+       
+        SimpleAttributeSet attribs = new SimpleAttributeSet();
+        StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_JUSTIFIED);
+        textArea.setParagraphAttributes(attribs, true);
+        
     }
 
  
@@ -22,29 +32,64 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
     private void initComponents() {
 
         PanelConstancia = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblCargo2 = new javax.swing.JLabel();
+        lblCargo1 = new javax.swing.JLabel();
+        lblCargo = new javax.swing.JLabel();
+        lblLogoCartaTrabajo = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        sP = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextPane();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(21, 27));
 
         PanelConstancia.setBackground(new java.awt.Color(255, 255, 255));
-        PanelConstancia.setLayout(null);
+        PanelConstancia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Hola,  esto      es              una                    prueba!!!!!!!!!!!!!");
-        PanelConstancia.add(jLabel1);
-        jLabel1.setBounds(50, 160, 330, 100);
-        PanelConstancia.add(lblLogo);
-        lblLogo.setBounds(30, 20, 80, 90);
+        lblCargo2.setBackground(new java.awt.Color(255, 255, 255));
+        lblCargo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCargo2.setText("__________________________");
+        PanelConstancia.add(lblCargo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 550, 30));
+
+        lblCargo1.setBackground(new java.awt.Color(255, 255, 255));
+        lblCargo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCargo1.setText("Director");
+        PanelConstancia.add(lblCargo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 550, 30));
+
+        lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCargo.setText("Juan Perez");
+        PanelConstancia.add(lblCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 550, 30));
+
+        lblLogoCartaTrabajo.setBackground(new java.awt.Color(153, 255, 102));
+        lblLogoCartaTrabajo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLogoCartaTrabajo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PanelConstancia.add(lblLogoCartaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 240, 30));
+        PanelConstancia.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 50, 50));
+
+        sP.setBorder(null);
+
+        textArea.setFont(new java.awt.Font("Noto Sans Light", 0, 12)); // NOI18N
+        textArea.setText("      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
+        textArea.setMargin(new java.awt.Insets(2, 60, 2, 60));
+        sP.setViewportView(textArea);
+
+        PanelConstancia.add(sP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 540, 360));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Constancia de Trabajo");
+        PanelConstancia.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 90, 550, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
         );
 
         pack();
@@ -54,8 +99,14 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelConstancia;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblCargo;
+    private javax.swing.JLabel lblCargo1;
+    private javax.swing.JLabel lblCargo2;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblLogoCartaTrabajo;
+    private javax.swing.JScrollPane sP;
+    private javax.swing.JTextPane textArea;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -67,8 +118,9 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         Graphics2D page = (Graphics2D) graphics;
         page.translate(pageFormat.getImageableX()+30, pageFormat.getImageableY()+30);
         page.scale(1.0, 1.0);
-        PanelConstancia.printAll(graphics);
         
+        PanelConstancia.printAll(graphics);
+        System.out.println(graphics.getClipBounds());
         return PAGE_EXISTS;
         
     }
