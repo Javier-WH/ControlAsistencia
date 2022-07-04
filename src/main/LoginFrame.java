@@ -12,13 +12,15 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        controllers.LogoController.updateLogoAddress();
+        controllers.LogoController.updateLogoAddress();//actualiza el logo usando la direccion en la base de datos
+        
+        
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight())); 
         lblBackGround.setIcon(env.Enviroment.getBackgroundIcon(lblBackGround.getWidth(), lblBackGround.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));
 
-        inputContainer.setOpaque(true);
-        inputContainer.setBackground(new Color(2, 77, 16, 200));
+        
+        inputContainer.setBackground(new Color(2, 77, 16));
     }
     
     
@@ -37,10 +39,14 @@ public class LoginFrame extends javax.swing.JFrame {
         lblAdmin1 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
-        lblClose = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        lblAdmin2 = new javax.swing.JLabel();
+        lblAdmin3 = new javax.swing.JLabel();
+        lblClose = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
         lblBackGround = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Assist Control");
@@ -50,25 +56,31 @@ public class LoginFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 51, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputContainer.setBackground(new java.awt.Color(51, 51, 255));
+        inputContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         inputContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAdmin.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAdmin.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdmin.setText("Administrador");
-        inputContainer.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 181, 30));
+        lblAdmin.setText("Abelardo Mendez");
+        inputContainer.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 180, 30));
 
         txtUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        inputContainer.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 181, 32));
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+        inputContainer.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 140, 180, 32));
 
         lblAdmin1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblAdmin1.setForeground(new java.awt.Color(255, 255, 255));
         lblAdmin1.setText("Contraseña");
-        inputContainer.add(lblAdmin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 181, 30));
-        inputContainer.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 181, 32));
+        inputContainer.add(lblAdmin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 181, 30));
+        inputContainer.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 181, 32));
 
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(0, 102, 51));
@@ -78,15 +90,23 @@ public class LoginFrame extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        inputContainer.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 181, 30));
+        inputContainer.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 181, 30));
+        inputContainer.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 80));
 
-        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 400, 200));
+        lblAdmin2.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAdmin2.setForeground(new java.awt.Color(255, 255, 255));
+        lblAdmin2.setText("Administrador");
+        inputContainer.add(lblAdmin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 181, 30));
 
-        lblTitle.setFont(new java.awt.Font("Miriam Libre", 0, 24)); // NOI18N
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 250, 90));
+        lblAdmin3.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        lblAdmin3.setForeground(new java.awt.Color(255, 255, 255));
+        lblAdmin3.setText("Escuela Básica");
+        inputContainer.add(lblAdmin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 180, 30));
+
+        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 280, 320));
 
         lblClose.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblClose.setForeground(new java.awt.Color(255, 255, 255));
+        lblClose.setForeground(new java.awt.Color(153, 153, 153));
         lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblClose.setText("X");
         lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,15 +114,41 @@ public class LoginFrame extends javax.swing.JFrame {
                 lblCloseMouseClicked(evt);
             }
         });
-        jPanel1.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 29, 26));
-        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 106));
-        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 410));
+        jPanel1.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 29, 26));
+
+        jPanel2.setBackground(new java.awt.Color(102, 51, 0));
+
+        lblTitle.setFont(new java.awt.Font("Miriam Libre", 0, 24)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(374, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, -1));
+        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 360, 410));
+
+        jLabel1.setForeground(new java.awt.Color(102, 51, 0));
+        jLabel1.setText("Version 0.1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +177,10 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
     public static void main(String args[]) {
    
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -153,9 +203,13 @@ public class LoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel inputContainer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblAdmin1;
+    private javax.swing.JLabel lblAdmin2;
+    private javax.swing.JLabel lblAdmin3;
     private javax.swing.JLabel lblBackGround;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblLogo;

@@ -1,11 +1,11 @@
 
 package pannels;
 
-import java.awt.ComponentOrientation;
+
+import Actors.Users;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
-import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import javax.swing.text.SimpleAttributeSet;
@@ -14,17 +14,25 @@ import javax.swing.text.StyleConstants;
 
 public class PrintPage extends javax.swing.JFrame implements Printable{
 
-   
-    public PrintPage() {
+       
+    public PrintPage(Users user, Users admin, String address) {
         initComponents();
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
         lblLogoCartaTrabajo.setIcon(env.Enviroment.getLogoCartaTrabajo(lblLogoCartaTrabajo.getWidth(), lblLogoCartaTrabajo.getHeight()));
+        
+   
+        
+        
+        env.Enviroment.setConstanciaText(user, admin, address);
        
+        textArea.setText(env.Enviroment.getConstaciaText());
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_JUSTIFIED);
-        textArea.setParagraphAttributes(attribs, true);
-        
+        textArea.setParagraphAttributes(attribs, true);  
     }
+
+    
+     
 
  
     @SuppressWarnings("unchecked")
@@ -64,22 +72,23 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         lblLogoCartaTrabajo.setBackground(new java.awt.Color(153, 255, 102));
         lblLogoCartaTrabajo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLogoCartaTrabajo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PanelConstancia.add(lblLogoCartaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 240, 30));
-        PanelConstancia.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 50, 50));
+        PanelConstancia.add(lblLogoCartaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 280, 40));
+        PanelConstancia.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 70, 70));
 
         sP.setBorder(null);
 
         textArea.setFont(new java.awt.Font("Noto Sans Light", 0, 12)); // NOI18N
-        textArea.setText("      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
+        textArea.setText("     Quien suscribe, Lcdo Borman Rafael Urquiola, titular de la cédula de indentidad N° 11.402.977, Jefe de Municipio del Sector Escolar N°5, que funciona en Guanarito Estado Portugueza, hace constar por medio de la presente que el ciudadano Yakelina Quevedo, titular de la cédula de identidad N° 9152249, se desempeña como Directora en la Escuela Básica \"Monseñor Unda\", y en la actualidad cuenta con 20 años y 08 meses de servicio. Constaaancia que se expide de parte interesaada en Guanarito a los veintidos días del mes de Octubre del año 2022");
+        textArea.setToolTipText("");
         textArea.setMargin(new java.awt.Insets(2, 60, 2, 60));
         sP.setViewportView(textArea);
 
-        PanelConstancia.add(sP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 540, 360));
+        PanelConstancia.add(sP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 540, 310));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Constancia de Trabajo");
-        PanelConstancia.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 90, 550, 40));
+        PanelConstancia.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 550, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +129,7 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         page.scale(1.0, 1.0);
         
         PanelConstancia.printAll(graphics);
-        System.out.println(graphics.getClipBounds());
+        
         return PAGE_EXISTS;
         
     }

@@ -1,7 +1,6 @@
 package main;
 
 
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -9,10 +8,9 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import pannels.EmisorPannel;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
-import pannels.PrintPage;
 import pannels.ShowAdmins;
 import pannels.ShowTeachers;
 
@@ -23,7 +21,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private final int logoWidth;
     private final int logoHeight;
     
-    private PrintPage constancia = new PrintPage();
+
     
     public ConfigFrame(JFrame frame) {
         initComponents();
@@ -31,11 +29,10 @@ public class ConfigFrame extends javax.swing.JFrame {
         logoWidth = lblLogo.getWidth();
         logoHeight = lblLogo.getHeight();
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
-        
+        lblImage.setIcon(env.Enviroment.getBackground2Icon(lblImage.getWidth(), lblImage.getHeight()));
         btnStartApp.requestFocus();
         
-        //panelGeneral.setBackground(new Color(97, 225, 121, 200));
-        //panelReportes.setBackground(new Color(2, 77, 16, 200));
+     
        
     }
 
@@ -46,7 +43,6 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         lblClose = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         lblClose1 = new javax.swing.JLabel();
         panelGeneral = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -62,6 +58,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnShowAdmins = new javax.swing.JButton();
         btnStartApp = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
 
         lblClose.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -77,14 +76,10 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 102, 0), 2, true));
-
-        jLabel2.setFont(new java.awt.Font("Miriam Libre", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Configuración");
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblClose1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblClose1.setForeground(new java.awt.Color(0, 102, 0));
+        lblClose1.setForeground(new java.awt.Color(255, 255, 255));
         lblClose1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblClose1.setText("X");
         lblClose1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -92,6 +87,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 lblClose1MouseClicked(evt);
             }
         });
+        mainPanel.add(lblClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 29, 26));
 
         panelGeneral.setBackground(new java.awt.Color(255, 255, 255));
         panelGeneral.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "General", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 102, 0))); // NOI18N
@@ -192,6 +188,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addGap(10, 10, 10))))
         );
 
+        mainPanel.add(panelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 369, -1));
+
         panelReportes.setBackground(new java.awt.Color(255, 255, 255));
         panelReportes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 102, 0))); // NOI18N
 
@@ -259,6 +257,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        mainPanel.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 369, -1));
+
         btnStartApp.setBackground(new java.awt.Color(0, 102, 0));
         btnStartApp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnStartApp.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,6 +269,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 btnStartAppActionPerformed(evt);
             }
         });
+        mainPanel.add(btnStartApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 202, 38));
 
         btnAtras.setBackground(new java.awt.Color(204, 0, 51));
         btnAtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -280,62 +281,44 @@ public class ConfigFrame extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
+        mainPanel.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 140, 38));
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addContainerGap(28, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(btnStartApp, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(panelReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+        jPanel1.setBackground(new java.awt.Color(102, 51, 0));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Miriam Libre", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Configuración           ");
+        jLabel2.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStartApp, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(210, 210, 210))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 660, 40));
+        mainPanel.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 400, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
         );
 
         pack();
@@ -413,29 +396,16 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartAppActionPerformed
 
     private void printConstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printConstanciaActionPerformed
-        
-        
-        try {
-            
-            PrinterJob pj = PrinterJob.getPrinterJob();
-            pj.setPrintable(constancia);
-            
-            if(pj.printDialog()){
-                pj.print();
-            }
-            
-        } catch (HeadlessException | PrinterException e) {
-            
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        
-        
-        
+
+       EmisorPannel EP = new EmisorPannel();
+       EP.setLocationRelativeTo(this);
+       EP.setVisible(true);
+  
         
     }//GEN-LAST:event_printConstanciaActionPerformed
 
     private void btnEditCartaTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCartaTrabajoActionPerformed
-        new PrintPage().setVisible(true);
+        //new PrintPage().setVisible(true);
     }//GEN-LAST:event_btnEditCartaTrabajoActionPerformed
 
     
@@ -459,8 +429,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnShowAdmins;
     private javax.swing.JButton btnStartApp;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblClose1;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel panelGeneral;

@@ -43,7 +43,7 @@ public class AutenticationController {
         return message;
     } 
     
-    
+    //regresa el id
     public static String autenticateUser(String ci, String password){
         
         if(ci.isEmpty() || password.isEmpty()){
@@ -75,5 +75,24 @@ public class AutenticationController {
         }
         return message;
     } 
+    
+    ///////////////////////////////////////
+    
+       public static ResultSet getUserData(String ci){
+        
+        Connection connection  = env.ConnectionDB.getConnection();
+        try {
+            String sql = ("SELECT * FROM `users` WHERE ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ci);
+             ResultSet rs = st.executeQuery();
+             return rs;  
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+         return null;
+    } 
+    
+    
     
 }

@@ -10,7 +10,25 @@ public class Users {
             password,
             email,
             phoneNumber,
-            address;
+            address,
+            charge, 
+            serviceTime;
+
+    public String getServiceTime() {
+        return serviceTime;
+    }
+
+    public void setServiceTime(String serviceTime) {
+        this.serviceTime = serviceTime;
+    }
+
+    public String getCharge() {
+        return charge;
+    }
+
+    public void setCharge(String charge) {
+        this.charge = charge;
+    }
 
     public String getName() {
         return name;
