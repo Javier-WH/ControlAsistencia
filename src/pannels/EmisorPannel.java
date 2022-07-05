@@ -15,6 +15,14 @@ public class EmisorPannel extends javax.swing.JFrame {
     public EmisorPannel() {
         initComponents();
         lblLogo.setIcon(env.Enviroment.getBackgroundIcon(lblLogo.getWidth(), lblLogo.getHeight()));
+        
+        txtEmisorName.setText(env.Enviroment.getDirectorName());
+        txtEmisorLastName.setText(env.Enviroment.getDirectorLastName());
+        txtEmisorCi.setText(env.Enviroment.getDirectorCi());
+        txtEmisorCharge.setText("Director");
+        
+        
+        
     }
 
    
@@ -45,10 +53,6 @@ public class EmisorPannel extends javax.swing.JFrame {
         txtEmisorLastName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtEmisorCharge = new javax.swing.JTextField();
-        txtInstitutionName = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnImprimir = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
@@ -164,7 +168,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 41, 290, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del Solicitante"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del Emisor"));
 
         jLabel7.setText("Cédula ");
 
@@ -198,47 +202,23 @@ public class EmisorPannel extends javax.swing.JFrame {
             }
         });
 
-        txtInstitutionName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInstitutionNameActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setText("Institución");
-
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Dirección");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtInstitutionName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmisorName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmisorCi, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmisorLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmisorCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtEmisorName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmisorCi, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmisorLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmisorCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -260,18 +240,10 @@ public class EmisorPannel extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtEmisorCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtInstitutionName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 263, 310, 250));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 263, 310, 170));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -290,8 +262,8 @@ public class EmisorPannel extends javax.swing.JFrame {
                 btnImprimirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 250, 40));
-        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 380, 520));
+        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 250, 40));
+        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 380, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,7 +273,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -343,10 +315,6 @@ public class EmisorPannel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmisorChargeActionPerformed
 
-    private void txtInstitutionNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInstitutionNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtInstitutionNameActionPerformed
-
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         this.dispose();
     }//GEN-LAST:event_jLabel12MouseClicked
@@ -360,8 +328,17 @@ public class EmisorPannel extends javax.swing.JFrame {
             emisor.setCharge(txtEmisorCharge.getText());
   
         if(!isMissingData()){
-            user.setServiceTime(txtServiceTime.getText());
-            PrintPage constancia = new PrintPage(user, emisor, txtAddress.getText());
+            if(user == null){
+                user = new Users();
+                user.setName(txtName.getText());
+                user.setLastName(txtLastName.getText());
+                user.setCI(txtCi.getText());
+                user.setCharge(txtCharge.getText());
+            }
+            
+             user.setServiceTime(txtServiceTime.getText());
+            
+            PrintPage constancia = new PrintPage(user, emisor);
           
             try {
 
@@ -374,7 +351,7 @@ public class EmisorPannel extends javax.swing.JFrame {
 
             } catch (HeadlessException | PrinterException e) {
 
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(this, e);
             }
        
         }else{
@@ -397,19 +374,13 @@ public class EmisorPannel extends javax.swing.JFrame {
         if(txtEmisorName.getText().isEmpty() ||
                 txtEmisorLastName.getText().isEmpty() ||
                 txtEmisorCi.getText().isEmpty() ||
-                txtEmisorCharge.getText().isEmpty() ||
-                txtAddress.getText().isEmpty() ||
-                txtInstitutionName.getText().isEmpty()){
+                txtEmisorCharge.getText().isEmpty()){
             return true;
         }
         return false;
     }
     
     
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
-
     private void txtCiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCiFocusLost
 
         user = controllers.MakeUser.makeNewUser(txtCi.getText());
@@ -437,9 +408,7 @@ public class EmisorPannel extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -452,14 +421,12 @@ public class EmisorPannel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCi;
     private javax.swing.JTextField txtEmisorCharge;
     private javax.swing.JTextField txtEmisorCi;
     private javax.swing.JTextField txtEmisorLastName;
     private javax.swing.JTextField txtEmisorName;
-    private javax.swing.JTextField txtInstitutionName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtServiceTime;

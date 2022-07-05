@@ -9,6 +9,7 @@ public class ConfirmClose extends javax.swing.JFrame {
     private JFrame configWindow;
     /**
      * Creates new form ConfirmClose
+     * @param configWindow
      */
     public ConfirmClose(JFrame configWindow) {
         initComponents();

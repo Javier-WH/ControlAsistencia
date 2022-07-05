@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import pannels.EmisorPannel;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
+import pannels.InstitutionDataForm;
 import pannels.ShowAdmins;
 import pannels.ShowTeachers;
 
@@ -51,6 +52,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnLogoRestore = new javax.swing.JButton();
         btnInsertAdmins = new javax.swing.JButton();
         btnInsertTeacher = new javax.swing.JButton();
+        btbInstitucionData = new javax.swing.JButton();
         panelReportes = new javax.swing.JPanel();
         printConstancia = new javax.swing.JButton();
         btnCambiarLogo4 = new javax.swing.JButton();
@@ -149,23 +151,39 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        btbInstitucionData.setBackground(new java.awt.Color(51, 102, 0));
+        btbInstitucionData.setForeground(new java.awt.Color(255, 255, 255));
+        btbInstitucionData.setText("Datos de la institución");
+        btbInstitucionData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btbInstitucionData.setPreferredSize(new java.awt.Dimension(74, 18));
+        btbInstitucionData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbInstitucionDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
         panelGeneralLayout.setHorizontalGroup(
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnCambiarLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditCartaTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInsertAdmins, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                    .addComponent(btnInsertTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLogoRestore, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnCambiarLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEditCartaTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnInsertAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnInsertTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLogoRestore, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                            .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32))))
         );
         panelGeneralLayout.setVerticalGroup(
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,22 +191,23 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLogoRestore)
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addComponent(btnCambiarLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditCartaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnInsertAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInsertTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10))))
+                        .addComponent(btnInsertTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLogoRestore)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        mainPanel.add(panelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 369, -1));
+        mainPanel.add(panelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 369, 220));
 
         panelReportes.setBackground(new java.awt.Color(255, 255, 255));
         panelReportes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 102, 0))); // NOI18N
@@ -257,7 +276,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        mainPanel.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 369, -1));
+        mainPanel.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 369, -1));
 
         btnStartApp.setBackground(new java.awt.Color(0, 102, 0));
         btnStartApp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -269,7 +288,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 btnStartAppActionPerformed(evt);
             }
         });
-        mainPanel.add(btnStartApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 202, 38));
+        mainPanel.add(btnStartApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 202, 38));
 
         btnAtras.setBackground(new java.awt.Color(204, 0, 51));
         btnAtras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -281,7 +300,7 @@ public class ConfigFrame extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        mainPanel.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 140, 38));
+        mainPanel.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 140, 38));
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
 
@@ -308,7 +327,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
 
         mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 660, 40));
-        mainPanel.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 400, 460));
+        mainPanel.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 400, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,7 +337,9 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -408,6 +429,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         //new PrintPage().setVisible(true);
     }//GEN-LAST:event_btnEditCartaTrabajoActionPerformed
 
+    private void btbInstitucionDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbInstitucionDataActionPerformed
+        InstitutionDataForm idf = new InstitutionDataForm();
+        idf.setLocationRelativeTo(this);
+        idf.setVisible(true);
+    }//GEN-LAST:event_btbInstitucionDataActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -418,6 +445,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btbInstitucionData;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCambiarLogo;
     private javax.swing.JButton btnCambiarLogo4;

@@ -12,10 +12,11 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 
+
 public class PrintPage extends javax.swing.JFrame implements Printable{
 
        
-    public PrintPage(Users user, Users admin, String address) {
+    public PrintPage(Users user, Users admin) {
         initComponents();
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
         lblLogoCartaTrabajo.setIcon(env.Enviroment.getLogoCartaTrabajo(lblLogoCartaTrabajo.getWidth(), lblLogoCartaTrabajo.getHeight()));
@@ -23,9 +24,9 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
    
         
         
-        env.Enviroment.setConstanciaText(user, admin, address);
+       String text =  env.Enviroment.setConstanciaText(user, admin);
        
-        textArea.setText(env.Enviroment.getConstaciaText());
+        textArea.setText(text);
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_JUSTIFIED);
         textArea.setParagraphAttributes(attribs, true);  
@@ -78,7 +79,7 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         sP.setBorder(null);
 
         textArea.setFont(new java.awt.Font("Noto Sans Light", 0, 12)); // NOI18N
-        textArea.setText("     Quien suscribe, Lcdo Borman Rafael Urquiola, titular de la cédula de indentidad N° 11.402.977, Jefe de Municipio del Sector Escolar N°5, que funciona en Guanarito Estado Portugueza, hace constar por medio de la presente que el ciudadano Yakelina Quevedo, titular de la cédula de identidad N° 9152249, se desempeña como Directora en la Escuela Básica \"Monseñor Unda\", y en la actualidad cuenta con 20 años y 08 meses de servicio. Constaaancia que se expide de parte interesaada en Guanarito a los veintidos días del mes de Octubre del año 2022");
+        textArea.setText("     Quien suscribe, Lcdo Borman Rafael Urquiola, titular de la cédula de indentidad N° 11.402.977, Jefe de Municipio del Sector Escolar N°5, que funciona en Guanarito Estado Portugueza, hace constar por medio de la presente que el ciudadano Yakelina Quevedo, titular de la cédula de identidad N° 9152249, se desempeña como Directora en la Escuela Básica \"Monseñor Unda\", y en la actualidad cuenta con 20 años y 08 meses de servicio. \n\n\n\n\nConstaaancia que se expide de parte interesaada en Guanarito a los veintidos días del mes de Octubre del año 2022");
         textArea.setToolTipText("");
         textArea.setMargin(new java.awt.Insets(2, 60, 2, 60));
         sP.setViewportView(textArea);
