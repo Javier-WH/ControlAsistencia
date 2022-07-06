@@ -14,6 +14,7 @@ import pannels.InsertTeachers;
 import pannels.InstitutionDataForm;
 import pannels.ShowAdmins;
 import pannels.ShowTeachers;
+import pannels.WorkLetterEditPannel;
 
 
 public class ConfigFrame extends javax.swing.JFrame {
@@ -426,7 +427,9 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_printConstanciaActionPerformed
 
     private void btnEditCartaTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCartaTrabajoActionPerformed
-        //new PrintPage().setVisible(true);
+      WorkLetterEditPannel WLEP = new WorkLetterEditPannel();
+      WLEP.setLocationRelativeTo(this);
+      WLEP.setVisible(true);
     }//GEN-LAST:event_btnEditCartaTrabajoActionPerformed
 
     private void btbInstitucionDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbInstitucionDataActionPerformed

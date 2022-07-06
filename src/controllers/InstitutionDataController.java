@@ -226,5 +226,40 @@ public class InstitutionDataController {
         }
     }
     
+        public static void setWorkLetter2Text(String text) {
+
+        if (!text.isEmpty()) {
+            Connection connection = env.ConnectionDB.getConnection();
+            try {
+                String sql = ("UPDATE `config` SET `value` = ? WHERE `config`.`ID` = 8");
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, text);
+                st.execute();
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar almacenar la carta de trabajo");
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static String getWorkLetter2Text() {
+
+        Connection connection = env.ConnectionDB.getConnection();
+
+        try {
+            String sql = "SELECT * FROM `config` WHERE ID = 8";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString("value");
+            } else {
+                return "Empty CI";
+            }
+
+        } catch (HeadlessException | SQLException e) {
+            return e.getMessage();
+        }
+    }
+    
     
 }

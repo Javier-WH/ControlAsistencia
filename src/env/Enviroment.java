@@ -19,7 +19,7 @@ public class Enviroment {
     private static String Background3Path = System.getProperty("user.dir") + "\\src\\images\\plazaBolivar2.jpg";
     private static String titlePath = System.getProperty("user.dir") + "\\src\\images\\title.png";
     private static String logoCartaTrabajoPath = System.getProperty("user.dir") + "\\src\\images\\logoCartaTrabajo.png";
-  
+   
 
     public static String getDirectorName() {
         return controllers.InstitutionDataController.getDirectorName();
@@ -55,6 +55,13 @@ public class Enviroment {
 
     public static void setTextConstanciaTrabajo(String text) {
         controllers.InstitutionDataController.setWorkLetterText(text);
+    }
+      public static String getTextConstanciaTrabajo2() {
+        return controllers.InstitutionDataController.getWorkLetter2Text();
+    }
+
+    public static void setTextConstanciaTrabajo2(String text) {
+        controllers.InstitutionDataController.setWorkLetter2Text(text);
     }
 
     public static String getOwnerAddress() {
@@ -130,7 +137,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getLogoIcon(int width, int height) {
-        return new ImageIcon(new ImageIcon(getLogoPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getLogoPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     ////////////////////////////////////////////////background image
@@ -185,7 +192,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getLogoCartaTrabajo(int width, int height) {
-        return new ImageIcon(new ImageIcon(getLogoCartaTrabajoPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getLogoCartaTrabajoPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     ///////////////////////////////constancia de trabajo
@@ -214,6 +221,19 @@ public class Enviroment {
         text = text.replaceAll("<CARGORECEPTOR>", userCharge);
         text = text.replaceAll("<NOMBREINSTITUCION>", getOwnerName());
         text = text.replaceAll("<TIEMPOSERVICIO>", userServiceTime);
+        text = text.replaceAll("<DIASEMISION>", libraries.GetDate.getDayOfMonth());
+        text = text.replaceAll("<MESEMISION>", libraries.GetDate.getMonthName());
+        text = text.replaceAll("<ANOEMISION>", libraries.GetDate.getCurrentYear());
+  
+
+        return text;
+    }
+    
+        public static String setConstanciaText2() {
+
+
+        String text = getTextConstanciaTrabajo2();
+       
         text = text.replaceAll("<DIASEMISION>", libraries.GetDate.getDayOfMonth());
         text = text.replaceAll("<MESEMISION>", libraries.GetDate.getMonthName());
         text = text.replaceAll("<ANOEMISION>", libraries.GetDate.getCurrentYear());
