@@ -21,8 +21,8 @@ public class MakeUser {
                 user.setCI(rs.getString("ci"));
                 user.setAddress(rs.getString("address"));
                 user.setEmail(rs.getString("email"));
-                user.setPhoneNumber("phone");
-                user.setCharge("docente");
+                user.setPhoneNumber(rs.getString("phone"));
+                user.setCharge(rs.getString("charge"));
                 return user;
             }
         } catch (SQLException ex) {

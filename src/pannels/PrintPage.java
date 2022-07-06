@@ -17,7 +17,7 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
        
     public PrintPage(Users user, Users admin) {
         initComponents();
-        lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
+        lblLogo.setIcon(env.Enviroment.getVenezuelaCoatOfArmsIcon(lblLogo.getWidth(), lblLogo.getHeight()));
         lblLogoCartaTrabajo.setIcon(env.Enviroment.getLogoCartaTrabajo(lblLogoCartaTrabajo.getWidth(), lblLogoCartaTrabajo.getHeight()));
         
    
@@ -34,6 +34,8 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         textArea1.setParagraphAttributes(attribs, true);  
         lblCargo1.setText(admin.getCharge());
         lblCargo.setText(admin.getName() + " "+ admin.getLastName());
+        
+      
         
     }
 
@@ -66,22 +68,22 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         lblCargo2.setBackground(new java.awt.Color(255, 255, 255));
         lblCargo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCargo2.setText("__________________________");
-        PanelConstancia.add(lblCargo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 550, 30));
+        PanelConstancia.add(lblCargo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 550, 30));
 
         lblCargo1.setBackground(new java.awt.Color(255, 255, 255));
         lblCargo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCargo1.setText("Director");
-        PanelConstancia.add(lblCargo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 550, 30));
+        PanelConstancia.add(lblCargo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 550, 30));
 
         lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCargo.setText("Juan Perez");
-        PanelConstancia.add(lblCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 550, 30));
+        PanelConstancia.add(lblCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 550, 30));
 
         lblLogoCartaTrabajo.setBackground(new java.awt.Color(153, 255, 102));
         lblLogoCartaTrabajo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLogoCartaTrabajo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PanelConstancia.add(lblLogoCartaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 280, 50));
-        PanelConstancia.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 70, 70));
+        PanelConstancia.add(lblLogoCartaTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 450, 30));
+        PanelConstancia.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 50, 50));
 
         sP1.setBorder(null);
 
@@ -91,7 +93,7 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         textArea1.setMargin(new java.awt.Insets(2, 60, 2, 60));
         sP1.setViewportView(textArea1);
 
-        PanelConstancia.add(sP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 540, 110));
+        PanelConstancia.add(sP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 540, 110));
 
         sP.setBorder(null);
 
@@ -101,22 +103,24 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         textArea.setMargin(new java.awt.Insets(2, 60, 2, 60));
         sP.setViewportView(textArea);
 
-        PanelConstancia.add(sP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 540, 210));
+        PanelConstancia.add(sP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 540, 150));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Constancia de Trabajo");
-        PanelConstancia.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 550, 40));
+        PanelConstancia.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 550, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelConstancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelConstancia, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

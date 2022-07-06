@@ -14,13 +14,25 @@ public class Enviroment {
     private static String dbUser = "root";
     private static String dbPassword = "";
     private static String logoIconPath = System.getProperty("user.dir") + "\\src\\images\\logo.png";
+    private static String venezuelaCoatOfArmsPath = System.getProperty("user.dir") + "\\src\\images\\venezelaEscudo.png";
     private static String BackgroundPath = System.getProperty("user.dir") + "\\src\\images\\plazaBolivar1.jpg";
     private static String Background2Path = System.getProperty("user.dir") + "\\src\\images\\iglesia1.jpg";
     private static String Background3Path = System.getProperty("user.dir") + "\\src\\images\\plazaBolivar2.jpg";
     private static String titlePath = System.getProperty("user.dir") + "\\src\\images\\title.png";
     private static String logoCartaTrabajoPath = System.getProperty("user.dir") + "\\src\\images\\logoCartaTrabajo.png";
+
+    public static String getVenezuelaCoatOfArmsPath() {
+        return venezuelaCoatOfArmsPath;
+    }
+
+    public static void setVenezuelaCoatOfArmsPath(String venezuelaCoatOfArmsPath) {
+        Enviroment.venezuelaCoatOfArmsPath = venezuelaCoatOfArmsPath;
+    }
    
 
+    
+    
+    
     public static String getDirectorName() {
         return controllers.InstitutionDataController.getDirectorName();
     }
@@ -139,7 +151,10 @@ public class Enviroment {
     public static ImageIcon getLogoIcon(int width, int height) {
         return new ImageIcon(new ImageIcon(getLogoPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
-
+    
+      public static ImageIcon getVenezuelaCoatOfArmsIcon(int width, int height) {
+        return new ImageIcon(new ImageIcon(getVenezuelaCoatOfArmsPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+    }
     ////////////////////////////////////////////////background image
     public static String getBackgroundPath() {
         return BackgroundPath;
@@ -150,7 +165,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getBackgroundIcon(int width, int height) {
-        return new ImageIcon(new ImageIcon(getBackgroundPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getBackgroundPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     public static String getBackground2Path() {
@@ -162,7 +177,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getBackground2Icon(int width, int height) {
-        return new ImageIcon(new ImageIcon(getBackground2Path()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getBackground2Path()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     public static String getBackground3Path() {
@@ -174,7 +189,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getBackground3Icon(int width, int height) {
-        return new ImageIcon(new ImageIcon(getBackground3Path()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getBackground3Path()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     /////////////////////////
@@ -183,7 +198,7 @@ public class Enviroment {
     }
 
     public static ImageIcon getTitleIcon(int width, int height) {
-        return new ImageIcon(new ImageIcon(getTitlePath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(getTitlePath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
     ////////////////////////////////

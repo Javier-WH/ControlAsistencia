@@ -247,7 +247,7 @@ public class WorkLetterEditPannel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-       
+
         if(txtWorkLetter1.getText().isEmpty() || txtWorkLetter2.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "El texto no puede estar vacío");
         }else{
@@ -257,9 +257,7 @@ public class WorkLetterEditPannel extends javax.swing.JFrame {
             this.dispose();
         
         }
-        
-        
-        
+ 
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

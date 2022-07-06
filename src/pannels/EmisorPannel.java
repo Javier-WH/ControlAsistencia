@@ -40,9 +40,9 @@ public class EmisorPannel extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtLastName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCharge = new javax.swing.JTextField();
         txtServiceTime = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        txtCharge = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -98,13 +98,6 @@ public class EmisorPannel extends javax.swing.JFrame {
 
         jLabel5.setText("Cargo");
 
-        txtCharge.setText("Docente");
-        txtCharge.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtChargeActionPerformed(evt);
-            }
-        });
-
         txtServiceTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtServiceTimeActionPerformed(evt);
@@ -112,6 +105,8 @@ public class EmisorPannel extends javax.swing.JFrame {
         });
 
         jLabel6.setText("Tiempo de servicio");
+
+        txtCharge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente", "Director", "Sub-director", "Administrativo", "Obrero", "Administrativo", "Asesor Pedagogico", "Cultura", "Colaborador", " " }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,13 +121,13 @@ public class EmisorPannel extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtServiceTime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtServiceTime, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtCi, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtCharge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +144,9 @@ public class EmisorPannel extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
                     .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -291,10 +286,6 @@ public class EmisorPannel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLastNameActionPerformed
 
-    private void txtChargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChargeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtChargeActionPerformed
-
     private void txtServiceTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceTimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtServiceTimeActionPerformed
@@ -333,8 +324,7 @@ public class EmisorPannel extends javax.swing.JFrame {
                 user.setName(txtName.getText());
                 user.setLastName(txtLastName.getText());
                 user.setCI(txtCi.getText());
-                user.setCharge(txtCharge.getText());
-            }
+              }
             
              user.setServiceTime(txtServiceTime.getText());
             
@@ -365,7 +355,6 @@ public class EmisorPannel extends javax.swing.JFrame {
         if(txtName.getText().isEmpty() ||
                 txtLastName.getText().isEmpty() ||
                 txtCi.getText().isEmpty() ||
-                txtCharge.getText().isEmpty() ||
                 txtServiceTime.getText().isEmpty()){
         
             return true;
@@ -388,8 +377,9 @@ public class EmisorPannel extends javax.swing.JFrame {
             txtName.setText(user.getName());
             txtLastName.setText(user.getLastName());
             txtCi.setText(user.getCI());
-            txtCharge.setText(user.getCharge());
             txtServiceTime.setText("");
+            txtCharge.setSelectedItem(user.getCharge());
+
         } else {
             cleanUserData();
           }
@@ -400,7 +390,6 @@ public class EmisorPannel extends javax.swing.JFrame {
     private void cleanUserData(){
         txtName.setText("");
         txtLastName.setText("");
-        txtCharge.setText("");
         txtServiceTime.setText("");
     }
     
@@ -421,7 +410,7 @@ public class EmisorPannel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JTextField txtCharge;
+    private javax.swing.JComboBox<String> txtCharge;
     private javax.swing.JTextField txtCi;
     private javax.swing.JTextField txtEmisorCharge;
     private javax.swing.JTextField txtEmisorCi;

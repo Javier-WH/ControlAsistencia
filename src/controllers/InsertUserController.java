@@ -21,7 +21,7 @@ public class InsertUserController {
         Connection connection  = env.ConnectionDB.getConnection();
      
         try {
-            String sql = ("INSERT INTO `users` (`name`, `lastName`, `ci`, `password`, `email`, `phone`, `address`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            String sql = ("INSERT INTO `users` (`name`, `lastName`, `ci`, `password`, `email`, `phone`, `address`, `charge`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, admin.getName());
             st.setString(2, admin.getLastName());
@@ -30,6 +30,7 @@ public class InsertUserController {
             st.setString(5, admin.getEmail());
             st.setString(6, admin.getPhoneNumber());
             st.setString(7, admin.getAddress());
+            st.setString(8, admin.getCharge());
             
             st.execute();
      
