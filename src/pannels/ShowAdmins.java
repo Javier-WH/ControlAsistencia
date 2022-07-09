@@ -10,7 +10,11 @@ public class ShowAdmins extends javax.swing.JFrame {
     public ShowAdmins() {
         initComponents();
         
-        DefaultTableModel model = (DefaultTableModel)tblAdmins.getModel();
+        fillTable();
+    }
+
+    private void fillTable(){
+         DefaultTableModel model = (DefaultTableModel)tblAdmins.getModel();
         model.setRowCount(0);
         
         ResultSet rs = controllers.GetAdminsListController.getAdminList();
@@ -22,8 +26,9 @@ public class ShowAdmins extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
         }
+    
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,6 +40,7 @@ public class ShowAdmins extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdmins = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,6 +103,13 @@ public class ShowAdmins extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblAdmins);
 
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,7 +117,10 @@ public class ShowAdmins extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +133,9 @@ public class ShowAdmins extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,10 +161,41 @@ public class ShowAdmins extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         String opt = JOptionPane.showInputDialog(null, "Introduce la cedula del administrador a eliminar");
+        
+        if(libraries.RegEx.isMatch("^[0-9]*$", opt)){
+           ResultSet rs = controllers.AutenticationController.getAdminData(opt);
+           
+            try {
+                if(rs.next()){
+                 
+                int proced = JOptionPane.showOptionDialog(this, "¿Desea eliminar al administrador "+rs.getString("name")+"?", "¡¡¡¡Advertencia!!!!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Eliminar", "NO eliminar"}, "default");
+                    
+                    if(proced == JOptionPane.YES_OPTION){
+                        String id = rs.getString("id");
+                        boolean deleteAdmin = controllers.RemoveAdminController.deleteAdminByID(id);
+                        if(deleteAdmin){
+                            fillTable();
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No se ha podido eliminar al Administrador");
+                        }
+                    } 
+                } 
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

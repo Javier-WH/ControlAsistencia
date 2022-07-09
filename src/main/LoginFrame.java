@@ -15,11 +15,20 @@ public class LoginFrame extends javax.swing.JFrame {
         controllers.LogoController.updateLogoAddress();//actualiza el logo usando la direccion en la base de datos
         
         
+     
+        
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight())); 
         lblBackGround.setIcon(env.Enviroment.getBackgroundIcon(lblBackGround.getWidth(), lblBackGround.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));
-
+        txtTitle.setText(env.Enviroment.getOwnerName());
+        txtTitle.setOpaque(false);
+        txtTitle.setBackground(new Color(0,0,0,0));
+        txtTitle.setWrapStyleWord(true);
         
+        ScrollTitle.getViewport().setOpaque(false);
+        ScrollTitle.setOpaque(false);
+                
+       
         inputContainer.setBackground(new Color(2, 77, 16));
     }
     
@@ -34,14 +43,14 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         inputContainer = new javax.swing.JPanel();
-        lblAdmin = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         lblAdmin1 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         lblAdmin2 = new javax.swing.JLabel();
-        lblAdmin3 = new javax.swing.JLabel();
+        ScrollTitle = new javax.swing.JScrollPane();
+        txtTitle = new javax.swing.JTextArea();
         lblClose = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
@@ -62,11 +71,6 @@ public class LoginFrame extends javax.swing.JFrame {
         inputContainer.setBackground(new java.awt.Color(51, 51, 255));
         inputContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         inputContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblAdmin.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdmin.setText("Abelardo Mendez");
-        inputContainer.add(lblAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 180, 30));
 
         txtUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         txtUser.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +102,19 @@ public class LoginFrame extends javax.swing.JFrame {
         lblAdmin2.setText("Administrador");
         inputContainer.add(lblAdmin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 181, 30));
 
-        lblAdmin3.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblAdmin3.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdmin3.setText("Escuela Básica");
-        inputContainer.add(lblAdmin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 180, 30));
+        ScrollTitle.setBackground(new java.awt.Color(242, 252, 249));
+        ScrollTitle.setBorder(null);
+
+        txtTitle.setEditable(false);
+        txtTitle.setColumns(20);
+        txtTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtTitle.setForeground(new java.awt.Color(255, 255, 255));
+        txtTitle.setLineWrap(true);
+        txtTitle.setRows(1);
+        txtTitle.setBorder(null);
+        ScrollTitle.setViewportView(txtTitle);
+
+        inputContainer.add(ScrollTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 160, 80));
 
         jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 280, 320));
 
@@ -138,7 +151,7 @@ public class LoginFrame extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, -1));
-        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 360, 410));
+        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -90, 360, 410));
 
         jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setText("Version 0.1");
@@ -201,20 +214,20 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollTitle;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel inputContainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblAdmin1;
     private javax.swing.JLabel lblAdmin2;
-    private javax.swing.JLabel lblAdmin3;
     private javax.swing.JLabel lblBackGround;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextArea txtTitle;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

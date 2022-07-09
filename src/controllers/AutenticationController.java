@@ -93,6 +93,19 @@ public class AutenticationController {
          return null;
     } 
     
-    
+         public static ResultSet getAdminData(String ci){
+        
+        Connection connection  = env.ConnectionDB.getConnection();
+        try {
+            String sql = ("SELECT * FROM `admins` WHERE ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ci);
+             ResultSet rs = st.executeQuery();
+             return rs;  
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+         return null;
+    } 
     
 }

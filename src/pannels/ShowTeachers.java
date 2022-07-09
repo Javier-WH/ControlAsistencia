@@ -10,11 +10,13 @@ public class ShowTeachers extends javax.swing.JFrame {
     public ShowTeachers() {
         initComponents();
         
-        DefaultTableModel model = (DefaultTableModel)tblTeachers.getModel();
+        fillTable();
+    }
+    
+    private void fillTable(){
+     DefaultTableModel model = (DefaultTableModel)tblTeachers.getModel();
         model.setRowCount(0);
-        
         ResultSet rs = controllers.GetTeachersController.getTeachers();
-        
         try {
             while (rs.next()) { 
                 model.addRow(new Object[]{rs.getString("lastName")+" "+rs.getString("name"), rs.getString("ci"),rs.getString("phone"), rs.getString("email"), rs.getString("address")});
@@ -22,6 +24,7 @@ public class ShowTeachers extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
         }
+    
     }
 
     @SuppressWarnings("unchecked")
@@ -33,6 +36,7 @@ public class ShowTeachers extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTeachers = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -45,7 +49,7 @@ public class ShowTeachers extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Docentes del sistema");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 8, 1011, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 8, 890, -1));
 
         jButton1.setForeground(new java.awt.Color(51, 102, 0));
         jButton1.setText("Atras");
@@ -87,6 +91,14 @@ public class ShowTeachers extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 40, 1010, 448));
 
+        jButton2.setText("Eliminar ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,10 +117,41 @@ public class ShowTeachers extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String opt = JOptionPane.showInputDialog(null, "Introduce la cedula del docente a eliminar");
+        
+        if(libraries.RegEx.isMatch("^[0-9]*$", opt)){
+           ResultSet rs = controllers.AutenticationController.getUserData(opt);
+           
+            try {
+                if(rs.next()){
+                 
+                int proced = JOptionPane.showOptionDialog(this, "¿Desea eliminar al docente "+rs.getString("name")+ " "+ rs.getString("lastName") + "?", "¡¡¡¡Advertencia!!!!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Eliminar", "NO eliminar"}, "default");
+                    
+                    if(proced == JOptionPane.YES_OPTION){
+                        String id = rs.getString("id");
+                        boolean deleteUser = controllers.RemoveUserController.deleteUserByID(id);
+                        if(deleteUser){
+                            fillTable();
+                        }else{
+                            JOptionPane.showMessageDialog(this, "No se ha podido eliminar al docente");
+                        }
+                    } 
+                } 
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+        
+  
+    }//GEN-LAST:event_jButton2ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
