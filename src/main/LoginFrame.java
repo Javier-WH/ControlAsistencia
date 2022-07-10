@@ -151,7 +151,7 @@ public class LoginFrame extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, -1));
-        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -90, 360, 410));
+        jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 410));
 
         jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setText("Version 0.1");

@@ -64,5 +64,10 @@ public class GetDate {
         int year = cal.get(Calendar.YEAR);
         return String.valueOf(year);
     }
+     
+         public static String getCurrentMonth() {
+        int month = cal.get(Calendar.MONTH);
+        return String.valueOf(month + 1);
+    }
 
 }

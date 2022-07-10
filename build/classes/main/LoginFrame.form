@@ -267,7 +267,7 @@
         <Component class="javax.swing.JLabel" name="lblBackGround">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="-50" y="-90" width="360" height="410"/>
+              <AbsoluteConstraints x="0" y="0" width="360" height="410"/>
             </Constraint>
           </Constraints>
         </Component>

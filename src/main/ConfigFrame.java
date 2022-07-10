@@ -13,6 +13,7 @@ import pannels.InsertAdmins;
 import pannels.InsertTeachers;
 import pannels.InstitutionDataForm;
 import pannels.ShowAdmins;
+import pannels.ShowAssitance;
 import pannels.ShowTeachers;
 import pannels.WorkLetterEditPannel;
 
@@ -237,6 +238,11 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnCambiarLogo5.setForeground(new java.awt.Color(255, 255, 255));
         btnCambiarLogo5.setText("Asistencias");
         btnCambiarLogo5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btnCambiarLogo5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarLogo5ActionPerformed(evt);
+            }
+        });
 
         btnShowAdmins.setBackground(new java.awt.Color(51, 102, 0));
         btnShowAdmins.setForeground(new java.awt.Color(255, 255, 255));
@@ -437,6 +443,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         idf.setLocationRelativeTo(this);
         idf.setVisible(true);
     }//GEN-LAST:event_btbInstitucionDataActionPerformed
+
+    private void btnCambiarLogo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLogo5ActionPerformed
+        // TODO add your handling code here:
+        ShowAssitance SA = new ShowAssitance();
+        SA.setLocationRelativeTo(this);
+        SA.setVisible(true);
+    }//GEN-LAST:event_btnCambiarLogo5ActionPerformed
 
     
     public void updateAlllogos(){
