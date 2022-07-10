@@ -235,7 +235,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         btnCambiarLogo5.setBackground(new java.awt.Color(51, 102, 0));
         btnCambiarLogo5.setForeground(new java.awt.Color(255, 255, 255));
-        btnCambiarLogo5.setText("Mostrar inasistencias");
+        btnCambiarLogo5.setText("Asistencias");
         btnCambiarLogo5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
 
         btnShowAdmins.setBackground(new java.awt.Color(51, 102, 0));

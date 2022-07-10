@@ -4,6 +4,7 @@ import Actors.Users;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 
@@ -20,8 +21,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         txtEmisorLastName.setText(env.Enviroment.getDirectorLastName());
         txtEmisorCi.setText(env.Enviroment.getDirectorCi());
         txtEmisorCharge.setText("Director");
-        
-        
+              
         
     }
 
@@ -43,6 +43,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         txtServiceTime = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCharge = new javax.swing.JComboBox<>();
+        cbService = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -103,10 +104,23 @@ public class EmisorPannel extends javax.swing.JFrame {
                 txtServiceTimeActionPerformed(evt);
             }
         });
+        txtServiceTime.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtServiceTimeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtServiceTimeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtServiceTimeKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Tiempo de servicio");
 
         txtCharge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente", "Director", "Sub-director", "Administrativo", "Obrero", "Administrativo", "Asesor Pedagogico", "Cultura", "Colaborador", " " }));
+
+        cbService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "años", "meses", "dias" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -122,11 +136,14 @@ public class EmisorPannel extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtServiceTime, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(txtCi, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addComponent(txtCharge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCharge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtServiceTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -151,7 +168,8 @@ public class EmisorPannel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtServiceTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtServiceTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -326,7 +344,7 @@ public class EmisorPannel extends javax.swing.JFrame {
                 user.setCI(txtCi.getText());
               }
             
-             user.setServiceTime(txtServiceTime.getText());
+             user.setServiceTime(txtServiceTime.getText() +" "+ String.valueOf(cbService.getSelectedItem()));
             
             PrintPage constancia = new PrintPage(user, emisor);
           
@@ -350,6 +368,8 @@ public class EmisorPannel extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnImprimirActionPerformed
 
+    
+    
     public boolean isMissingData(){
     
         if(txtName.getText().isEmpty() ||
@@ -386,6 +406,36 @@ public class EmisorPannel extends javax.swing.JFrame {
   
     }//GEN-LAST:event_txtCiFocusLost
 
+    private void txtServiceTimeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServiceTimeKeyTyped
+        // TODO add your handling code here:
+ 
+        
+    }//GEN-LAST:event_txtServiceTimeKeyTyped
+
+    private void txtServiceTimeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServiceTimeKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtServiceTimeKeyPressed
+
+    private void txtServiceTimeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServiceTimeKeyReleased
+        // TODO add your handling code here:
+        
+            if(txtServiceTime.getText().equals("1")){
+            DefaultComboBoxModel DCBM = (DefaultComboBoxModel) cbService.getModel();
+            DCBM.removeAllElements();
+            DCBM.addElement("año");
+            DCBM.addElement("mes");
+            DCBM.addElement("dia");
+        }else{
+            DefaultComboBoxModel DCBM = (DefaultComboBoxModel) cbService.getModel();
+            DCBM.removeAllElements();
+            DCBM.addElement("años");
+            DCBM.addElement("meses");
+            DCBM.addElement("dias");
+        
+        }
+    }//GEN-LAST:event_txtServiceTimeKeyReleased
+
 
     private void cleanUserData(){
         txtName.setText("");
@@ -395,6 +445,7 @@ public class EmisorPannel extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JComboBox<String> cbService;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
