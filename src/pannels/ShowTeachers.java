@@ -36,7 +36,7 @@ public class ShowTeachers extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTeachers = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -91,13 +91,13 @@ public class ShowTeachers extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 40, 1010, 448));
 
-        jButton2.setText("Eliminar ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar ");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 20));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,11 +117,11 @@ public class ShowTeachers extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         String opt = JOptionPane.showInputDialog(null, "Introduce la cedula del docente a eliminar");
         
-        if(libraries.RegEx.isMatch("^[0-9]*$", opt)){
+        if(opt != null && libraries.RegEx.isMatch("^[0-9]*$", opt)){
            ResultSet rs = controllers.AutenticationController.getUserData(opt);
            
             try {
@@ -145,13 +145,13 @@ public class ShowTeachers extends javax.swing.JFrame {
         }
         
   
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -1,5 +1,8 @@
 package pannels;
 
+import java.awt.HeadlessException;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ButtonGroup;
@@ -9,8 +12,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class ShowAssitance extends javax.swing.JFrame {
 
+    
+  private DefaultTableModel model = null;
+  private String date = null;  
   
-    public ShowAssitance() {
+  public ShowAssitance() {
         initComponents();
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
@@ -27,32 +33,37 @@ public class ShowAssitance extends javax.swing.JFrame {
 
    private void fillTable(){
        
-      String date = txtYear.getText()+"-"+txtMonth.getText()+"-"+txtDay.getText();
+        date = txtYear.getText()+"-"+txtMonth.getText()+"-"+txtDay.getText();
        
-        DefaultTableModel model = (DefaultTableModel)tblAssistance.getModel();
+        model = (DefaultTableModel)tblAssistance.getModel();
         model.setRowCount(0);
         
-        ResultSet rs = null;
+        ResultSet rsPresent= controllers.AssistenceController.getAssistanceListByDate(date);
+        ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
         
-        if(btnPresente.isSelected()){
-            rs = controllers.AssistenceController.getAssistanceListByDate(date);
-        }else{
-            rs = controllers.AssistenceController.getInAssistanceListByDate(date);
-        }
-        
-        
-        if(rs != null){
-            try {
-                while (rs.next()) { 
-                    model.addRow(new Object[]{ rs.getString("ci"), rs.getString("name"), rs.getString("lastName"), rs.getString("charge")});
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
-            }
-        }
+       if (rsPresent != null) {
+
+           try {
+               while (rsPresent.next()) {
+                   if (btnPresente.isSelected()) {
+                       model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
+                   }else{
+                       while(rsTeacherList.next()){
+                          if(!rsTeacherList.getString("id").equals(rsPresent.getString("id"))){
+                              model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
+                          }
+                       }
+                   }
+               }
+               
+           } catch (SQLException e) {
+               JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
+           }
+       }
     
     }
- 
+    
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,6 +84,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         btnPresente = new javax.swing.JRadioButton();
         btnInasistente = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -155,16 +167,25 @@ public class ShowAssitance extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Imprimir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(btnPresente)
-                .addGap(18, 18, 18)
-                .addComponent(btnInasistente)
+                .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPresente)
+                .addGap(38, 38, 38)
+                .addComponent(btnInasistente)
+                .addGap(72, 72, 72)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,7 +239,8 @@ public class ShowAssitance extends javax.swing.JFrame {
                     .addComponent(btnFilter)
                     .addComponent(btnPresente)
                     .addComponent(btnInasistente)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -274,6 +296,35 @@ public class ShowAssitance extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public DefaultTableModel getTableModel(){
+        return model;
+    }
+    
+    public String getThisDate(){
+        return date;
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        PrintAsistences PA = new PrintAsistences(getTableModel(), btnPresente.isSelected(), getThisDate());
+       // PA.setLocationRelativeTo(this);
+        //PA.setVisible(true);
+        
+          try {
+
+                PrinterJob pj = PrinterJob.getPrinterJob();
+                pj.setPrintable(PA);
+
+                if(pj.printDialog()){
+                    pj.print();
+                }
+
+            } catch (HeadlessException | PrinterException e) {
+
+                JOptionPane.showMessageDialog(this, e);
+            }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
@@ -281,6 +332,7 @@ public class ShowAssitance extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnPresente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

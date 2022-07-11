@@ -165,7 +165,7 @@ public class ShowAdmins extends javax.swing.JFrame {
         // TODO add your handling code here:
          String opt = JOptionPane.showInputDialog(null, "Introduce la cedula del administrador a eliminar");
         
-        if(libraries.RegEx.isMatch("^[0-9]*$", opt)){
+        if( opt != null && libraries.RegEx.isMatch("^[0-9]*$", opt)){
            ResultSet rs = controllers.AutenticationController.getAdminData(opt);
            
             try {

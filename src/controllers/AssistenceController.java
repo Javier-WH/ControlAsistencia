@@ -31,7 +31,7 @@ public class AssistenceController {
        
         Connection connection  = env.ConnectionDB.getConnection();
         try {
-            String sql = ("SELECT users.id, users.name, users.lastName, users.ci, users.charge FROM `users` INNER JOIN `assistance` ON users.id = assistance.userID AND DATE(assistance.createdAt) = DATE(?)");
+            String sql = ("SELECT users.id, users.name, users.lastName, users.ci, users.charge, users.createdAt FROM `users` INNER JOIN `assistance` ON users.id = assistance.userID AND DATE(assistance.createdAt) = DATE(?)");
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, date);
             ResultSet rs = st.executeQuery();
@@ -45,21 +45,6 @@ public class AssistenceController {
     ////////////////////////////
     
         
-    public static ResultSet getInAssistanceListByDate(String date){
-       
-        Connection connection  = env.ConnectionDB.getConnection();
-        try {
-            //String sql = ("SELECT users.id, users.name, users.lastName, users.ci, users.charge FROM `users` INNER JOIN `assistance` ON users.id = assistance.userID AND DATE(assistance.createdAt) != DATE(?)");
-            String sql = ("SELECT users.id, users.name, users.lastName, users.ci, users.charge FROM `users` INNER JOIN `assistance` ON DATE(assistance.createdAt) != DATE(?)");
 
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, date);
-            ResultSet rs = st.executeQuery();
-             return rs;  
-        } catch (HeadlessException | SQLException e) {
-            System.out.println(e.getMessage());
-        }
-         return null;
-    } 
-
+    
 }
