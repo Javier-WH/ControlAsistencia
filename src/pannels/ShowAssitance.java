@@ -5,18 +5,17 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ShowAssitance extends javax.swing.JFrame {
 
-    
-  private DefaultTableModel model = null;
-  private String date = null;  
-  
-  public ShowAssitance() {
+    private DefaultTableModel model = null;
+    private String date = null;
+
+    public ShowAssitance() {
         initComponents();
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
@@ -24,46 +23,50 @@ public class ShowAssitance extends javax.swing.JFrame {
         fillInputsCurrentDate();
         fillTable();
     }
-    
+
     private void fillInputsCurrentDate() {
         txtDay.setText(libraries.GetDate.getDayOfMonth());
         txtMonth.setText(libraries.GetDate.getCurrentMonth());
         txtYear.setText(libraries.GetDate.getCurrentYear());
     }
 
-   private void fillTable(){
-       
-        date = txtYear.getText()+"-"+txtMonth.getText()+"-"+txtDay.getText();
-       
-        model = (DefaultTableModel)tblAssistance.getModel();
-        model.setRowCount(0);
-        
-        ResultSet rsPresent= controllers.AssistenceController.getAssistanceListByDate(date);
-        ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
-        
-       if (rsPresent != null) {
+    private void fillTable() {
 
-           try {
-               while (rsPresent.next()) {
-                   if (btnPresente.isSelected()) {
-                       model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
-                   }else{
-                       while(rsTeacherList.next()){
-                          if(!rsTeacherList.getString("id").equals(rsPresent.getString("id"))){
-                              model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
-                          }
-                       }
-                   }
-               }
-               
-           } catch (SQLException e) {
-               JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
-           }
-       }
-    
+        date = txtYear.getText() + "-" + txtMonth.getText() + "-" + txtDay.getText();
+
+        model = (DefaultTableModel) tblAssistance.getModel();
+        model.setRowCount(0);
+
+        ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
+        ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
+
+        if (rsPresent != null) {
+
+            try {
+                if (btnPresente.isSelected()) {
+                    while (rsPresent.next()) {
+                        model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
+                    }
+                } else {
+                    //se hizó así, porque fue la uníca solución que funcionó para resolver el bug que duplicaba los resultados.
+                    ArrayList<String> presentsList = new ArrayList();
+
+                    while (rsPresent.next()) {
+                        presentsList.add(rsPresent.getString("id"));
+                    }
+              
+                    while (rsTeacherList.next()) {
+                        if (!presentsList.contains(rsTeacherList.getString("id"))) {
+                            model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
+            }
+        }
     }
-    
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -270,14 +273,14 @@ public class ShowAssitance extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-       
-        if(!txtDay.getText().isEmpty() && !txtMonth.getText().isEmpty() && !txtYear.getText().isEmpty()){
+
+        if (!txtDay.getText().isEmpty() && !txtMonth.getText().isEmpty() && !txtYear.getText().isEmpty()) {
             fillTable();
-        }else{
+        } else {
             fillInputsCurrentDate();
         }
-        
-        
+
+
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void btnPresenteStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnPresenteStateChanged
@@ -296,33 +299,33 @@ public class ShowAssitance extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public DefaultTableModel getTableModel(){
+    public DefaultTableModel getTableModel() {
         return model;
     }
-    
-    public String getThisDate(){
+
+    public String getThisDate() {
         return date;
     }
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         PrintAsistences PA = new PrintAsistences(getTableModel(), btnPresente.isSelected(), getThisDate());
-       // PA.setLocationRelativeTo(this);
+        // PA.setLocationRelativeTo(this);
         //PA.setVisible(true);
-        
-          try {
 
-                PrinterJob pj = PrinterJob.getPrinterJob();
-                pj.setPrintable(PA);
+        try {
 
-                if(pj.printDialog()){
-                    pj.print();
-                }
+            PrinterJob pj = PrinterJob.getPrinterJob();
+            pj.setPrintable(PA);
 
-            } catch (HeadlessException | PrinterException e) {
-
-                JOptionPane.showMessageDialog(this, e);
+            if (pj.printDialog()) {
+                pj.print();
             }
-        
+
+        } catch (HeadlessException | PrinterException e) {
+
+            JOptionPane.showMessageDialog(this, e);
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
