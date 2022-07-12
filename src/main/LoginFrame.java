@@ -196,24 +196,7 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
-    public static void main(String args[]) {
-   
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                
-              if(env.ConnectionDB.connectionDB()){
-                 // new LoadingScreen().setVisible(true);
-                  LoginFrame LF = new LoginFrame();
-                  LF.setVisible(true);
-              }else{
-                  env.ConnectionDB.getError();
-                  System.exit(0);
-              }
-              
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollTitle;
