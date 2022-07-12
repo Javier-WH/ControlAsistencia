@@ -30,6 +30,8 @@ public class LoginFrame extends javax.swing.JFrame {
                 
        
         inputContainer.setBackground(new Color(2, 77, 16));
+        
+        lblVersion.setText(env.Enviroment.getVersion());
     }
     
     
@@ -55,7 +57,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblBackGround = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblVersion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Assist Control");
@@ -153,9 +155,9 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, -1));
         jPanel1.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 410));
 
-        jLabel1.setForeground(new java.awt.Color(102, 51, 0));
-        jLabel1.setText("Version 0.1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
+        lblVersion.setForeground(new java.awt.Color(102, 51, 0));
+        lblVersion.setText("Version 0.1");
+        jPanel1.add(lblVersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,6 +203,7 @@ public class LoginFrame extends javax.swing.JFrame {
             public void run() {
                 
               if(env.ConnectionDB.connectionDB()){
+                 // new LoadingScreen().setVisible(true);
                   LoginFrame LF = new LoginFrame();
                   LF.setVisible(true);
               }else{
@@ -216,7 +219,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollTitle;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel inputContainer;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdmin1;
@@ -225,6 +227,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblVersion;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextArea txtTitle;
     private javax.swing.JTextField txtUser;

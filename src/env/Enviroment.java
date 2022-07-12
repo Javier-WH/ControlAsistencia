@@ -20,6 +20,14 @@ public class Enviroment {
     private static String Background3Path = System.getProperty("user.dir") + "\\src\\images\\plazaBolivar2.jpg";
     private static String titlePath = System.getProperty("user.dir") + "\\src\\images\\title.png";
     private static String logoCartaTrabajoPath = System.getProperty("user.dir") + "\\src\\images\\logoCartaTrabajo.png";
+    private static String logoSpashScreen = System.getProperty("user.dir") + "\\src\\images\\SplashScreen.jpg";
+    private static String version = "Version 0.1";
+
+    public static String getVersion() {
+        return version;
+    }
+    
+    
 
     public static String getVenezuelaCoatOfArmsPath() {
         return venezuelaCoatOfArmsPath;
@@ -27,6 +35,14 @@ public class Enviroment {
 
     public static void setVenezuelaCoatOfArmsPath(String venezuelaCoatOfArmsPath) {
         Enviroment.venezuelaCoatOfArmsPath = venezuelaCoatOfArmsPath;
+    }
+
+    public static String getLogoSpashScreen() {
+        return logoSpashScreen;
+    }
+
+    public static void setLogoSpashScreen(String logoSpashScreen) {
+        Enviroment.logoSpashScreen = logoSpashScreen;
     }
    
 
@@ -152,6 +168,9 @@ public class Enviroment {
         return new ImageIcon(new ImageIcon(getLogoPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
     
+    public static ImageIcon getSplashScreenIcon(int width, int height) {
+        return new ImageIcon(new ImageIcon(getLogoSpashScreen()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+    }
       public static ImageIcon getVenezuelaCoatOfArmsIcon(int width, int height) {
         return new ImageIcon(new ImageIcon(getVenezuelaCoatOfArmsPath()).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
