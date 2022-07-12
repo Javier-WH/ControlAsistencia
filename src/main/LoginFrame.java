@@ -202,8 +202,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 
               if(env.ConnectionDB.connectionDB()){
                   LoginFrame LF = new LoginFrame();
-                
-                LF.setVisible(true);
+                  LF.setVisible(true);
               }else{
                   env.ConnectionDB.getError();
                   System.exit(0);

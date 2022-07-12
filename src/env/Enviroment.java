@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 public class Enviroment {
 
     ////////// database connection enviroment viables
-    private static String databaseName = "assistcontrol";
-    private static String databaseAddress = "jdbc:mysql://localhost:3306/";
-    private static String dbUser = "root";
-    private static String dbPassword = "";
+    private static String databaseName = GetLocalConfig.getDbNConfig();
+    private static String databaseAddress = GetLocalConfig.getDbAConfig();
+    private static String dbUser = GetLocalConfig.getDbUConfig();
+    private static String dbPassword = GetLocalConfig.getDbPConfig();
     private static String logoIconPath = System.getProperty("user.dir") + "\\src\\images\\logo.png";
     private static String venezuelaCoatOfArmsPath = System.getProperty("user.dir") + "\\src\\images\\venezelaEscudo.png";
     private static String BackgroundPath = System.getProperty("user.dir") + "\\src\\images\\plazaBolivar1.jpg";
