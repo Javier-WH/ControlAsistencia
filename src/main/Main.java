@@ -13,15 +13,19 @@ public class Main {
             System.exit(0);
         }
         */
-       
-       
-        loading.setVisible(true);
-        loading.checkList();
-        
+        startLoading();
     }
 
-    public static LoadingScreen getLoading() {
-        return loading;
+    public static void startLoading() {
+
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                loading.setVisible(true);
+                loading.checkList();
+            }
+        });
+        t1.start();
+
     }
     
     

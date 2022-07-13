@@ -18,9 +18,10 @@ public class GetLocalConfig {
     //default info
     
     private static String databasePathAddress = "jdbc:mysql://localhost:3306/";
-    private static String databaseName = "assistcontrol";
+    private static String databaseName = "assistcontrolxd";
     private static String dbUser = "root";
     private static String dbPassword = "";
+     private static String start = "";
     
     private static String key = "ESCUELA ABELARDO MENDEZ";
     
@@ -29,6 +30,7 @@ public class GetLocalConfig {
     private static String DBNpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBN.ascon";
     private static String DBUpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBU.ascon";
     private static String DBPpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBP.ascon";
+    private static String StartPath = System.getProperty("user.dir") + "\\src\\configFiles\\ST.ascon";
     
     
     
@@ -237,6 +239,53 @@ public class GetLocalConfig {
     ///////////////////////////////
     
     
+    
+     public static String getStartConfig() {
+        File doc = new File(StartPath);
+
+        try {
+            Scanner obj = new Scanner(doc);
+            while (obj.hasNextLine()) {
+                return Encript.desencriptar(obj.nextLine(), key);
+            }
+        } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+        }
+        return null;
+    }
+    
+    ////////
+    
+    public static void setStartConfig(String text){
+        
+         try
+        {
+            String filePath = StartPath;
+            FileWriter fw = new FileWriter(filePath);    
+            String lineToAppend = Encript.encriptar(text, key);    
+            fw.write(lineToAppend);
+            fw.close();
+        }
+        catch(IOException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e)
+        {
+            System.out.println(e);
+        }
+    
+    }
+   
+        public static void resetStart(){
+        setStartConfig(start);
+         }
+    
+    
+    ////////////////////
+    
+    public static boolean StartExist(){
+        
+         File file = new File(StartPath);
+         return file.exists();
+        
+    }
     
     
     

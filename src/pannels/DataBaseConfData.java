@@ -10,10 +10,10 @@ public class DataBaseConfData extends javax.swing.JFrame {
     public DataBaseConfData() {
         initComponents();
         setLocationRelativeTo(null);
-        txtDBAddress.setText(env.Enviroment.getDatabaseAddress());
-        txtDBName.setText(env.Enviroment.getDatabaseName());
-        txtDBUser.setText(env.Enviroment.getDbUser());
-        txtDBPassword.setText(env.Enviroment.getDbPassword());
+        txtDBAddress.setText(env.GetLocalConfig.getDbAConfig());
+        txtDBName.setText(env.GetLocalConfig.getDbNConfig());
+        txtDBUser.setText(env.GetLocalConfig.getDbUConfig());
+        txtDBPassword.setText(env.GetLocalConfig.getDbPConfig());
     }
 
 
@@ -150,12 +150,14 @@ public class DataBaseConfData extends javax.swing.JFrame {
         env.GetLocalConfig.setDBUConfig(txtDBUser.getText());
         env.GetLocalConfig.setDBPConfig(String.valueOf(txtDBPassword.getPassword()));   
         this.dispose();
-        main.Main.getLoading().checkList();
-       
-
         
+        main.Main.startLoading();
+         
+
+       
     }//GEN-LAST:event_btnAcceptActionPerformed
 
+    
 
     
     

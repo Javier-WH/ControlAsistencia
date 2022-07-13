@@ -16,7 +16,7 @@ public class LoginFrame extends javax.swing.JFrame {
         
         
      
-        
+    
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight())); 
         lblBackGround.setIcon(env.Enviroment.getBackgroundIcon(lblBackGround.getWidth(), lblBackGround.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));

@@ -12,7 +12,7 @@ public class ConnectionDB {
     private static Connection connection = null;
     private static int ERROR_CODE = 0;
 
-    private static void setConnection(Connection con){
+    public static void setConnection(Connection con){
         connection = con;
     }
     

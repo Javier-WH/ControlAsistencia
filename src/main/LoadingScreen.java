@@ -1,11 +1,11 @@
 
 package main;
 
+import Actors.Admins;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pannels.DataBaseConfData;
-
 
 
 
@@ -20,13 +20,46 @@ public class LoadingScreen extends javax.swing.JFrame {
         lblImage.setIcon(env.Enviroment.getSplashScreenIcon(lblImage.getWidth(), lblImage.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));
         progessBar.setValue(0);
+        
     }
 
     public void checkList() {
-        connectToDB();
+        env.GetLocalConfig.setStartConfig("0");
+        String uses = env.GetLocalConfig.getStartConfig();
+        System.out.println(uses);
+        if (connectToDB()) {
+            addProgress(25);
+            checkTables();
+            addProgress(26);
+            checkTablesContent();
+            addProgress(30);
+            checkAdminContent();
+            addProgress(19);
+
+            if (uses.equals("0")) {
+                env.Enviroment.setLogoPath();
+            }
+
+            addUse(uses);
+
+            startApp();
+        }
+
     }
+   
+    public void addUse(String use){
+        try {
+            int intUse = Integer.parseInt(use);
+            int newUse = intUse + 1;
+            env.GetLocalConfig.setStartConfig(String.valueOf(newUse));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.exit(0);
+        }
+    }
+    
 ///////////connect DB
-    private void connectToDB() {
+    private boolean connectToDB() {
         int DBcount = 0;
         boolean isDBconnected = false;
         while (DBcount < 2) {
@@ -43,26 +76,28 @@ public class LoadingScreen extends javax.swing.JFrame {
             }
         }
         if (!isDBconnected) {
+            this.dispose();
             DataBaseConfData dbcd = new DataBaseConfData();
             dbcd.setVisible(true);
+            Thread.currentThread().interrupt();
 
         }
+        return isDBconnected;
     }
-
+///////////////
     private void addProgress(int newProgress){
         int currentProgress = progessBar.getValue();
         progessBar.setValue(currentProgress + newProgress);
     }
-    private void setMessage(String message){  
+    public void setMessage(String message){  
         lblMessage.setText(message);
         try {
-            Thread.sleep(700);
+            Thread.sleep(200);
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Error desconocido " + ex.getMessage());
         }
       
     }
-
     private boolean checkConnectionDB() {
         setMessage("Conectandose con la Base de datos...");
 
@@ -73,7 +108,7 @@ public class LoadingScreen extends javax.swing.JFrame {
             return false;
        
         } else {
-            addProgress(20);
+           
             setMessage("Conección con la base de datos exitosa");
             return true;
         }
@@ -81,14 +116,75 @@ public class LoadingScreen extends javax.swing.JFrame {
     }
 
 /////////////////
+ /// Check tables
     
     
+ public boolean checkTables(){
+  
+    setMessage("Verificando las tablas...");
+    String resp = controllers.CheckDB.checkIstablesExists();
+    if(resp.equals("OK")){
+         setMessage("Las tablas han sido encontradas...");
+        return true;
+    }else{
+        setMessage("Error. La tabla "+resp+" no existe...");
+        setMessage("Creando la tabla " +resp+"...");
+        controllers.CheckDB.createTable(resp);
+        setMessage("La tabla " +resp+" ha sido creada...");
+        checkTables();
+    }
+     return false;
+ }
+    
+ public boolean checkTablesContent(){
+          
+     setMessage("Verificando el contenido de la tabla de configuración...");
+     if(!controllers.CheckDB.checkConfigTableContent()){
+        setMessage("El contenido de la tabla de configuración no es correcto...");
+        controllers.CheckDB.fillConfigTable();
+         setMessage("El contendio de la tabla configucaón se ha creado");
+     }
+     setMessage("El contenido de la tabla de configuración es correcto...");
+     return true;
+ }
     
     
+   ///////////////////
+
+public boolean checkAdminContent(){
+     setMessage("Verificando la existencia de Administradores...");
+    if(!controllers.CheckDB.checkAdminTableContent()){
+        setMessage("Error. No se encontraron Administradores inscritos..");
+        setMessage("Generando administrador por defecto...");
+        
+        Admins admin = new Admins();
+        admin.setName("Default-Admin");
+        admin.setAddress("No-Address");
+        admin.setCI("123456");
+        admin.setEmail("No-Email");
+        admin.setPassword("admin");
+        admin.setUser("admin");
+        admin.setPhoneNumber("123456");
+     
+        if(controllers.InsertAdminController.insertAdmin(admin)){
+            setMessage("Administrador por defecto inscrito...");
+            return true;
+        }else{
+             setMessage("ERROR");
+             return false;
+        }
+    }
+     setMessage("Administrador encontrado...");
+    return true;
+} 
     
-    
-    
-    
+ public void startApp(){
+     setMessage("Iniciando el sistema...");
+     LoginFrame LG = new LoginFrame();
+     LG.setVisible(true);
+     this.dispose();
+     
+ }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

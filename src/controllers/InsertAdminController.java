@@ -30,6 +30,7 @@ public class InsertAdminController {
            return true;
             
         } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
            return false;
         }
     }
