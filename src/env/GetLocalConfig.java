@@ -31,6 +31,10 @@ public class GetLocalConfig {
     private static String DBUpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBU.ascon";
     private static String DBPpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBP.ascon";
     private static String StartPath = System.getProperty("user.dir") + "\\src\\configFiles\\ST.ascon";
+
+    public static String getKey() {
+        return key;
+    }
     
     
     

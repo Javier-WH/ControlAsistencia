@@ -2,9 +2,15 @@ package controllers;
 
 import Actors.Admins;
 import java.awt.HeadlessException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 public class InsertAdminController {
@@ -20,7 +26,7 @@ public class InsertAdminController {
             st.setString(1, admin.getName());
             st.setString(2, admin.getCI());
             st.setString(3, admin.getUser());
-            st.setString(4, admin.getPassword());
+            st.setString(4, libraries.Encript.encriptar(admin.getPassword(), env.GetLocalConfig.getKey()));
             st.setString(5, admin.getEmail());
             st.setString(6, admin.getPhoneNumber());
             st.setString(7, admin.getAddress());
@@ -29,7 +35,7 @@ public class InsertAdminController {
      
            return true;
             
-        } catch (HeadlessException | SQLException e) {
+        } catch (HeadlessException | SQLException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
            return false;
         }

@@ -2,8 +2,11 @@
 package main;
 
 import Actors.Admins;
+import static env.Enviroment.getLogoPath;
+import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import pannels.DataBaseConfData;
 
@@ -182,6 +185,7 @@ public boolean checkAdminContent(){
      setMessage("Iniciando el sistema...");
      LoginFrame LG = new LoginFrame();
      LG.setVisible(true);
+     LG.getLogoLabel().setIcon(new ImageIcon(new ImageIcon( System.getProperty("user.dir") + "\\src\\images\\logo.png").getImage().getScaledInstance(LG.getLogoLabel().getWidth(), LG.getLogoLabel().getHeight(), Image.SCALE_SMOOTH)));
      this.dispose();
      
  }

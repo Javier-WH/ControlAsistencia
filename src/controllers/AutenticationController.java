@@ -1,10 +1,16 @@
 package controllers;
 
 import java.awt.HeadlessException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 public class AutenticationController {
@@ -28,16 +34,18 @@ public class AutenticationController {
             rs = st.executeQuery();
      
             if(rs.next()){
-                if(!rs.getString("password").equals(password)){
+                
+                if(!libraries.Encript.desencriptar(rs.getString("password") , env.GetLocalConfig.getKey()).equals(password)){
                     message = "La contraseña suministrada es incorrecta";
                 }else{
                     message = "ACCESS-GRANTED";
                 }
+                
             }else{
                 message = "El usuario suministrado no está registrado"; 
             }
             
-        } catch (HeadlessException | SQLException e) {
+        } catch (HeadlessException | SQLException | UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e){
            return e.getMessage();
         }
         return message;
@@ -61,7 +69,7 @@ public class AutenticationController {
             rs = st.executeQuery();
      
             if(rs.next()){
-                if(!rs.getString("password").equals(password)){
+                if( !libraries.Encript.desencriptar(rs.getString("password") , env.GetLocalConfig.getKey()).equals(password)){
                     message = "La contraseña suministrada es incorrecta";
                 }else{
                     message = rs.getString("id");
@@ -70,7 +78,7 @@ public class AutenticationController {
                 message = "El usuario suministrado no está registrado"; 
             }
             
-        } catch (HeadlessException | SQLException e) {
+        } catch (HeadlessException | SQLException | UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
            return e.getMessage();
         }
         return message;
