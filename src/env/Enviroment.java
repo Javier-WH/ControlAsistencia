@@ -245,14 +245,14 @@ public class Enviroment {
         String userServiceTime = user.getServiceTime();
 
         String emptyText = getTextConstanciaTrabajo();
-        
+      
         String text = emptyText.replaceAll("<EMISOR>", emisorName);
         text = text.replaceAll("<CEDULAEMISOR>", emisorCi);
         text = text.replaceAll("<CARGOEMISOR>", emisorCharge);
         text = text.replaceAll("<DIRECCIONEMISOR>", getOwnerAddress());
         text = text.replaceAll("<NOMBRERECEPTOR>", userName);
         text = text.replaceAll("<CEDULARECEPTOR>", userCi);
-        text = text.replaceAll("<CARGORECEPTOR>", userCharge);
+       text = text.replaceAll("<CARGORECEPTOR>", userCharge);
         text = text.replaceAll("<NOMBREINSTITUCION>", getOwnerName());
         text = text.replaceAll("<TIEMPOSERVICIO>", userServiceTime);
         text = text.replaceAll("<DIASEMISION>", libraries.GetDate.getDayOfMonth());

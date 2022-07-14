@@ -44,7 +44,6 @@ public class EmisorPannel extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtCharge = new javax.swing.JComboBox<>();
         cbService = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtEmisorCi = new javax.swing.JTextField();
@@ -56,6 +55,8 @@ public class EmisorPannel extends javax.swing.JFrame {
         txtEmisorCharge = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnImprimir = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -170,15 +171,10 @@ public class EmisorPannel extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtServiceTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 17, 310, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Datos de la constancia de trabajo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 41, 290, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 17, 310, 210));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del Emisor"));
@@ -256,7 +252,7 @@ public class EmisorPannel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 263, 310, 170));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 310, 170));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,16 +263,44 @@ public class EmisorPannel extends javax.swing.JFrame {
                 jLabel12MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 9, 19, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 19, -1));
 
-        btnImprimir.setText("Imprimir");
+        btnImprimir.setBackground(new java.awt.Color(51, 102, 0));
+        btnImprimir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnImprimir.setForeground(new java.awt.Color(255, 255, 255));
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/print2.png"))); // NOI18N
+        btnImprimir.setText("      Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 250, 40));
-        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 380, 460));
+        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 310, 50));
+
+        jPanel4.setBackground(new java.awt.Color(102, 51, 0));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Datos de la constancia de trabajo");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(344, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 40, 659, 30));
+        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 1, 379, 489));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,7 +310,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -342,10 +366,14 @@ public class EmisorPannel extends javax.swing.JFrame {
                 user.setName(txtName.getText());
                 user.setLastName(txtLastName.getText());
                 user.setCI(txtCi.getText());
+                user.setCharge(String.valueOf(txtCharge.getSelectedItem()));
+                
               }
             
              user.setServiceTime(txtServiceTime.getText() +" "+ String.valueOf(cbService.getSelectedItem()));
             
+          
+             
             PrintPage constancia = new PrintPage(user, emisor);
           
             try {
@@ -392,7 +420,12 @@ public class EmisorPannel extends javax.swing.JFrame {
     
     private void txtCiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCiFocusLost
 
-        user = controllers.MakeUser.makeNewUser(txtCi.getText());
+        makeUser();
+  
+    }//GEN-LAST:event_txtCiFocusLost
+
+    private void makeUser(){
+       user = controllers.MakeUser.makeNewUser(txtCi.getText());
         if (user != null) {
             txtName.setText(user.getName());
             txtLastName.setText(user.getLastName());
@@ -401,11 +434,12 @@ public class EmisorPannel extends javax.swing.JFrame {
             txtCharge.setSelectedItem(user.getCharge());
 
         } else {
+            user = null;
             cleanUserData();
           }
-  
-    }//GEN-LAST:event_txtCiFocusLost
-
+    
+    }
+    
     private void txtServiceTimeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServiceTimeKeyTyped
         // TODO add your handling code here:
  
@@ -460,6 +494,7 @@ public class EmisorPannel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JComboBox<String> txtCharge;
     private javax.swing.JTextField txtCi;

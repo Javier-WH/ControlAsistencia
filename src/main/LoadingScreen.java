@@ -14,7 +14,8 @@ import pannels.DataBaseConfData;
 
 
 public class LoadingScreen extends javax.swing.JFrame {
-
+    
+     LoginFrame LG = null;
    
     public LoadingScreen() {
         initComponents();
@@ -27,9 +28,9 @@ public class LoadingScreen extends javax.swing.JFrame {
     }
 
     public void checkList() {
-        env.GetLocalConfig.setStartConfig("0");
+        //env.GetLocalConfig.setStartConfig("0");
         String uses = env.GetLocalConfig.getStartConfig();
-        System.out.println(uses);
+       // System.out.println(uses);
         if (connectToDB()) {
             addProgress(25);
             checkTables();
@@ -38,14 +39,16 @@ public class LoadingScreen extends javax.swing.JFrame {
             addProgress(30);
             checkAdminContent();
             addProgress(19);
+            
+            startApp();
 
             if (uses.equals("0")) {
                 env.Enviroment.setLogoPath();
+                LG.getLogoLabel().setIcon(new ImageIcon(new ImageIcon( System.getProperty("user.dir") + "\\src\\images\\logo.png").getImage().getScaledInstance(LG.getLogoLabel().getWidth(), LG.getLogoLabel().getHeight(), Image.SCALE_SMOOTH)));
+
             }
 
             addUse(uses);
-
-            startApp();
         }
 
     }
@@ -183,9 +186,8 @@ public boolean checkAdminContent(){
     
  public void startApp(){
      setMessage("Iniciando el sistema...");
-     LoginFrame LG = new LoginFrame();
+     LG = new LoginFrame();
      LG.setVisible(true);
-     LG.getLogoLabel().setIcon(new ImageIcon(new ImageIcon( System.getProperty("user.dir") + "\\src\\images\\logo.png").getImage().getScaledInstance(LG.getLogoLabel().getWidth(), LG.getLogoLabel().getHeight(), Image.SCALE_SMOOTH)));
      this.dispose();
      
  }
