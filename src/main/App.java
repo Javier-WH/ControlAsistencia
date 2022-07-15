@@ -1,26 +1,53 @@
 package main;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import pannels.ConfirmClose;
 
 
 public class App extends javax.swing.JFrame {
-
+    private boolean startClock = true; 
     
     public App() {
         initComponents();
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
         lblImagen.setIcon(env.Enviroment.getBackground3Icon(lblImagen.getWidth(), lblImagen.getHeight()));
         txtCI.requestFocus();
+        lbltitle.setIcon(env.Enviroment.getTitleIcon(lbltitle.getWidth(), lbltitle.getHeight()));
+        startClock();
+       
+    }
+    public void startClock() {
+
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (startClock) {
+                        setClockTime(); 
+                        Thread.sleep(1000);
+                    }
+                } catch (InterruptedException ex) {
+                   JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+            }
+        });
+       
+            t1.start();
     }
 
-
+    public void stopClock(){
+    
+        startClock = false;
+     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
+        lbltitle = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtCI = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
@@ -28,6 +55,8 @@ public class App extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAccept = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lblClock = new javax.swing.JLabel();
         lblImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -46,6 +75,7 @@ public class App extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 90, 110));
+        jPanel2.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, 80));
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 0));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -124,6 +154,31 @@ public class App extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 20, 20));
+
+        jPanel3.setBackground(new java.awt.Color(102, 51, 0));
+
+        lblClock.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblClock.setForeground(new java.awt.Color(255, 255, 255));
+        lblClock.setText("00:00:00AM");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lblClock, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblClock, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 270, 410, 70));
         jPanel2.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 470));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 470));
@@ -163,9 +218,15 @@ public class App extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, response);
         }
-        
-        
     }//GEN-LAST:event_btnAcceptActionPerformed
+    
+    public void setClockTime() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ssa");
+        LocalDateTime now = LocalDateTime.now();
+        lblClock.setText(dtf.format(now));
+    }
+    
     
     public void clean() {
         txtCI.setText("");
@@ -186,8 +247,7 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        //exitApp();
+      stopClock();
 
     }//GEN-LAST:event_formWindowClosed
 
@@ -201,8 +261,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lbltitle;
     private javax.swing.JTextField txtCI;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
