@@ -31,6 +31,9 @@ public class LoadingScreen extends javax.swing.JFrame {
         //env.GetLocalConfig.setStartConfig("0");
         String uses = env.GetLocalConfig.getStartConfig();
        // System.out.println(uses);
+       
+        setMessage("Verificando las fechas");
+       libraries.GetDate.compareDates();
         if (connectToDB()) {
             addProgress(25);
             checkTables();

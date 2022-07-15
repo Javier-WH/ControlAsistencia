@@ -1,6 +1,11 @@
 package libraries;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class GetDate {
 
@@ -56,18 +61,49 @@ public class GetDate {
             default:
                 month = "indeterminado";
         }
-        
+
         return month;
     }
-    
-     public static String getCurrentYear() {
+
+    public static String getCurrentYear() {
         int year = cal.get(Calendar.YEAR);
         return String.valueOf(year);
     }
-     
-         public static String getCurrentMonth() {
+
+    public static String getCurrentMonth() {
         int month = cal.get(Calendar.MONTH);
         return String.valueOf(month + 1);
     }
 
+    public static void compareDates() {
+        Date currentDate = new Date();
+        String savedDate = env.GetLocalConfig.getSavedDate();
+
+        try {
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date parsed = format.parse(savedDate);
+            java.sql.Timestamp sql = new java.sql.Timestamp(parsed.getTime());
+            
+            if (currentDate.before(sql)) {
+                    JOptionPane.showMessageDialog(null, "La hora o la fecha de su sistema operativo no concuerda con la ultima hora y fecha registrada, corriga la hora de su sistema operativo y abra de nuevo este programa para continuar", "ERROR", JOptionPane.ERROR_MESSAGE);
+           
+                System.exit(0);
+            }else{
+                saveCurrentDate();
+            }
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void saveCurrentDate() {
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+        String dd = String.valueOf(dateFormat.format(date));
+        //System.out.println("date to save: "+dd);
+        env.GetLocalConfig.setCurrentDate(dd);
+    }
 }

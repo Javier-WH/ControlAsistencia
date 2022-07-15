@@ -31,6 +31,7 @@ public class GetLocalConfig {
     private static String DBUpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBU.ascon";
     private static String DBPpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBP.ascon";
     private static String StartPath = System.getProperty("user.dir") + "\\src\\configFiles\\ST.ascon";
+     private static String DatePath = System.getProperty("user.dir") + "\\src\\configFiles\\CD.ascon";
 
     public static String getKey() {
         return key;
@@ -292,7 +293,55 @@ public class GetLocalConfig {
     }
     
     
+    //////////////////////date
     
+    
+     public static String getSavedDate() {
+        File doc = new File(DatePath);
+
+        try {
+            Scanner obj = new Scanner(doc);
+            while (obj.hasNextLine()) {
+                return Encript.desencriptar(obj.nextLine(), key);
+            }
+        } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+        }
+        return null;
+    }
+    
+    ////////
+    
+    public static void setCurrentDate(String text){
+        
+         try
+        {
+            String filePath = DatePath;
+            FileWriter fw = new FileWriter(filePath);    
+            String lineToAppend = Encript.encriptar(text, key);    
+            fw.write(lineToAppend);
+            fw.close();
+        }
+        catch(IOException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e)
+        {
+            System.out.println(e);
+        }
+    
+    }
+   
+        public static void resetDate(){
+        setStartConfig(DatePath);
+         }
+    
+    
+    ////////////////////
+    
+    public static boolean dateExist(){
+        
+         File file = new File(DatePath);
+         return file.exists();
+        
+    }
     
 
 }
