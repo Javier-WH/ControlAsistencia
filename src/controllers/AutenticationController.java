@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.swing.JOptionPane;
 
 
 public class AutenticationController {
@@ -115,5 +118,43 @@ public class AutenticationController {
         }
          return null;
     } 
-    
+    /////////////////
+      public static boolean userExist(String CI){
+      
+          ResultSet rs =  getUserData(CI);
+          
+        try {
+            rs.last();
+            int exist =  rs.getRow();
+       
+            if(exist > 0){
+                return true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.exit(0);
+        }
+          
+          return false;
+      }
+       /////////////////////////
+           public static boolean adminExist(String CI){
+      
+          ResultSet rs =  getAdminData(CI);
+          
+        try {
+            rs.last();
+            int exist =  rs.getRow();
+          
+            if(exist > 0){
+                return true;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.exit(0);
+        }
+          
+          return false;
+      }
+      
 }

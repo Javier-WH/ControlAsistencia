@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class InsertUserController {
     
-    public static boolean insertUser(Users admin) throws UnsupportedEncodingException, NoSuchAlgorithmException{
+    public static boolean insertUser(Users admin){
                
         Connection connection  = env.ConnectionDB.getConnection();
      
@@ -39,7 +39,7 @@ public class InsertUserController {
      
            return true;
             
-        } catch (HeadlessException | SQLException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+        } catch (HeadlessException | SQLException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException |NoSuchAlgorithmException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
          return false;
