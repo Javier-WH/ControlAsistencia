@@ -1,4 +1,3 @@
-
 package main;
 
 import Actors.Admins;
@@ -10,13 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import pannels.DataBaseConfData;
 
-
-
-
 public class LoadingScreen extends javax.swing.JFrame {
-    
-     LoginFrame LG = null;
-   
+
+    LoginFrame LG = null;
+
     public LoadingScreen() {
         initComponents();
         lblVersion.setText(env.Enviroment.getVersion());
@@ -24,30 +20,36 @@ public class LoadingScreen extends javax.swing.JFrame {
         lblImage.setIcon(env.Enviroment.getSplashScreenIcon(lblImage.getWidth(), lblImage.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));
         progessBar.setValue(0);
-        
+
     }
 
     public void checkList() {
+        setMessage("Revisando los archivos de configuración...");
+        env.GetLocalConfig.checkConfigurationFilesExists();
+        addProgress(11);
+        setMessage("Archivos de configuración correctos...");
+        setMessage("Obteniendo configurción...");
         //env.GetLocalConfig.setStartConfig("0");
         String uses = env.GetLocalConfig.getStartConfig();
-       // System.out.println(uses);
-       
-        setMessage("Verificando las fechas");
-       libraries.GetDate.compareDates();
+        // System.out.println(uses);
+
+        setMessage("Verificando las fechas...");
+        libraries.GetDate.compareDates();
+          addProgress(5);
         if (connectToDB()) {
             addProgress(25);
             checkTables();
             addProgress(26);
             checkTablesContent();
-            addProgress(30);
+            addProgress(15);
             checkAdminContent();
             addProgress(19);
-            
+
             startApp();
 
             if (uses.equals("0")) {
                 env.Enviroment.setLogoPath();
-                LG.getLogoLabel().setIcon(new ImageIcon(new ImageIcon( System.getProperty("user.dir") + "\\src\\images\\logo.png").getImage().getScaledInstance(LG.getLogoLabel().getWidth(), LG.getLogoLabel().getHeight(), Image.SCALE_SMOOTH)));
+                LG.getLogoLabel().setIcon(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\images\\logo.png").getImage().getScaledInstance(LG.getLogoLabel().getWidth(), LG.getLogoLabel().getHeight(), Image.SCALE_SMOOTH)));
 
             }
 
@@ -55,8 +57,8 @@ public class LoadingScreen extends javax.swing.JFrame {
         }
 
     }
-   
-    public void addUse(String use){
+
+    public void addUse(String use) {
         try {
             int intUse = Integer.parseInt(use);
             int newUse = intUse + 1;
@@ -66,12 +68,12 @@ public class LoadingScreen extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-    
+
 ///////////connect DB
     private boolean connectToDB() {
         int DBcount = 0;
         boolean isDBconnected = false;
-        while (DBcount < 2) {
+        while (DBcount < 5) {
             if (checkConnectionDB()) {
                 DBcount = 6;
                 isDBconnected = true;
@@ -94,107 +96,106 @@ public class LoadingScreen extends javax.swing.JFrame {
         return isDBconnected;
     }
 ///////////////
-    private void addProgress(int newProgress){
+
+    private void addProgress(int newProgress) {
         int currentProgress = progessBar.getValue();
         progessBar.setValue(currentProgress + newProgress);
     }
-    public void setMessage(String message){  
+
+    public void setMessage(String message) {
         lblMessage.setText(message);
         try {
             Thread.sleep(200);
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Error desconocido " + ex.getMessage());
         }
-      
+
     }
+
     private boolean checkConnectionDB() {
         setMessage("Conectandose con la Base de datos...");
 
         boolean isOK = env.ConnectionDB.connectionDB();
-        
+
         if (!isOK) {
             setMessage("Error al conectarse con la base de datos...");
             return false;
-       
+
         } else {
-           
+
             setMessage("Conección con la base de datos exitosa");
             return true;
         }
-        
+
     }
 
 /////////////////
- /// Check tables
-    
-    
- public boolean checkTables(){
-  
-    setMessage("Verificando las tablas...");
-    String resp = controllers.CheckDB.checkIstablesExists();
-    if(resp.equals("OK")){
-         setMessage("Las tablas han sido encontradas...");
-        return true;
-    }else{
-        setMessage("Error. La tabla "+resp+" no existe...");
-        setMessage("Creando la tabla " +resp+"...");
-        controllers.CheckDB.createTable(resp);
-        setMessage("La tabla " +resp+" ha sido creada...");
-        checkTables();
-    }
-     return false;
- }
-    
- public boolean checkTablesContent(){
-          
-     setMessage("Verificando el contenido de la tabla de configuración...");
-     if(!controllers.CheckDB.checkConfigTableContent()){
-        setMessage("El contenido de la tabla de configuración no es correcto...");
-        controllers.CheckDB.fillConfigTable();
-         setMessage("El contendio de la tabla configucaón se ha creado");
-     }
-     setMessage("El contenido de la tabla de configuración es correcto...");
-     return true;
- }
-    
-    
-   ///////////////////
+    /// Check tables
+    public boolean checkTables() {
 
-public boolean checkAdminContent(){
-     setMessage("Verificando la existencia de Administradores...");
-    if(!controllers.CheckDB.checkAdminTableContent()){
-        setMessage("Error. No se encontraron Administradores inscritos..");
-        setMessage("Generando administrador por defecto...");
-        
-        Admins admin = new Admins();
-        admin.setName("Default-Admin");
-        admin.setAddress("No-Address");
-        admin.setCI("123456");
-        admin.setEmail("No-Email");
-        admin.setPassword("admin");
-        admin.setUser("admin");
-        admin.setPhoneNumber("123456");
-     
-        if(controllers.InsertAdminController.insertAdmin(admin)){
-            setMessage("Administrador por defecto inscrito...");
+        setMessage("Verificando las tablas...");
+        String resp = controllers.CheckDB.checkIstablesExists();
+        if (resp.equals("OK")) {
+            setMessage("Las tablas han sido encontradas...");
             return true;
-        }else{
-             setMessage("ERROR");
-             return false;
+        } else {
+            setMessage("Error. La tabla " + resp + " no existe...");
+            setMessage("Creando la tabla " + resp + "...");
+            controllers.CheckDB.createTable(resp);
+            setMessage("La tabla " + resp + " ha sido creada...");
+            checkTables();
         }
+        return false;
     }
-     setMessage("Administrador encontrado...");
-    return true;
-} 
-    
- public void startApp(){
-     setMessage("Iniciando el sistema...");
-     LG = new LoginFrame();
-     LG.setVisible(true);
-     this.dispose();
-     
- }
-    
+
+    public boolean checkTablesContent() {
+
+        setMessage("Verificando el contenido de la tabla de configuración...");
+        if (!controllers.CheckDB.checkConfigTableContent()) {
+            setMessage("El contenido de la tabla de configuración no es correcto...");
+            controllers.CheckDB.fillConfigTable();
+            setMessage("El contendio de la tabla configucaón se ha creado");
+        }
+        setMessage("El contenido de la tabla de configuración es correcto...");
+        return true;
+    }
+
+    ///////////////////
+    public boolean checkAdminContent() {
+        setMessage("Verificando la existencia de Administradores...");
+        if (!controllers.CheckDB.checkAdminTableContent()) {
+            setMessage("Error. No se encontraron Administradores inscritos..");
+            setMessage("Generando administrador por defecto...");
+
+            Admins admin = new Admins();
+            admin.setName("Default-Admin");
+            admin.setAddress("No-Address");
+            admin.setCI("123456");
+            admin.setEmail("No-Email");
+            admin.setPassword("admin");
+            admin.setUser("admin");
+            admin.setPhoneNumber("123456");
+
+            if (controllers.InsertAdminController.insertAdmin(admin)) {
+                setMessage("Administrador por defecto inscrito...");
+                return true;
+            } else {
+                setMessage("ERROR");
+                return false;
+            }
+        }
+        setMessage("Administrador encontrado...");
+        return true;
+    }
+
+    public void startApp() {
+        setMessage("Iniciando el sistema...");
+        LG = new LoginFrame();
+        LG.setVisible(true);
+        this.dispose();
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

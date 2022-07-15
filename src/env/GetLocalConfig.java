@@ -343,5 +343,17 @@ public class GetLocalConfig {
         
     }
     
+    
+      public static void checkConfigurationFilesExists(){
+      
+          if(!DBAFileExist() || !DBNFileExist() || !DBPFileExist() || !DBUFileExist() || !StartExist() || !dateExist()){
+              JOptionPane.showMessageDialog(null, "Los archivos de configuracion no existen o estan corruptos, necesita reinstalar este software para reparar el error", "ERROR", JOptionPane.ERROR_MESSAGE);
+               System.exit(0);
 
+          }
+      
+      
+      }
+    
+    
 }

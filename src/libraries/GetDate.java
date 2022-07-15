@@ -86,8 +86,7 @@ public class GetDate {
             java.sql.Timestamp sql = new java.sql.Timestamp(parsed.getTime());
             
             if (currentDate.before(sql)) {
-                    JOptionPane.showMessageDialog(null, "La hora o la fecha de su sistema operativo no concuerda con la ultima hora y fecha registrada, corriga la hora de su sistema operativo y abra de nuevo este programa para continuar", "ERROR", JOptionPane.ERROR_MESSAGE);
-           
+                JOptionPane.showMessageDialog(null, "La hora o la fecha de su sistema operativo no concuerda con la ultima hora y fecha registrada, corriga la hora de su sistema operativo y abra de nuevo este programa para continuar", "ERROR", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }else{
                 saveCurrentDate();
