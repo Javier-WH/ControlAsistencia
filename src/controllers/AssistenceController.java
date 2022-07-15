@@ -1,10 +1,12 @@
 package controllers;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class AssistenceController {
 
@@ -35,7 +37,7 @@ public class AssistenceController {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, date);
             ResultSet rs = st.executeQuery();
-             return rs;  
+            return rs;  
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -43,6 +45,26 @@ public class AssistenceController {
     } 
     
     ////////////////////////////
+    
+    public static boolean alreadyAsistence(String id){
+        
+            
+        String  date = libraries.GetDate.getCurrentYear() + "-" + libraries.GetDate.getCurrentMonth() + "-" + libraries.GetDate.getDayOfMonth();
+        ResultSet rs = getAssistanceListByDate(date);
+        
+        try {
+          while(rs.next()){
+           
+              if(rs.getString("id").equalsIgnoreCase(id)){
+                  return true;
+              }
+          }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+       
+        return false;
+    }
     
         
 

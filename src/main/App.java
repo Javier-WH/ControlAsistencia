@@ -147,21 +147,30 @@ public class App extends javax.swing.JFrame {
         String response = controllers.AutenticationController.autenticateUser(ci, password);
         
         try {
-           Integer.parseInt(response);
-           boolean res = controllers.AssistenceController.insertAssistance(response);
-           if(res){
-              txtCI.setText("");
-              txtPassword.setText("");
-           }else{
-               JOptionPane.showMessageDialog(this, "No se pudo registrar la asistencia");
-           }
+            Integer.parseInt(response);
+            if (!controllers.AssistenceController.alreadyAsistence(response)) {
+                boolean res = controllers.AssistenceController.insertAssistance(response);
+                if (res) {
+                  clean();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo registrar la asistencia");
+                }
+            }else{
+               JOptionPane.showMessageDialog(this, "La asistencia ya ha sido registrada el dia de hoy");
+               clean();
+            }
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, response);
         }
         
         
     }//GEN-LAST:event_btnAcceptActionPerformed
+    
+    public void clean() {
+        txtCI.setText("");
+        txtPassword.setText("");
+    }
 
     private void exitApp(){
         ConfirmClose CC = new ConfirmClose(this);
