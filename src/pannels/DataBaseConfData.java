@@ -55,7 +55,7 @@ public class DataBaseConfData extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Configuración de la base de datos");
+        jLabel5.setText("Configuraci\u00F3n de la base de datos");
 
         btnExit.setText("Salir");
         btnExit.addActionListener(new java.awt.event.ActionListener() {

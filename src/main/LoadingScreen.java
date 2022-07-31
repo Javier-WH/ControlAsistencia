@@ -1,7 +1,6 @@
 package main;
 
 import Actors.Admins;
-import static env.Enviroment.getLogoPath;
 import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +35,7 @@ public class LoadingScreen extends javax.swing.JFrame {
         setMessage("Verificando las fechas...");
         libraries.GetDate.compareDates();
           addProgress(5);
+          
         if (connectToDB()) {
             addProgress(25);
             checkTables();
@@ -261,3 +261,6 @@ public class LoadingScreen extends javax.swing.JFrame {
     private javax.swing.JProgressBar progessBar;
     // End of variables declaration//GEN-END:variables
 }
+
+
+

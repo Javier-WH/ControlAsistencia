@@ -13,7 +13,10 @@ public class Main {
             System.exit(0);
         }
         */
+        //5026 lineas
+        //env.GetLocalConfig.setStartConfig("0");
         startLoading();
+        
     }
     
     
@@ -21,8 +24,16 @@ public class Main {
 
         Thread t1 = new Thread(new Runnable() {
             public void run() {
+              
                 loading.setVisible(true);
                 loading.checkList();
+                
+                //System.out.println(controllers.HollydaysCalendar.isHollyDay("12-31"));
+                //System.out.println(controllers.HollydaysCalendar.getHolydaysList());
+                //System.out.println(libraries.GetDate.isWeekEnd());
+                
+                
+                
             }
         });
         t1.start();

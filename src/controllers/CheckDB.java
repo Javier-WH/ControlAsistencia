@@ -81,7 +81,10 @@ public class CheckDB {
             executeSQLQuery("CREATE TABLE `users` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `lastName` VARCHAR(255) NOT NULL , `ci` VARCHAR(255) NOT NULL , `password` VARCHAR(255) NOT NULL , `charge` VARCHAR(255) NOT NULL , `email` VARCHAR(255) NOT NULL , `phone` VARCHAR(255) NOT NULL , `address` VARCHAR(255) NOT NULL , `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAT` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB");
             return;
         }
-  
+        
+        
+        // CREATE TABLE `assistcontrolxd`.`hollydays` ( `id` INT NOT NULL AUTO_INCREMENT , `date` VARCHAR(255) NOT NULL , `description` VARCHAR(255) NOT NULL , `createdAT` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
 
     }
     
