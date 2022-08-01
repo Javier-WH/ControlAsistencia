@@ -27,7 +27,7 @@ public class Main {
               
                 loading.setVisible(true);
                 loading.checkList();
-                
+                //System.out.println(libraries.GetDate.isLapYear(2021));
                 //System.out.println(controllers.HollydaysCalendar.isHollyDay("12-31"));
                 //System.out.println(controllers.HollydaysCalendar.getHolydaysList());
                 //System.out.println(libraries.GetDate.isWeekEnd());

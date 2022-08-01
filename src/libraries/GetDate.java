@@ -74,23 +74,22 @@ public class GetDate {
         int month = cal.get(Calendar.MONTH);
         return String.valueOf(month + 1);
     }
-    
+
     public static String getCurrentDay() {
         int year = cal.get(Calendar.DAY_OF_WEEK);
         return String.valueOf(year);
     }
-    
-    public static boolean isWeekEnd(){
-        
+
+    public static boolean isWeekEnd() {
+
         String currentDay = getCurrentDay();
-        
-        if(currentDay.equals("1") || currentDay.equals("7")){
+
+        if (currentDay.equals("1") || currentDay.equals("7")) {
             return true;
         }
         return false;
-    } 
-     
-    
+    }
+
     public static void compareDates() {
         Date currentDate = new Date();
         String savedDate = env.GetLocalConfig.getSavedDate();
@@ -100,11 +99,11 @@ public class GetDate {
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date parsed = format.parse(savedDate);
             java.sql.Timestamp sql = new java.sql.Timestamp(parsed.getTime());
-                
+
             if (currentDate.before(sql)) {
                 JOptionPane.showMessageDialog(null, "La hora o la fecha de su sistema operativo no concuerda con la ultima hora y fecha registrada, corriga la hora de su sistema operativo y abra de nuevo este programa para continuar", "ERROR", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
-            }else{
+            } else {
                 saveCurrentDate();
             }
         } catch (ParseException ex) {
@@ -121,4 +120,21 @@ public class GetDate {
         //System.out.println("date to save: "+dd);
         env.GetLocalConfig.setCurrentDate(dd);
     }
+
+    public static boolean isLapYear(double year) {
+
+        if ((year / 4) == (int)(year / 4)) {
+            if ((year / 100) == (int)(year / 100)) {
+                if ((year / 400) == (int)(year / 400)) {
+                    return true;
+                }
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //30 dias abril, julio, sepiempre y noviembre
+    //31 todos los demas, excepcion de febrero que son 28 dias.
 }
