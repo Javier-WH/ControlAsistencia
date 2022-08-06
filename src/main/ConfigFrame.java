@@ -333,7 +333,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Miriam Libre", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Configuración           ");
+        jLabel2.setText("Configuración  ");
         jLabel2.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -1,6 +1,5 @@
 package pannels;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +17,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
     public HollydayCalendar() {
         initComponents();
         txtYear.setText(libraries.GetDate.getCurrentYear());
+        txtYear2.setText(txtYear.getText());
         fillTable();
         fillDaysOfMoth();
     }
@@ -36,7 +36,11 @@ public class HollydayCalendar extends javax.swing.JFrame {
         
            try {
             while (rs.next()) { 
-                model.addRow(new Object[]{rs.getString("date"), rs.getString("description")});
+                if(rs.getString("date").equals(rs.getString("date2"))){
+                    model.addRow(new Object[]{rs.getString("date"), rs.getString("description")});
+                }else{
+                    model.addRow(new Object[]{rs.getString("date") + " hasta " + rs.getString("date2") , rs.getString("description")});
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getContentPane(), ex.getMessage());
@@ -68,6 +72,15 @@ public class HollydayCalendar extends javax.swing.JFrame {
         btnAddHollyDay = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtYear2 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtMonth2 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        txtDay2 = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        btnDate2 = new javax.swing.JCheckBox();
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
 
@@ -106,13 +119,21 @@ public class HollydayCalendar extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Fecha", "Descripción"
+                "Mes - Dia", "Descripción"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCalendar);
         if (tblCalendar.getColumnModel().getColumnCount() > 0) {
-            tblCalendar.getColumnModel().getColumn(0).setMinWidth(100);
-            tblCalendar.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblCalendar.getColumnModel().getColumn(0).setMinWidth(120);
+            tblCalendar.getColumnModel().getColumn(0).setMaxWidth(120);
         }
 
         btnSalir.setText("Salir");
@@ -181,47 +202,113 @@ public class HollydayCalendar extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel7.setText("Desde");
+
+        jLabel8.setText("Dia");
+
+        txtYear2.setEnabled(false);
+        txtYear2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtYear2KeyReleased(evt);
+            }
+        });
+
+        jLabel10.setText("Año");
+
+        txtMonth2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Frebro", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        txtMonth2.setEnabled(false);
+        txtMonth2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtMonth2ItemStateChanged(evt);
+            }
+        });
+        txtMonth2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtMonth2PropertyChange(evt);
+            }
+        });
+
+        jLabel11.setText("Mes");
+
+        txtDay2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtDay2.setEnabled(false);
+
+        jLabel12.setText("Fecha");
+
+        btnDate2.setText("Hasta");
+        btnDate2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                btnDate2StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtDescription)
-                            .addComponent(jLabel4)
-                            .addComponent(btnAddHollyDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel1))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel2))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtDescription)
+                                            .addComponent(jLabel4)
+                                            .addComponent(btnAddHollyDay, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7)
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtYear2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel10))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtMonth2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel11))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel8)
+                                                    .addComponent(txtDay2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnDate2))))))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jLabel12)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel12)
+                .addGap(4, 4, 4)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -235,8 +322,21 @@ public class HollydayCalendar extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAddHollyDay)))
+                        .addGap(23, 23, 23)
+                        .addComponent(btnDate2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtYear2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMonth2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDay2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAddHollyDay))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -267,12 +367,9 @@ public class HollydayCalendar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMonthPropertyChange
 
     private void txtMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtMonthItemStateChanged
-        // TODO add your handling code here:
-   
-        
+        // TOD       
            fillDaysOfMoth();
             
-        
     }//GEN-LAST:event_txtMonthItemStateChanged
 
     private void txtYearKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYearKeyReleased
@@ -287,44 +384,111 @@ public class HollydayCalendar extends javax.swing.JFrame {
         String day = String.valueOf(txtDay.getSelectedItem());
         String description = txtDescription.getText();
         
-        controllers.HollydaysCalendar.insertHollyDay(month, day, description);
+        /////////////////////////
+        
+        String month2 = String.valueOf(txtMonth2.getSelectedIndex() + 1);
+        String day2 = String.valueOf(txtDay2.getSelectedItem());
+  
+        
+        //////////////
+        
+        if(month2.isEmpty() && day2.isEmpty()){
+            controllers.HollydaysCalendar.insertHollyDay(month, day, description);
+        }else{
+        
+        
+        
+        }
+  
+        
+        
+        
         
         fillTable();
     }//GEN-LAST:event_btnAddHollyDayActionPerformed
 
+    private void txtYear2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYear2KeyReleased
+        // TODO add your handling code here:
+        fillDaysOfMoth();
+    }//GEN-LAST:event_txtYear2KeyReleased
+
+    private void txtMonth2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtMonth2ItemStateChanged
+        // TODO add your handling code here:
+        fillDaysOfMoth();
+    }//GEN-LAST:event_txtMonth2ItemStateChanged
+
+    private void txtMonth2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtMonth2PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMonth2PropertyChange
+
+    private void btnDate2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnDate2StateChanged
+        // TODO add your handling code here:
+        if(btnDate2.isSelected()){
+            txtDay2.setEnabled(true);
+            txtYear2.setEnabled(true);
+            txtMonth2.setEnabled(true);
+        }else{
+         txtDay2.setEnabled(false);
+            txtYear2.setEnabled(false);
+            txtMonth2.setEnabled(false);
+        
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnDate2StateChanged
+
       private void fillDaysOfMoth(){
-      
+          
+          //fecha 1
           DefaultComboBoxModel DCBM = (DefaultComboBoxModel) txtDay.getModel();
-            DCBM.removeAllElements();
-            
-            int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear.getText(), String.valueOf(txtMonth.getSelectedIndex() +1 ));
+          DCBM.removeAllElements();
+                    
+          int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear.getText(), String.valueOf(txtMonth.getSelectedIndex() +1 ));
             
             for(int i = 1 ; i <= days ; i++ ){
                 DCBM.addElement(i);
             }
-      
-      
+            
+           //fecha2
+          DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) txtDay2.getModel();
+          DCBM2.removeAllElements();
+          
+           int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(txtMonth2.getSelectedIndex() +1 ));
+           
+            for(int i = 1 ; i <= days2 ; i++ ){
+                DCBM2.addElement(i);
+            }
       }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAddHollyDay;
+    private javax.swing.JCheckBox btnDate2;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tblCalendar;
     private javax.swing.JComboBox<String> txtDay;
+    private javax.swing.JComboBox<String> txtDay2;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JComboBox<String> txtMonth;
+    private javax.swing.JComboBox<String> txtMonth2;
     private javax.swing.JTextField txtYear;
+    private javax.swing.JTextField txtYear2;
     // End of variables declaration//GEN-END:variables
 }
 

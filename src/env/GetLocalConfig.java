@@ -26,12 +26,12 @@ public class GetLocalConfig {
     private static String key = "ESCUELA ABELARDO MENDEZ";
     
     //
-    private static String DBApath = System.getProperty("user.dir") + "\\src\\configFiles\\DBA.ascon";
-    private static String DBNpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBN.ascon";
-    private static String DBUpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBU.ascon";
-    private static String DBPpath = System.getProperty("user.dir") + "\\src\\configFiles\\DBP.ascon";
-    private static String StartPath = System.getProperty("user.dir") + "\\src\\configFiles\\ST.ascon";
-     private static String DatePath = System.getProperty("user.dir") + "\\src\\configFiles\\CD.ascon";
+    private static String DBApath = System.getProperty("user.dir") + "/src/configFiles/DBA.ascon";
+    private static String DBNpath = System.getProperty("user.dir") + "/src/configFiles/DBN.ascon";
+    private static String DBUpath = System.getProperty("user.dir") + "/src/configFiles/DBU.ascon";
+    private static String DBPpath = System.getProperty("user.dir") + "/src/configFiles/DBP.ascon";
+    private static String StartPath = System.getProperty("user.dir") + "/src/configFiles/ST.ascon";
+     private static String DatePath = System.getProperty("user.dir") + "/src/configFiles/CD.ascon";
 
     public static String getKey() {
         return key;

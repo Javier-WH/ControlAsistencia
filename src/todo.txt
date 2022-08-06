@@ -1,3 +1,1 @@
-1. Agregar justificación de inacistencias
-2. ajustar el control de verificación de fechas
-3. reporte de permisos
+arreglar el calendario
