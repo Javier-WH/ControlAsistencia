@@ -74,7 +74,7 @@ public class CheckDB {
             return;
         }
         if(tableName.equals("config")){
-            executeSQLQuery("CREATE TABLE `assistcontrolxd`.`config` ( `ID` INT NOT NULL AUTO_INCREMENT , `data` VARCHAR(255) NOT NULL , `value` VARCHAR(1000) NOT NULL , `createdAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAt` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`ID`)) ENGINE = InnoDB");
+            executeSQLQuery("CREATE TABLE `config` ( `ID` INT NOT NULL AUTO_INCREMENT , `data` VARCHAR(255) NOT NULL , `value` VARCHAR(1000) NOT NULL , `createdAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAt` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`ID`)) ENGINE = InnoDB");
             return;
         }
         if(tableName.equals("users")){
