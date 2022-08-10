@@ -235,7 +235,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
 
         jLabel12.setText("Fecha");
 
-        btnDate2.setText("Hasta");
+        btnDate2.setText("Hasta (opcional)");
         btnDate2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 btnDate2StateChanged(evt);
