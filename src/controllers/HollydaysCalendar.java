@@ -1,98 +1,96 @@
 package controllers;
 
 import java.awt.HeadlessException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
-
 public class HollydaysCalendar {
-    
-    public static ArrayList<String> getHolydaysList(){
-        ArrayList<String> hollyDays = new ArrayList<>();
-         Connection connection  = env.ConnectionDB.getConnection();
-     
-           try {
-            String sql = ("SELECT date FROM `hollydays`");
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                hollyDays.add(rs.getString("date"));
-            }
-            return hollyDays;
-       
-        } catch (HeadlessException | SQLException e) {
-            System.out.println(e.getMessage());
-        }
-         return null;
-    } 
-    
+
     //////////////
-    
-    
-        public static ResultSet getHolydaysListRS(){
-   
-         Connection connection  = env.ConnectionDB.getConnection();
-           try {
+    public static ResultSet getHolydaysListRS() {
+
+        Connection connection = env.ConnectionDB.getConnection();
+        try {
             String sql = ("SELECT * FROM `hollydays`");
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
-           return rs;
-       
+            return rs;
+
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
-         return null;
-    } 
-    
-    
+        return null;
+    }
+
     ///////////////////////////////
-    
-    public static boolean isHollyDay(String date){
+    public static void deleteHolyDay(String init) {
+        Connection connection = env.ConnectionDB.getConnection();
         
-        ArrayList<String> hollyDayList = getHolydaysList();
+        if(init.contains("hasta")){
+            String[] data = init.split(" ");
+            init = data[0];
+        }
         
-        if(hollyDayList.contains(date)){
+        
+        try {
+            String sql = ("DELETE FROM `hollydays` WHERE init = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, init);
+            st.execute();
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /////////////////////////////////
+    public static boolean insertHollyDay(String month1, String day1, String month2, String day2, String description) {
+
+        Connection connection = env.ConnectionDB.getConnection();
+        String init = month1 + "-" + day1;
+        String end = month2 + "-" + day2;
+
+        try {
+            String sql = ("INSERT INTO `hollydays` (`init`, `end`, `description`) VALUES (?, ?, ?)");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, init);
+            st.setString(2, end);
+            st.setString(3, description);
+
+            st.execute();
+
             return true;
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return false;
     }
-    
-    /////////////////////////////////
-    
-    
-    public static boolean insertHollyDay(String month, String day, String description){
-        
-           Connection connection  = env.ConnectionDB.getConnection();
-           String date = month + "-"+day;
-           
+
+    /////
+    public static void fillDefailtHollyDaysTable() {
+
+        //INSERT INTO `hollydays` (`id`, `init`, `end`, `description`, `createdAT`, `updatedAT`) VALUES (NULL, '1-1', '1-1', 'Año Nuevo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '4-19', '4-19', 'Declaración de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-1', '5-1', 'Día del Trabajo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-6', '24-6', 'Batalla de Carabobo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-7', '5-7', 'Día de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-7', '24-7', 'Natalicio de Simón Bolívar', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-10', '12-10', 'Día de la Resistencia Indígena', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-12', '24-12', 'Víspera de Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '25-12', '25-12', 'Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '31-12', '31-12', 'Fin de año', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        ResultSet rs = getHolydaysListRS();
+        int rows = 0;
         try {
-            String sql = ("INSERT INTO `hollydays` (`date`, `description`) VALUES (?, ?)");
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, date);
-            st.setString(2, description);
-     
-            st.execute();
-     
-           return true;
-            
-        } catch (HeadlessException | SQLException  e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } 
-         return false;
+            if (rs.last()) {
+                rows = rs.getRow();
+                rs.beforeFirst();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        if (rows == 0) {
+            String sql = "INSERT INTO `hollydays` (`id`, `init`, `end`, `description`, `createdAT`, `updatedAT`) VALUES (NULL, '1-1', '1-1', 'Año Nuevo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '4-19', '4-19', 'Declaración de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-1', '5-1', 'Día del Trabajo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-6', '24-6', 'Batalla de Carabobo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-7', '5-7', 'Día de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-7', '24-7', 'Natalicio de Simón Bolívar', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-10', '12-10', 'Día de la Resistencia Indígena', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-12', '24-12', 'Víspera de Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '25-12', '25-12', 'Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '31-12', '31-12', 'Fin de año', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+            controllers.CheckDB.executeSQLQuery(sql);
+        }
+
     }
-    
-        
-        
-    
-    
+
 }

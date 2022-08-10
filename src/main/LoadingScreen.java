@@ -157,6 +157,8 @@ public class LoadingScreen extends javax.swing.JFrame {
             setMessage("El contendio de la tabla configucaón se ha creado");
         }
         setMessage("El contenido de la tabla de configuración es correcto...");
+        controllers.HollydaysCalendar.fillDefailtHollyDaysTable();
+        setMessage("El contenido de la tabla de calendarios es correcto...");
         return true;
     }
 

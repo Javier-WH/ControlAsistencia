@@ -2,15 +2,13 @@ package pannels;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-
-
-
 
 public class HollydayCalendar extends javax.swing.JFrame {
 
@@ -22,35 +20,30 @@ public class HollydayCalendar extends javax.swing.JFrame {
         fillDaysOfMoth();
     }
 
-   
-    
-        private void fillTable(){
-         DefaultTableModel model = (DefaultTableModel)tblCalendar.getModel();
-         model.setRowCount(0);
-        
-         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-         tblCalendar.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
-         
-         ResultSet rs = controllers.HollydaysCalendar.getHolydaysListRS();
-        
-           try {
-            while (rs.next()) { 
-                if(rs.getString("date").equals(rs.getString("date2"))){
-                    model.addRow(new Object[]{rs.getString("date"), rs.getString("description")});
-                }else{
-                    model.addRow(new Object[]{rs.getString("date") + " hasta " + rs.getString("date2") , rs.getString("description")});
+    private void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblCalendar.getModel();
+        model.setRowCount(0);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tblCalendar.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
+        ResultSet rs = controllers.HollydaysCalendar.getHolydaysListRS();
+
+        try {
+            while (rs.next()) {
+                if (rs.getString("init").equals(rs.getString("end"))) {
+                    model.addRow(new Object[]{rs.getString("init"), rs.getString("description")});
+                } else {
+                    model.addRow(new Object[]{rs.getString("init") + " hasta " + rs.getString("end"), rs.getString("description")});
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getContentPane(), ex.getMessage());
         }
-    
+
     }
-    
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,7 +73,8 @@ public class HollydayCalendar extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtDay2 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        btnDate2 = new javax.swing.JCheckBox();
+        btnCheck = new javax.swing.JCheckBox();
+        btnDeleteDate = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
 
@@ -235,10 +229,17 @@ public class HollydayCalendar extends javax.swing.JFrame {
 
         jLabel12.setText("Fecha");
 
-        btnDate2.setText("Hasta");
-        btnDate2.addChangeListener(new javax.swing.event.ChangeListener() {
+        btnCheck.setText("Hasta");
+        btnCheck.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                btnDate2StateChanged(evt);
+                btnCheckStateChanged(evt);
+            }
+        });
+
+        btnDeleteDate.setText("Eliminar");
+        btnDeleteDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteDateActionPerformed(evt);
             }
         });
 
@@ -291,7 +292,10 @@ public class HollydayCalendar extends javax.swing.JFrame {
                                                     .addComponent(txtDay2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(mainPanelLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnDate2))))))
+                                        .addComponent(btnCheck))
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnDeleteDate))))))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(jLabel12)))
@@ -305,7 +309,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(jLabel12)
                 .addGap(4, 4, 4)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -323,7 +327,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
-                        .addComponent(btnDate2)
+                        .addComponent(btnCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
@@ -335,7 +339,9 @@ public class HollydayCalendar extends javax.swing.JFrame {
                             .addComponent(txtMonth2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDay2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
-                        .addComponent(btnAddHollyDay))
+                        .addComponent(btnAddHollyDay)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeleteDate))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,49 +368,64 @@ public class HollydayCalendar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtMonthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtMonthPropertyChange
-       
-        
+
+
     }//GEN-LAST:event_txtMonthPropertyChange
 
     private void txtMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtMonthItemStateChanged
         // TOD       
-           fillDaysOfMoth();
-            
+        fillDaysOfMoth();
+
     }//GEN-LAST:event_txtMonthItemStateChanged
 
     private void txtYearKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYearKeyReleased
-            // TODO add your handling code here:
-            fillDaysOfMoth();
+        // TODO add your handling code here:
+        fillDaysOfMoth();
     }//GEN-LAST:event_txtYearKeyReleased
 
     private void btnAddHollyDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddHollyDayActionPerformed
         // TODO add your handling code here:
-        
-        String month = String.valueOf(txtMonth.getSelectedIndex() + 1);
-        String day = String.valueOf(txtDay.getSelectedItem());
-        String description = txtDescription.getText();
-        
-        /////////////////////////
-        
-        String month2 = String.valueOf(txtMonth2.getSelectedIndex() + 1);
-        String day2 = String.valueOf(txtDay2.getSelectedItem());
-  
-        
-        //////////////
-        
-        if(month2.isEmpty() && day2.isEmpty()){
-            controllers.HollydaysCalendar.insertHollyDay(month, day, description);
-        }else{
-        
-        
-        
+
+        if (txtDescription.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes agregar una descripción");
+        } else {
+
+            boolean isValidDate = true;
+
+            ResultSet rs = controllers.HollydaysCalendar.getHolydaysListRS();
+
+            String month1 = String.valueOf(txtMonth.getSelectedIndex() + 1);
+            String day1 = String.valueOf(txtDay.getSelectedItem());
+            String description = txtDescription.getText();
+
+            /////////////////////////
+            try {
+                while (rs.next()) {
+                    if (rs.getString("init").equals(month1 + "-" + day1)) {
+                        isValidDate = false;
+                    }
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            if (isValidDate) {
+                if (btnCheck.isSelected()) {
+                    String month2 = String.valueOf(txtMonth2.getSelectedIndex() + 1);
+                    String day2 = String.valueOf(txtDay2.getSelectedItem());
+                    
+                    if(Integer.parseInt(month2) < Integer.parseInt(month1) || (Integer.parseInt(month1) == Integer.parseInt(month2) && Integer.parseInt(day2) < Integer.parseInt(day1)) ){
+                        JOptionPane.showMessageDialog(this, "La fecha ingresada no es valida");
+                    }else{
+                        controllers.HollydaysCalendar.insertHollyDay(month1, day1, month2, day2, description);
+                    }
+                } else {
+                    controllers.HollydaysCalendar.insertHollyDay(month1, day1, month1, day1, description);
+                }
+            } else {
+                  JOptionPane.showMessageDialog(this, "La fehca ya está registrada");
+            }
+            fillTable();
         }
-  
-        
-        
-        
-        
-        fillTable();
     }//GEN-LAST:event_btnAddHollyDayActionPerformed
 
     private void txtYear2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYear2KeyReleased
@@ -421,50 +442,65 @@ public class HollydayCalendar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMonth2PropertyChange
 
-    private void btnDate2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnDate2StateChanged
+    private void btnCheckStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnCheckStateChanged
         // TODO add your handling code here:
-        if(btnDate2.isSelected()){
+        if (btnCheck.isSelected()) {
             txtDay2.setEnabled(true);
             txtYear2.setEnabled(true);
             txtMonth2.setEnabled(true);
-        }else{
-         txtDay2.setEnabled(false);
+        } else {
+            txtDay2.setEnabled(false);
             txtYear2.setEnabled(false);
             txtMonth2.setEnabled(false);
-        
+
+        }
+
+
+    }//GEN-LAST:event_btnCheckStateChanged
+
+    private void btnDeleteDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDateActionPerformed
+        // TODO add your handling code here:
+        String value ="";
+        try {
+            int row = tblCalendar.getSelectedRow();
+            value = tblCalendar.getModel().getValueAt(row, 0).toString();
+            controllers.HollydaysCalendar.deleteHolyDay(value);
+            fillTable();
+            
+        } catch (Exception e) {
         }
         
         
-        
-    }//GEN-LAST:event_btnDate2StateChanged
+    }//GEN-LAST:event_btnDeleteDateActionPerformed
 
-      private void fillDaysOfMoth(){
-          
-          //fecha 1
-          DefaultComboBoxModel DCBM = (DefaultComboBoxModel) txtDay.getModel();
-          DCBM.removeAllElements();
-                    
-          int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear.getText(), String.valueOf(txtMonth.getSelectedIndex() +1 ));
-            
-            for(int i = 1 ; i <= days ; i++ ){
-                DCBM.addElement(i);
-            }
-            
-           //fecha2
-          DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) txtDay2.getModel();
-          DCBM2.removeAllElements();
-          
-           int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(txtMonth2.getSelectedIndex() +1 ));
-           
-            for(int i = 1 ; i <= days2 ; i++ ){
-                DCBM2.addElement(i);
-            }
-      }
+    private void fillDaysOfMoth() {
+
+        //fecha 1
+        DefaultComboBoxModel DCBM = (DefaultComboBoxModel) txtDay.getModel();
+        DCBM.removeAllElements();
+
+        int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear.getText(), String.valueOf(txtMonth.getSelectedIndex() + 1));
+
+        for (int i = 1; i <= days; i++) {
+            DCBM.addElement(i);
+        }
+
+        //fecha2
+        DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) txtDay2.getModel();
+        DCBM2.removeAllElements();
+
+        int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(txtMonth2.getSelectedIndex() + 1));
+
+        for (int i = 1; i <= days2; i++) {
+            DCBM2.addElement(i);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAddHollyDay;
-    private javax.swing.JCheckBox btnDate2;
+    private javax.swing.JCheckBox btnCheck;
+    private javax.swing.JButton btnDeleteDate;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -491,5 +527,3 @@ public class HollydayCalendar extends javax.swing.JFrame {
     private javax.swing.JTextField txtYear2;
     // End of variables declaration//GEN-END:variables
 }
-
-
