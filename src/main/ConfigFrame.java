@@ -13,6 +13,7 @@ import pannels.HollydayCalendar;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
 import pannels.InstitutionDataForm;
+import pannels.LeavesPannel;
 import pannels.ShowAdmins;
 import pannels.ShowAssitance;
 import pannels.ShowTeachers;
@@ -57,6 +58,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnInsertTeacher = new javax.swing.JButton();
         btbInstitucionData = new javax.swing.JButton();
         btbCalendar = new javax.swing.JButton();
+        btbLeaves = new javax.swing.JButton();
         panelReportes = new javax.swing.JPanel();
         printConstancia = new javax.swing.JButton();
         btnCambiarLogo4 = new javax.swing.JButton();
@@ -177,6 +179,17 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        btbLeaves.setBackground(new java.awt.Color(51, 102, 0));
+        btbLeaves.setForeground(new java.awt.Color(255, 255, 255));
+        btbLeaves.setText("Permisos");
+        btbLeaves.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btbLeaves.setPreferredSize(new java.awt.Dimension(74, 18));
+        btbLeaves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbLeavesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
         panelGeneralLayout.setHorizontalGroup(
@@ -184,12 +197,6 @@ public class ConfigFrame extends javax.swing.JFrame {
             .addGroup(panelGeneralLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -201,7 +208,13 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLogoRestore, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                             .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(32, 32, 32))))
+                        .addGap(32, 32, 32))
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
+                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btbLeaves, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelGeneralLayout.setVerticalGroup(
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,12 +235,14 @@ public class ConfigFrame extends javax.swing.JFrame {
                         .addComponent(btnLogoRestore)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btbLeaves, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        mainPanel.add(panelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 369, 250));
+        mainPanel.add(panelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 369, 290));
 
         panelReportes.setBackground(new java.awt.Color(255, 255, 255));
         panelReportes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 102, 0))); // NOI18N
@@ -476,6 +491,12 @@ public class ConfigFrame extends javax.swing.JFrame {
         hdc.setVisible(true);
     }//GEN-LAST:event_btbCalendarActionPerformed
 
+    private void btbLeavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLeavesActionPerformed
+        LeavesPannel lp = new LeavesPannel();
+        lp.setLocationRelativeTo(this);
+        lp.setVisible(true);
+    }//GEN-LAST:event_btbLeavesActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -488,6 +509,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbCalendar;
     private javax.swing.JButton btbInstitucionData;
+    private javax.swing.JButton btbLeaves;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCambiarLogo;
     private javax.swing.JButton btnCambiarLogo4;
