@@ -1,6 +1,7 @@
 package main;
 
 
+import Actors.Day;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -8,6 +9,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import pannels.EmisorPannel;
 import pannels.HollydayCalendar;
 import pannels.InsertAdmins;
@@ -449,6 +451,12 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCambiarLogo4ActionPerformed
 
     private void btnStartAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartAppActionPerformed
+       libraries.GetDate.compareDates();
+       Day today = libraries.WorkingDays.isWorkingDay();
+       if(!today.isWorkingDay()){
+           JOptionPane.showMessageDialog(this, "Hoy no es un dia laboral, "+ today.getDesciption());
+       } 
+       
       App app = new App();
       app.setLocationRelativeTo(this);
       app.setVisible(true);

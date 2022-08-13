@@ -1,7 +1,9 @@
 package main;
 
+import Actors.Day;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import pannels.ConfirmClose;
 
@@ -16,6 +18,26 @@ public class App extends javax.swing.JFrame {
         txtCI.requestFocus();
         lbltitle.setIcon(env.Enviroment.getTitleIcon(lbltitle.getWidth(), lbltitle.getHeight()));
         startClock();
+        
+        Day today = libraries.WorkingDays.isWorkingDay();
+        
+        if(!today.isWorkingDay()){
+            jLabel1.setVisible(false);
+            jLabel2.setVisible(false);
+            txtCI.setVisible(false);
+            txtPassword.setVisible(false);
+            btnAccept.setVisible(false);
+            lblMessage.setText("Hoy no es un dia laboral");
+            lblMessage1.setText(today.getDesciption());
+        } else{
+            jLabel1.setVisible(true);
+            jLabel2.setVisible(true);
+            txtCI.setVisible(true);
+            txtPassword.setVisible(true);
+            btnAccept.setVisible(true);
+            lblMessage.setText("");
+            lblMessage1.setText("");
+        }
        
     }
     public void startClock() {
@@ -45,10 +67,13 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lbltitle = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        inputPanel = new javax.swing.JPanel();
+        lblMessage = new javax.swing.JLabel();
+        lblMessage1 = new javax.swing.JLabel();
         txtCI = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -58,6 +83,8 @@ public class App extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         lblImagen = new javax.swing.JLabel();
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -77,8 +104,16 @@ public class App extends javax.swing.JFrame {
         jPanel2.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 90, 110));
         jPanel2.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, 80));
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 0));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        inputPanel.setBackground(new java.awt.Color(51, 102, 0));
+        inputPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(255, 255, 255));
+        lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblMessage1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblMessage1.setForeground(new java.awt.Color(255, 255, 255));
+        lblMessage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         txtCI.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtCI.setForeground(new java.awt.Color(51, 102, 0));
@@ -112,24 +147,34 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
+        inputPanel.setLayout(inputPanelLayout);
+        inputPanelLayout.setHorizontalGroup(
+            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inputPanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(inputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMessage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+        inputPanelLayout.setVerticalGroup(
+            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessage1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,12 +182,12 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGap(60, 60, 60))
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 74, -1, -1));
+        jPanel2.add(inputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 340, 350));
 
         btnStop.setBackground(new java.awt.Color(204, 0, 0));
         btnStop.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,28 +241,36 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        String ci = txtCI.getText();
-        String password = String.valueOf(txtPassword.getPassword());
         
-        String response = controllers.AutenticationController.autenticateUser(ci, password);
+        libraries.GetDate.compareDates();
+    
+        Day today = libraries.WorkingDays.isWorkingDay();
         
-        try {
-            Integer.parseInt(response);
-            if (!controllers.AssistenceController.alreadyAsistence(response)) {
-                boolean res = controllers.AssistenceController.insertAssistance(response);
-                if (res) {
-                  clean();
-                } else {
-                    JOptionPane.showMessageDialog(this, "No se pudo registrar la asistencia");
-                }
-            }else{
-               JOptionPane.showMessageDialog(this, "La asistencia ya ha sido registrada el dia de hoy");
-               clean();
-            }
-        } catch (NumberFormatException e) {
+        if(!today.isWorkingDay()){
+           JOptionPane.showMessageDialog(this, "Hoy no es un dia laboral, "+ today.getDesciption());
+        }else{
+            String ci = txtCI.getText();
+            String password = String.valueOf(txtPassword.getPassword());
+            String response = controllers.AutenticationController.autenticateUser(ci, password);
 
-            JOptionPane.showMessageDialog(this, response);
-        }
+            try {
+                Integer.parseInt(response);
+                if (!controllers.AssistenceController.alreadyAsistence(response)) {
+                    boolean res = controllers.AssistenceController.insertAssistance(response);
+                    if (res) {
+                      clean();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo registrar la asistencia");
+                    }
+                }else{
+                   JOptionPane.showMessageDialog(this, "La asistencia ya ha sido registrada el dia de hoy");
+                   clean();
+                }
+            } catch (NumberFormatException e) {
+
+                JOptionPane.showMessageDialog(this, response);
+            }
+        }  
     }//GEN-LAST:event_btnAcceptActionPerformed
     
     public void setClockTime() {
@@ -257,14 +310,17 @@ public class App extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnStop;
+    private javax.swing.JPanel inputPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMessage;
+    private javax.swing.JLabel lblMessage1;
     private javax.swing.JLabel lbltitle;
     private javax.swing.JTextField txtCI;
     private javax.swing.JPasswordField txtPassword;

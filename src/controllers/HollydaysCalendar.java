@@ -93,7 +93,7 @@ public class HollydaysCalendar {
     
     ///////
     
-    public static boolean isHollyDay(String date){
+    public static String isHollyDay(String date){
         try {
             int month = Integer.parseInt(date.split("-")[0]);
             int day = Integer.parseInt(date.split("-")[1]);
@@ -108,26 +108,26 @@ public class HollydaysCalendar {
            
                 if(monthInit == monthEnd){
                     if(day >= dayInit && day <= dayEnd){   
-                        return true;
+                        return rs.getString("description");
                     }
                 }
                 
                 if(month >= monthInit && month <= monthEnd){
                     if(month == monthEnd){
                         if(day <= dayEnd){
-                            return true;
+                         return rs.getString("description");
                         }
                     }
                     if(month == monthInit){   
                          if(day >= dayInit){
-                            return true;
+                           return rs.getString("description");
                         }
                     }
                 }
             }         
         } catch (NumberFormatException | SQLException e) {
         }
-        return false;
+        return "false";
     }
 
 }
