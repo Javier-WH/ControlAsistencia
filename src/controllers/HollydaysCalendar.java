@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -87,10 +85,49 @@ public class HollydaysCalendar {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         if (rows == 0) {
-            String sql = "INSERT INTO `hollydays` (`id`, `init`, `end`, `description`, `createdAT`, `updatedAT`) VALUES (NULL, '1-1', '1-1', 'Año Nuevo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '4-19', '4-19', 'Declaración de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-1', '5-1', 'Día del Trabajo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-6', '24-6', 'Batalla de Carabobo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-7', '5-7', 'Día de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-7', '24-7', 'Natalicio de Simón Bolívar', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-10', '12-10', 'Día de la Resistencia Indígena', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '24-12', '24-12', 'Víspera de Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '25-12', '25-12', 'Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '31-12', '31-12', 'Fin de año', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+            String sql = "INSERT INTO `hollydays` (`id`, `init`, `end`, `description`, `createdAT`, `updatedAT`) VALUES (NULL, '1-1', '1-1', 'Año Nuevo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '4-19', '4-19', 'Declaración de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-1', '5-1', 'Día del Trabajo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '6-24', '6-24', 'Batalla de Carabobo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '5-7', '5-7', 'Día de la Independencia', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '7-24', '7-24', 'Natalicio de Simón Bolívar', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '10-12', '10-12', 'Día de la Resistencia Indígena', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-24', '12-24', 'Víspera de Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-25', '12-25', 'Navidad', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), (NULL, '12-31', '12-31', 'Fin de año', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
             controllers.CheckDB.executeSQLQuery(sql);
         }
 
+    }
+    
+    ///////
+    
+    public static boolean isHollyDay(String date){
+        try {
+            int month = Integer.parseInt(date.split("-")[0]);
+            int day = Integer.parseInt(date.split("-")[1]);
+   
+            ResultSet rs = getHolydaysListRS();
+            while (rs.next()) {
+                
+                int monthInit = Integer.parseInt(rs.getString("init").split("-")[0]);
+                int dayInit = Integer.parseInt(rs.getString("init").split("-")[1]);
+                int monthEnd = Integer.parseInt(rs.getString("end").split("-")[0]);
+                int dayEnd = Integer.parseInt(rs.getString("end").split("-")[1]);
+           
+                if(monthInit == monthEnd){
+                    if(day >= dayInit && day <= dayEnd){   
+                        return true;
+                    }
+                }
+                
+                if(month >= monthInit && month <= monthEnd){
+                    if(month == monthEnd){
+                        if(day <= dayEnd){
+                            return true;
+                        }
+                    }
+                    if(month == monthInit){   
+                         if(day >= dayInit){
+                            return true;
+                        }
+                    }
+                }
+            }         
+        } catch (NumberFormatException | SQLException e) {
+        }
+        return false;
     }
 
 }
