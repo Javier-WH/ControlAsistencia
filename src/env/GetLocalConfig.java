@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -21,36 +24,34 @@ public class GetLocalConfig {
     private static String databaseName = "assistcontrolxd";
     private static String dbUser = "root";
     private static String dbPassword = "";
-     private static String start = "";
+    private static String start = "";
     
     private static String key = "ESCUELA ABELARDO MENDEZ";
-    
-    //
-    private static String DBApath = System.getProperty("user.dir") + "/src/configFiles/DBA.ascon";
+        
+    private static String DBApath = System.getProperty("user.dir") +"/src/configFiles/DBA.ascon";
     private static String DBNpath = System.getProperty("user.dir") + "/src/configFiles/DBN.ascon";
     private static String DBUpath = System.getProperty("user.dir") + "/src/configFiles/DBU.ascon";
     private static String DBPpath = System.getProperty("user.dir") + "/src/configFiles/DBP.ascon";
     private static String StartPath = System.getProperty("user.dir") + "/src/configFiles/ST.ascon";
-     private static String DatePath = System.getProperty("user.dir") + "/src/configFiles/CD.ascon";
+    private static String DatePath = System.getProperty("user.dir") + "/src/configFiles/CD.ascon";
+    
 
     public static String getKey() {
         return key;
     }
-    
-    
-    
-        
+      
     
     public static String getDbAConfig() {
         File doc = new File(DBApath);
-
+      
         try {
             Scanner obj = new Scanner(doc);
             while (obj.hasNextLine()) {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+        
+            System.out.println(e.getCause());
         }
         return null;
     }
@@ -68,7 +69,7 @@ public class GetLocalConfig {
         }
         catch(IOException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e)
         {
-            System.out.println(e);
+ 
         }
     
     }
@@ -100,7 +101,7 @@ public class GetLocalConfig {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+           
         }
         return null;
     }
@@ -150,7 +151,7 @@ public class GetLocalConfig {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+            
         }
         return null;
     }
@@ -202,7 +203,7 @@ public class GetLocalConfig {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+           
         }
         return null;
     }
@@ -254,7 +255,7 @@ public class GetLocalConfig {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+           
         }
         return null;
     }
@@ -305,7 +306,7 @@ public class GetLocalConfig {
                 return Encript.desencriptar(obj.nextLine(), key);
             }
         } catch (FileNotFoundException | UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error importante, no se encuentran los archivos de configuración");
+           
         }
         return null;
     }

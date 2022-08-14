@@ -2,9 +2,6 @@ package main;
 
 
 import Actors.Day;
-import java.awt.HeadlessException;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -39,7 +36,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         lblImage.setIcon(env.Enviroment.getBackground2Icon(lblImage.getWidth(), lblImage.getHeight()));
         btnStartApp.requestFocus();
         
-     
+       
        
     }
 
@@ -369,7 +366,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         );
 
         mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 660, 40));
-        mainPanel.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 400, 540));
+        mainPanel.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, -10, 400, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

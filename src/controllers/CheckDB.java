@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CheckDB {
-    private static  String[] list = {"admins", "assistance", "config", "users", "hollydays"};
+    private static  String[] list = {"admins", "assistance", "config", "users", "hollydays", "leaves"};
     
     
     public static ResultSet getTablesList() {
@@ -84,8 +84,14 @@ public class CheckDB {
         
         if(tableName.equals("hollydays")){
             executeSQLQuery("CREATE TABLE `hollydays` ( `id` INT NOT NULL AUTO_INCREMENT , `init` VARCHAR(30) NOT NULL , `end` VARCHAR(30) NOT NULL , `description` VARCHAR(255) NOT NULL , `createdAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+            return;
         }
         
+        if(tableName.equals("leaves")){
+            executeSQLQuery("CREATE TABLE `leaves` ( `id` INT NOT NULL AUTO_INCREMENT , `userID` INT NOT NULL , `init` VARCHAR(30) NOT NULL , `end` VARCHAR(30) NOT NULL , `type` VARCHAR(255) NOT NULL , `description` VARCHAR(255) NOT NULL , `createdAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAT` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB");
+        }
+        
+        //// CREATE TABLE `leaves` ( `id` INT NOT NULL AUTO_INCREMENT , `userID` INT NOT NULL , `init` VARCHAR(30) NOT NULL , `end` VARCHAR(30) NOT NULL , `type` VARCHAR(255) NOT NULL , `description` VARCHAR(255) NOT NULL , `createdAT` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updatedAT` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
     }
