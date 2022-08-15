@@ -21,7 +21,7 @@ public class GetLocalConfig {
     //default info
     
     private static String databasePathAddress = "jdbc:mysql://localhost:3306/";
-    private static String databaseName = "assistcontrolxd";
+    private static String databaseName = "assistcontrol";
     private static String dbUser = "root";
     private static String dbPassword = "";
     private static String start = "";

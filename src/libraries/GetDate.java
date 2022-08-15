@@ -81,7 +81,6 @@ public class GetDate {
     }
 
     public static boolean isWeekEnd() {
-
         String currentDay = getCurrentDay();
 
         if (currentDay.equals("1") || currentDay.equals("7")) {
@@ -89,6 +88,10 @@ public class GetDate {
         }
         return false;
     }
+    ////////////////
+
+    ///////////////////
+ 
 
     public static void compareDates() {
         Date currentDate = new Date();
@@ -123,18 +126,18 @@ public class GetDate {
 
     public static boolean isLapYear(double year) {
 
-        if ((year / 4) == (int)(year / 4)) {
-            if ((year / 100) == (int)(year / 100)) {
-                if ((year / 400) == (int)(year / 400)) {
+        if ((year / 4) == (int) (year / 4)) {
+            if ((year / 100) == (int) (year / 100)) {
+                if ((year / 400) == (int) (year / 400)) {
                     return true;
                 }
-            }else{
+            } else {
                 return true;
             }
         }
         return false;
     }
-    
+
     //30 dias abril, julio, sepiempre y noviembre
     //31 todos los demas, excepcion de febrero que son 28 dias.
 }

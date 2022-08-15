@@ -31,6 +31,9 @@ public class ConnectionDB {
     
     public static boolean connectionDB(){
         String url = env.Enviroment.getContectionString();
+       //String url = "jdbc:mysql://localhost/assistcontrol?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+       
+        
         String user = env.Enviroment.getDbUser();
         String password = env.Enviroment.getDbPassword();
         try {
@@ -39,6 +42,7 @@ public class ConnectionDB {
             return true;
         } catch (SQLException e) {
             setERROR_CODE(e.getErrorCode());
+            System.out.println(e.getMessage());
             return false;
         }catch(Exception x){
             setERROR_CODE(-1);

@@ -14,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 public class ShowAssitance extends javax.swing.JFrame {
 
     private DefaultTableModel model = null;
@@ -57,44 +58,37 @@ public class ShowAssitance extends javax.swing.JFrame {
     private void fillTable() {
 
         date = txtYear.getText() + "-" + (cmbMonth.getSelectedIndex() + 1) + "-" + cmbDay.getSelectedItem();
-        Day day = libraries.WorkingDays.isWorkingDay( String.valueOf(cmbMonth.getSelectedIndex() + 1), String.valueOf(cmbDay.getSelectedItem()));
-
+        Day day = libraries.WorkingDays.isWorkingDay();
         model = (DefaultTableModel) tblAssistance.getModel();
         model.setRowCount(0);
 
- ///////////////////Bug, debe corregirse
-        if (day.isWorkingDay()) {
-            model.addRow(new Object[]{"Este dia no es laboral", day.getDesciption()});
-        } else {
-            ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
-            ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
+        ///////////////////Bug, debe corregirse
+        ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
+        ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
 
-            if (rsPresent != null) {
+        if (rsPresent != null) {
+            try {
+                if (btnPresente.isSelected()) {
+                    while (rsPresent.next()) {
+                        model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
+                    }
+                } else {
+                    //se hizó así, porque fue la uníca solución que funcionó para resolver el bug que duplicaba los resultados.
+                    ArrayList<String> presentsList = new ArrayList();
 
-                try {
-                    if (btnPresente.isSelected()) {
-                        while (rsPresent.next()) {
-                            model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
-                        }
-                    } else {
-                        //se hizó así, porque fue la uníca solución que funcionó para resolver el bug que duplicaba los resultados.
-                        ArrayList<String> presentsList = new ArrayList();
+                    while (rsPresent.next()) {
+                        presentsList.add(rsPresent.getString("id"));
+                    }
 
-                        while (rsPresent.next()) {
-                            presentsList.add(rsPresent.getString("id"));
-                        }
-
-                        while (rsTeacherList.next()) {
-                            if (!presentsList.contains(rsTeacherList.getString("id"))) {
-                                model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
-                            }
+                    while (rsTeacherList.next()) {
+                        if (!presentsList.contains(rsTeacherList.getString("id"))) {
+                            model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
                         }
                     }
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
                 }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
             }
-
         }
 
     }
