@@ -235,8 +235,7 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCIActionPerformed
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
-       exitApp();
-        
+        exitApp(); 
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
@@ -286,9 +285,13 @@ public class App extends javax.swing.JFrame {
     }
 
     private void exitApp(){
-        ConfirmClose CC = new ConfirmClose(this);
-        CC.setLocationRelativeTo(this);
-        CC.setVisible(true);
+        try {
+           ConfirmClose CC = new ConfirmClose(this);
+           CC.setLocationRelativeTo(this);
+           CC.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
