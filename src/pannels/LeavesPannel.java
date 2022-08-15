@@ -1,5 +1,6 @@
 package pannels;
 
+import java.awt.Toolkit;
 import javax.swing.DefaultComboBoxModel;
 
 
@@ -14,6 +15,8 @@ public class LeavesPannel extends javax.swing.JFrame {
         txtYear2.setText(txtYear1.getText());
         
         fillDaysOfMoth();
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
     @SuppressWarnings("unchecked")

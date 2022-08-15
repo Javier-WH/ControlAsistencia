@@ -1,5 +1,6 @@
 package pannels;
 
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.ConfigFrame;
@@ -12,6 +13,8 @@ public class ConfirmClose extends javax.swing.JFrame {
          initComponents();
    
         this.configWindow = configWindow;
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
  

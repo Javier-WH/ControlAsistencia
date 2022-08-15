@@ -1,5 +1,6 @@
 package pannels;
 
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +17,8 @@ public class HollydayCalendar extends javax.swing.JFrame {
         txtYear2.setText(txtYear.getText());
         fillTable();
         fillDaysOfMoth();
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
     private void fillTable() {
@@ -101,7 +104,9 @@ public class HollydayCalendar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        mainPanel.setBackground(new java.awt.Color(51, 102, 0));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mainPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         tblCalendar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,6 +146,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Año");
 
         txtMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Frebro", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
@@ -155,12 +161,15 @@ public class HollydayCalendar extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mes");
 
         txtDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Dia");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripción");
 
         btnAddHollyDay.setText("Agregar dia feriado");
@@ -194,8 +203,10 @@ public class HollydayCalendar extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Desde");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Dia");
 
         txtYear2.setEnabled(false);
@@ -205,6 +216,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Año");
 
         txtMonth2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Frebro", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
@@ -220,13 +232,16 @@ public class HollydayCalendar extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Mes");
 
         txtDay2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtDay2.setEnabled(false);
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha");
 
+        btnCheck.setForeground(new java.awt.Color(255, 255, 255));
         btnCheck.setText("Hasta");
         btnCheck.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

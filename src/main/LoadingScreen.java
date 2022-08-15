@@ -2,6 +2,7 @@ package main;
 
 import Actors.Admins;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -19,6 +20,9 @@ public class LoadingScreen extends javax.swing.JFrame {
         lblImage.setIcon(env.Enviroment.getSplashScreenIcon(lblImage.getWidth(), lblImage.getHeight()));
         lblTitle.setIcon(env.Enviroment.getTitleIcon(lblTitle.getWidth(), lblTitle.getHeight()));
         progessBar.setValue(0);
+        
+       this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
+
 
     }
 

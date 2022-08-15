@@ -2,6 +2,7 @@ package main;
 
 
 import Actors.Day;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -37,7 +38,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnStartApp.requestFocus();
         
        
-       
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
  

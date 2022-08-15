@@ -1,6 +1,7 @@
 package pannels;
 
 import Actors.Users;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -11,6 +12,8 @@ public class InsertTeachers extends javax.swing.JFrame {
         initComponents();
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
 

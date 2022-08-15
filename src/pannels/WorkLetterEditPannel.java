@@ -1,5 +1,6 @@
 package pannels;
 
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class WorkLetterEditPannel extends javax.swing.JFrame {
@@ -10,6 +11,8 @@ public class WorkLetterEditPannel extends javax.swing.JFrame {
         
         txtWorkLetter1.setText(env.Enviroment.getTextConstanciaTrabajo());
         txtWorkLetter2.setText(env.Enviroment.getTextConstanciaTrabajo2());
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
     @SuppressWarnings("unchecked")
@@ -41,14 +44,18 @@ public class WorkLetterEditPannel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        mainPannel.setBackground(new java.awt.Color(51, 102, 0));
         mainPannel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Editar carta de Trabajo");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cuerpo");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Pie de pagina");
 
         btnAccept.setText("Aceptar");

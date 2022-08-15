@@ -2,6 +2,7 @@ package pannels;
 
 import Actors.Users;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +23,7 @@ public class EmisorPannel extends javax.swing.JFrame {
         txtEmisorCi.setText(env.Enviroment.getDirectorCi());
         txtEmisorCharge.setText("Director");
               
-        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
    

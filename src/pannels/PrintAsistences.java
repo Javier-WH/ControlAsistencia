@@ -2,6 +2,7 @@ package pannels;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import static java.awt.print.Printable.NO_SUCH_PAGE;
@@ -22,6 +23,8 @@ public class PrintAsistences extends javax.swing.JFrame implements Printable{
         lblTitle.setText(title);
         lblInstitutionName.setText(env.Enviroment.getOwnerName());
         lblLogo.setIcon(env.Enviroment.getLogoIcon(lblLogo.getWidth(), lblLogo.getHeight()));
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
         
     }
 

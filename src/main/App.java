@@ -1,6 +1,7 @@
 package main;
 
 import Actors.Day;
+import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -38,6 +39,7 @@ public class App extends javax.swing.JFrame {
             lblMessage1.setText("");
         }
        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
     public void startClock() {
 
@@ -241,7 +243,6 @@ public class App extends javax.swing.JFrame {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         
         libraries.GetDate.compareDates();
-    
         Day today = libraries.WorkingDays.isWorkingDay();
         
         if(!today.isWorkingDay()){

@@ -1,6 +1,8 @@
 
 package pannels;
 
+import java.awt.Toolkit;
+
 
 
 
@@ -14,6 +16,8 @@ public class DataBaseConfData extends javax.swing.JFrame {
         txtDBName.setText(env.GetLocalConfig.getDbNConfig());
         txtDBUser.setText(env.GetLocalConfig.getDbUConfig());
         txtDBPassword.setText(env.GetLocalConfig.getDbPConfig());
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
 

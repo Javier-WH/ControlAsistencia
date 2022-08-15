@@ -2,6 +2,7 @@ package main;
 
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -32,6 +33,8 @@ public class LoginFrame extends javax.swing.JFrame {
         inputContainer.setBackground(new Color(2, 77, 16));
         
         lblVersion.setText(env.Enviroment.getVersion());
+        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
     
     

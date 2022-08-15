@@ -4,6 +4,7 @@ package pannels;
 import Actors.Users;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -36,7 +37,7 @@ public class PrintPage extends javax.swing.JFrame implements Printable{
         lblCargo.setText(admin.getName() + " "+ admin.getLastName());
         
       
-        
+         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
     

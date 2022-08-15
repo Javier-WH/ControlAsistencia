@@ -15,6 +15,8 @@ public class ShowTeachers extends javax.swing.JFrame {
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
          this.setSize((int)(screenSize.width * 0.8), 550);
+         
+          this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
     
     private void fillTable(){
