@@ -25,6 +25,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
         Asistencia.add(btnInasistente);
+        Asistencia.add(btnLeaves);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize((int) (screenSize.width * 0.9), 600);
@@ -60,11 +61,10 @@ public class ShowAssitance extends javax.swing.JFrame {
     private void fillTable() {
 
         date = txtYear.getText() + "-" + (cmbMonth.getSelectedIndex() + 1) + "-" + cmbDay.getSelectedItem();
-        Day day = libraries.WorkingDays.isWorkingDay();
         model = (DefaultTableModel) tblAssistance.getModel();
         model.setRowCount(0);
 
-        ///////////////////Bug, debe corregirse
+     
         ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
         ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
 
@@ -112,6 +112,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnPresente = new javax.swing.JRadioButton();
         btnInasistente = new javax.swing.JRadioButton();
+        btnLeaves = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         cmbMonth = new javax.swing.JComboBox<>();
@@ -200,6 +201,20 @@ public class ShowAssitance extends javax.swing.JFrame {
         btnInasistente.setBackground(new java.awt.Color(51, 102, 0));
         btnInasistente.setForeground(new java.awt.Color(255, 255, 255));
         btnInasistente.setText("Inasistentes");
+        btnInasistente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInasistenteActionPerformed(evt);
+            }
+        });
+
+        btnLeaves.setBackground(new java.awt.Color(51, 102, 0));
+        btnLeaves.setForeground(new java.awt.Color(255, 255, 255));
+        btnLeaves.setText("Permisos");
+        btnLeaves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeavesActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Hoy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +265,9 @@ public class ShowAssitance extends javax.swing.JFrame {
                                 .addComponent(btnPresente)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnInasistente)
-                                .addGap(42, 42, 42)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLeaves)
+                                .addGap(88, 88, 88)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,8 +282,8 @@ public class ShowAssitance extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton1))
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 656, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1323, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,7 +310,8 @@ public class ShowAssitance extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(cmbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLeaves))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -382,6 +400,14 @@ public class ShowAssitance extends javax.swing.JFrame {
         refreshAssitence();
     }//GEN-LAST:event_txtYearKeyReleased
 
+    private void btnLeavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeavesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLeavesActionPerformed
+
+    private void btnInasistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInasistenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInasistenteActionPerformed
+
     public void refreshAssitence() {
         if (!txtYear.getText().isEmpty()) {
             fillTable();
@@ -402,6 +428,7 @@ public class ShowAssitance extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btnInasistente;
+    private javax.swing.JRadioButton btnLeaves;
     private javax.swing.JRadioButton btnPresente;
     private javax.swing.JComboBox<String> cmbDay;
     private javax.swing.JComboBox<String> cmbMonth;

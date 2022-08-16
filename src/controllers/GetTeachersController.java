@@ -23,4 +23,21 @@ public class GetTeachersController {
  
     }
     
+    //////////////
+    
+    public static ResultSet getTeachers(String ci){
+        Connection connection  = env.ConnectionDB.getConnection();
+                
+        try {
+            String sql = ("SELECT * FROM `users` WHERE ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ci);
+            return st.executeQuery();
+            
+        } catch (HeadlessException | SQLException e) {
+            return null;
+        }
+ 
+    }
+    
 }

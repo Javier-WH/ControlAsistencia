@@ -1,22 +1,22 @@
 package pannels;
 
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
-
-
+import javax.swing.JOptionPane;
 
 public class LeavesPannel extends javax.swing.JFrame {
 
-  
     public LeavesPannel() {
         initComponents();
-        
+
         txtYear1.setText(libraries.GetDate.getCurrentYear());
         txtYear2.setText(txtYear1.getText());
-        
+
         fillDaysOfMoth();
-        
-         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
+
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +46,8 @@ public class LeavesPannel extends javax.swing.JFrame {
         rdbTo = new javax.swing.JRadioButton();
         btnAccept = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        cmbType = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -54,7 +56,11 @@ public class LeavesPannel extends javax.swing.JFrame {
 
         jLabel1.setText("Descripción");
 
-        txtDescription.setEditable(false);
+        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescriptionActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Cédula");
 
@@ -146,6 +152,11 @@ public class LeavesPannel extends javax.swing.JFrame {
         });
 
         btnAccept.setText("Agregar Permiso");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout optionalPannelLayout = new javax.swing.GroupLayout(optionalPannel);
         optionalPannel.setLayout(optionalPannelLayout);
@@ -203,6 +214,10 @@ public class LeavesPannel extends javax.swing.JFrame {
             }
         });
 
+        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Permiso Médico", "Permiso Pre-Natal", "Permiso Post-Natal", "Permiso para Diliegencias", "Permiso de Año Sabatico", "Permiso de Comisión de Servicio", "Permiso por Duelo", " " }));
+
+        jLabel11.setText("Tipo");
+
         javax.swing.GroupLayout mainPannelLayout = new javax.swing.GroupLayout(mainPannel);
         mainPannel.setLayout(mainPannelLayout);
         mainPannelLayout.setHorizontalGroup(
@@ -210,15 +225,23 @@ public class LeavesPannel extends javax.swing.JFrame {
             .addGroup(mainPannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addComponent(optionalPannel, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(mainPannelLayout.createSequentialGroup()
+                        .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPannelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         mainPannelLayout.setVerticalGroup(
             mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,9 +249,13 @@ public class LeavesPannel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel2)
+                .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -244,7 +271,7 @@ public class LeavesPannel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPannel, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +287,7 @@ public class LeavesPannel extends javax.swing.JFrame {
 
     private void cmbMonth2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMonth2ItemStateChanged
         // TODO add your handling code here:
-                fillDaysOfMoth();
+        fillDaysOfMoth();
     }//GEN-LAST:event_cmbMonth2ItemStateChanged
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -270,17 +297,65 @@ public class LeavesPannel extends javax.swing.JFrame {
 
     private void rdbToItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdbToItemStateChanged
         // TODO add your handling code here:
-        if(rdbTo.isSelected()){
+        if (rdbTo.isSelected()) {
             txtYear2.setEnabled(true);
             cmbDay2.setEnabled(true);
             cmbMonth2.setEnabled(true);
-        }else{
+        } else {
             txtYear2.setEnabled(false);
             cmbDay2.setEnabled(false);
             cmbMonth2.setEnabled(false);
         }
     }//GEN-LAST:event_rdbToItemStateChanged
 
+    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescriptionActionPerformed
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+
+        String ci = txtCI.getText();
+        String type = String.valueOf(cmbType.getSelectedItem());
+        String description = txtDescription.getText();
+        String year1 = txtYear1.getText();
+        String month1 = String.valueOf(cmbMonth1.getSelectedItem());
+        String day1 = String.valueOf(cmbDay1.getSelectedItem());
+        String year2 = txtYear2.getText();
+        String month2 = String.valueOf(cmbMonth2.getSelectedItem());
+        String day2 = String.valueOf(cmbDay2.getSelectedItem());
+
+        String init = month1 + "-" + day1;
+        String end = rdbTo.isSelected() ? month2 + "-" + day2 : init;
+        String userID = "";
+        String userName = "";
+
+        if (ci.isEmpty() || description.isEmpty() || year1.isEmpty() || year2.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        } else {
+            
+            try {
+                ResultSet rs = controllers.GetTeachersController.getTeachers(ci);
+
+                if (rs.next()) {
+                    userID = rs.getString("id");
+                    userName = rs.getString("name") + " " + rs.getString("lastName");
+
+                    if (controllers.LeavesController.RegisterLeave(userID, init, end, type, description)) {
+                        JOptionPane.showMessageDialog(this, "Se ha registrado un permiso para el profesor " + userName);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al registrar el permiso");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cédula introducida no esta registrada en el sistema");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void fillDaysOfMoth() {
 
@@ -295,8 +370,7 @@ public class LeavesPannel extends javax.swing.JFrame {
         }
 
         ///////////
-    
-       DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) cmbDay2.getModel();
+        DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) cmbDay2.getModel();
         DCBM2.removeAllElements();
 
         int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(cmbMonth2.getSelectedIndex() + 1));
@@ -304,11 +378,9 @@ public class LeavesPannel extends javax.swing.JFrame {
         for (int i = 1; i <= days2; i++) {
             DCBM2.addElement(i);
         }
-        
-       
+
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -316,8 +388,10 @@ public class LeavesPannel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDay2;
     private javax.swing.JComboBox<String> cmbMonth1;
     private javax.swing.JComboBox<String> cmbMonth2;
+    private javax.swing.JComboBox<String> cmbType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
