@@ -13,6 +13,7 @@ import pannels.HollydayCalendar;
 import pannels.InsertAdmins;
 import pannels.InsertTeachers;
 import pannels.InstitutionDataForm;
+import pannels.LeavesListPanel;
 import pannels.LeavesPannel;
 import pannels.ShowAdmins;
 import pannels.ShowAssitance;
@@ -64,6 +65,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnCambiarLogo4 = new javax.swing.JButton();
         btnCambiarLogo5 = new javax.swing.JButton();
         btnShowAdmins = new javax.swing.JButton();
+        btnCambiarLogo6 = new javax.swing.JButton();
         btnStartApp = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -181,7 +183,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         btbLeaves.setBackground(new java.awt.Color(51, 102, 0));
         btbLeaves.setForeground(new java.awt.Color(255, 255, 255));
-        btbLeaves.setText("Permisos");
+        btbLeaves.setText("Registrar permiso");
         btbLeaves.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
         btbLeaves.setPreferredSize(new java.awt.Dimension(74, 18));
         btbLeaves.addActionListener(new java.awt.event.ActionListener() {
@@ -287,6 +289,16 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        btnCambiarLogo6.setBackground(new java.awt.Color(51, 102, 0));
+        btnCambiarLogo6.setForeground(new java.awt.Color(255, 255, 255));
+        btnCambiarLogo6.setText("Permisos");
+        btnCambiarLogo6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btnCambiarLogo6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarLogo6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelReportesLayout = new javax.swing.GroupLayout(panelReportes);
         panelReportes.setLayout(panelReportesLayout);
         panelReportesLayout.setHorizontalGroup(
@@ -295,8 +307,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCambiarLogo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(printConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(printConstancia, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(btnCambiarLogo6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnShowAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCambiarLogo4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -313,10 +326,12 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addGroup(panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCambiarLogo4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCambiarLogo5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(btnCambiarLogo6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        mainPanel.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 369, -1));
+        mainPanel.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 331, 369, 140));
 
         btnStartApp.setBackground(new java.awt.Color(0, 102, 0));
         btnStartApp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -503,6 +518,13 @@ public class ConfigFrame extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_btbLeavesActionPerformed
 
+    private void btnCambiarLogo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLogo6ActionPerformed
+        // TODO add your handling code here:
+        LeavesListPanel llp = new LeavesListPanel();
+        llp.setLocationRelativeTo(this);
+        llp.setVisible(true);
+    }//GEN-LAST:event_btnCambiarLogo6ActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -520,6 +542,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCambiarLogo;
     private javax.swing.JButton btnCambiarLogo4;
     private javax.swing.JButton btnCambiarLogo5;
+    private javax.swing.JButton btnCambiarLogo6;
     private javax.swing.JButton btnEditCartaTrabajo;
     private javax.swing.JButton btnInsertAdmins;
     private javax.swing.JButton btnInsertTeacher;

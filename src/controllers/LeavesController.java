@@ -44,7 +44,29 @@ public class LeavesController {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+    
+    ////
+    
+      public static ResultSet getLeavesList() {
 
+        Connection connection = env.ConnectionDB.getConnection();
+
+        try {
+            String sql = ("SELECT * FROM users inner join leaves on users.id = leaves.userID");
+            PreparedStatement st = connection.prepareStatement(sql);
+            return st.executeQuery();
+
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
+      //////////////////////////
+      
+      
+      
+      
+      
 }

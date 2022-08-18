@@ -1,6 +1,7 @@
 package pannels;
 
-import Actors.Day;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -12,8 +13,9 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
 
 public class ShowAssitance extends javax.swing.JFrame {
 
@@ -25,7 +27,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
         Asistencia.add(btnInasistente);
-        Asistencia.add(btnLeaves);
+      
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize((int) (screenSize.width * 0.9), 600);
@@ -34,8 +36,8 @@ public class ShowAssitance extends javax.swing.JFrame {
         fillDaysOfMoth();
         cmbDay.setSelectedIndex(Integer.parseInt(libraries.GetDate.getDayOfMonth()) - 1);
         fillTable();
-        
-         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
+
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
 
     }
 
@@ -58,15 +60,35 @@ public class ShowAssitance extends javax.swing.JFrame {
         }
     }
 
+    private void changeRowColor(ArrayList<Integer> leaves) {
+        tblAssistance.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+                if (leaves.contains(row)) {
+                    setBackground(new Color(255, 239, 0));
+                    // setForeground(Color.WHITE);
+                } else {
+                    setBackground(tblAssistance.getBackground());
+                    setForeground(tblAssistance.getForeground());
+                }
+                return this;
+            }
+        });
+    }
+
     private void fillTable() {
+
+        ArrayList<Integer> leaves = new ArrayList();
 
         date = txtYear.getText() + "-" + (cmbMonth.getSelectedIndex() + 1) + "-" + cmbDay.getSelectedItem();
         model = (DefaultTableModel) tblAssistance.getModel();
         model.setRowCount(0);
 
-     
         ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
         ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
+      
 
         if (rsPresent != null) {
             try {
@@ -83,11 +105,54 @@ public class ShowAssitance extends javax.swing.JFrame {
                     }
 
                     while (rsTeacherList.next()) {
-                        if (!presentsList.contains(rsTeacherList.getString("id"))) {
+                        String teacherID = rsTeacherList.getString("id");
+                        if (!presentsList.contains(teacherID)) {
                             model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
+
+                            ResultSet leave = controllers.LeavesController.getLeaves(teacherID);
+
+                            try {
+                                if (leave.next()) {
+                                    //leaves.add(model.getRowCount() - 1);
+                                    String init = leave.getString("init");
+                                    String end = leave.getString("end");
+                                    int month1 = Integer.parseInt(String.valueOf(init.charAt(0)));
+                                    int day1 = Integer.parseInt(String.valueOf(init.charAt(2)));
+                                    int month2 = Integer.parseInt(String.valueOf(end.charAt(0)));
+                                    int day2 = Integer.parseInt(String.valueOf(end.charAt(2)));
+                                 
+                                    int selectedMonth = cmbMonth.getSelectedIndex() + 1;
+                                    int selectedDay = cmbDay.getSelectedIndex() + 1;
+                                    
+                                    ///////////////////bug
+                                    if(month1 == month2){
+                                        if(day1 >= selectedDay && day2 <= selectedDay){
+                                            leaves.add(model.getRowCount() - 1);
+                                        }   
+                                    }else{ 
+                                        if(selectedMonth >= month1  && selectedMonth <= month2){
+                                            if(selectedMonth == month1){
+                                                if(selectedDay >= day1){
+                                                    leaves.add(model.getRowCount() - 1);
+                                                }
+                                            }else if(selectedMonth == month2){
+                                                if(selectedDay <= day2){
+                                                    leaves.add(model.getRowCount() - 1);
+                                                }
+                                            }else{
+                                                leaves.add(model.getRowCount() - 1);
+                                            }    
+                                        }
+                                    }
+                                }
+
+                            } catch (SQLException e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
                     }
                 }
+                changeRowColor(leaves);
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
             }
@@ -112,7 +177,6 @@ public class ShowAssitance extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnPresente = new javax.swing.JRadioButton();
         btnInasistente = new javax.swing.JRadioButton();
-        btnLeaves = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         cmbMonth = new javax.swing.JComboBox<>();
@@ -207,15 +271,6 @@ public class ShowAssitance extends javax.swing.JFrame {
             }
         });
 
-        btnLeaves.setBackground(new java.awt.Color(51, 102, 0));
-        btnLeaves.setForeground(new java.awt.Color(255, 255, 255));
-        btnLeaves.setText("Permisos");
-        btnLeaves.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeavesActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Hoy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,8 +321,6 @@ public class ShowAssitance extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnInasistente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLeaves)
-                                .addGap(88, 88, 88)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,13 +328,13 @@ public class ShowAssitance extends javax.swing.JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
                                         .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1))
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton1)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1323, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -310,8 +363,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(cmbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLeaves))
+                    .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -385,11 +437,11 @@ public class ShowAssitance extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDayItemStateChanged
 
     private void txtYearKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYearKeyReleased
-            // TODO add your handling code here:
-            if(txtYear.getText().equals("") || txtYear.getText().equals("0")){
-                txtYear.setText("1");
-            }
-            
+        // TODO add your handling code here:
+        if (txtYear.getText().equals("") || txtYear.getText().equals("0")) {
+            txtYear.setText("1");
+        }
+
         int selectedIndex = cmbDay.getSelectedIndex();
         fillDaysOfMoth();
         try {
@@ -399,10 +451,6 @@ public class ShowAssitance extends javax.swing.JFrame {
         }
         refreshAssitence();
     }//GEN-LAST:event_txtYearKeyReleased
-
-    private void btnLeavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeavesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLeavesActionPerformed
 
     private void btnInasistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInasistenteActionPerformed
         // TODO add your handling code here:
@@ -428,7 +476,6 @@ public class ShowAssitance extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btnInasistente;
-    private javax.swing.JRadioButton btnLeaves;
     private javax.swing.JRadioButton btnPresente;
     private javax.swing.JComboBox<String> cmbDay;
     private javax.swing.JComboBox<String> cmbMonth;

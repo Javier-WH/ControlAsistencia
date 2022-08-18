@@ -318,10 +318,10 @@ public class LeavesPannel extends javax.swing.JFrame {
         String type = String.valueOf(cmbType.getSelectedItem());
         String description = txtDescription.getText();
         String year1 = txtYear1.getText();
-        String month1 = String.valueOf(cmbMonth1.getSelectedItem());
+        String month1 = String.valueOf(cmbMonth1.getSelectedIndex() +1);
         String day1 = String.valueOf(cmbDay1.getSelectedItem());
         String year2 = txtYear2.getText();
-        String month2 = String.valueOf(cmbMonth2.getSelectedItem());
+        String month2 = String.valueOf(cmbMonth2.getSelectedIndex() +1);
         String day2 = String.valueOf(cmbDay2.getSelectedItem());
 
         String init = month1 + "-" + day1;
