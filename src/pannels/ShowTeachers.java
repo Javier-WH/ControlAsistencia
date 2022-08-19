@@ -25,7 +25,7 @@ public class ShowTeachers extends javax.swing.JFrame {
         ResultSet rs = controllers.GetTeachersController.getTeachers();
         try {
             while (rs.next()) { 
-                model.addRow(new Object[]{rs.getString("lastName")+" "+rs.getString("name"), rs.getString("ci"),rs.getString("phone"), rs.getString("email"), rs.getString("address")});
+                model.addRow(new Object[]{rs.getString("ci"), rs.getString("lastName")+" "+rs.getString("name"), rs.getString("phone"), rs.getString("email"), rs.getString("address")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
@@ -72,7 +72,7 @@ public class ShowTeachers extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Apellidos y Nombres", "Cédula", "Telefono", "Correco Electronico", "Dirección"
+                "Cédula", "Apellidos y Nombres", "Telefono", "Correco Electronico", "Dirección"
             }
         ) {
             Class[] types = new Class [] {
@@ -88,6 +88,11 @@ public class ShowTeachers extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblTeachers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTeachersMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblTeachers);
@@ -168,6 +173,11 @@ public class ShowTeachers extends javax.swing.JFrame {
         
   
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTeachersMouseClicked
+        // TODO add your handling code here:
+        libraries.ShowUserInfo.showUserInfo(tblTeachers, this);
+    }//GEN-LAST:event_tblTeachersMouseClicked
 
    
 

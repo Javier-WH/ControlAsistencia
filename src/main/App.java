@@ -242,7 +242,8 @@ public class App extends javax.swing.JFrame {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         
-        libraries.GetDate.compareDates();
+        libraries.GetDate.compareDates(); //revisa las fechas antes de anotar la asistencia, si el reloj del sistema fue atrasado, el sistema se cierra
+        
         Day today = libraries.WorkingDays.isWorkingDay();
         boolean isOnLeave = controllers.LeavesController.checkLeave(txtCI.getText());
     

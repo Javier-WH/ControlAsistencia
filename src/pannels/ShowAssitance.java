@@ -64,14 +64,14 @@ public class ShowAssitance extends javax.swing.JFrame {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-                 
+
                 if (leaves.contains(row)) {
                     setBackground(new Color(255, 239, 0));
                     // setForeground(Color.WHITE);
                 } else {
                     setBackground(tblAssistance.getBackground());
                     setForeground(tblAssistance.getForeground());
-                }             
+                }
                 return this;
             }
         });
@@ -115,14 +115,13 @@ public class ShowAssitance extends javax.swing.JFrame {
                                     String end = leave.getString("end");
                                     String[] date1 = init.split("-");
                                     String[] date2 = end.split("-");
-                                    
+
                                     int month1 = Integer.parseInt(date1[0]);
                                     int day1 = Integer.parseInt(date1[1]);
-                                    
+
                                     int month2 = Integer.parseInt(date2[0]);
                                     int day2 = Integer.parseInt(date2[1]);
-                                    
-                                
+
                                     int selectedMonth = cmbMonth.getSelectedIndex() + 1;
                                     int selectedDay = cmbDay.getSelectedIndex() + 1;
 
@@ -194,6 +193,11 @@ public class ShowAssitance extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblAssistance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAssistanceMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblAssistance);
@@ -440,6 +444,11 @@ public class ShowAssitance extends javax.swing.JFrame {
     private void btnInasistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInasistenteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInasistenteActionPerformed
+
+    private void tblAssistanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAssistanceMouseClicked
+        libraries.ShowUserInfo.showUserInfo(tblAssistance, this);
+
+    }//GEN-LAST:event_tblAssistanceMouseClicked
 
     public void refreshAssitence() {
         if (!txtYear.getText().isEmpty()) {

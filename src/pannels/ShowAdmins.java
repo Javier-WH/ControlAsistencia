@@ -108,6 +108,11 @@ public class ShowAdmins extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAdmins.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAdminsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAdmins);
 
         jButton2.setText("Eliminar");
@@ -145,7 +150,7 @@ public class ShowAdmins extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -187,6 +192,11 @@ public class ShowAdmins extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tblAdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminsMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tblAdminsMouseClicked
 
    
 

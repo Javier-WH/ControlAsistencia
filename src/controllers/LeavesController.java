@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LeavesController {
 
@@ -37,7 +35,7 @@ public class LeavesController {
         Connection connection = env.ConnectionDB.getConnection();
 
         try {
-            String sql = ("SELECT * FROM leaves WHERE userID = ?");
+            String sql = ("SELECT * FROM leaves WHERE userID = ? order by id desc");
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, userID);
             return st.executeQuery();
