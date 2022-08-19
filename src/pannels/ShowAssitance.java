@@ -27,7 +27,6 @@ public class ShowAssitance extends javax.swing.JFrame {
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
         Asistencia.add(btnInasistente);
-      
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize((int) (screenSize.width * 0.9), 600);
@@ -65,14 +64,14 @@ public class ShowAssitance extends javax.swing.JFrame {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-
+                 
                 if (leaves.contains(row)) {
                     setBackground(new Color(255, 239, 0));
                     // setForeground(Color.WHITE);
                 } else {
                     setBackground(tblAssistance.getBackground());
                     setForeground(tblAssistance.getForeground());
-                }
+                }             
                 return this;
             }
         });
@@ -88,7 +87,6 @@ public class ShowAssitance extends javax.swing.JFrame {
 
         ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
         ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
-      
 
         if (rsPresent != null) {
             try {
@@ -113,36 +111,23 @@ public class ShowAssitance extends javax.swing.JFrame {
 
                             try {
                                 if (leave.next()) {
-                                    //leaves.add(model.getRowCount() - 1);
                                     String init = leave.getString("init");
                                     String end = leave.getString("end");
-                                    int month1 = Integer.parseInt(String.valueOf(init.charAt(0)));
-                                    int day1 = Integer.parseInt(String.valueOf(init.charAt(2)));
-                                    int month2 = Integer.parseInt(String.valueOf(end.charAt(0)));
-                                    int day2 = Integer.parseInt(String.valueOf(end.charAt(2)));
-                                 
+                                    String[] date1 = init.split("-");
+                                    String[] date2 = end.split("-");
+                                    
+                                    int month1 = Integer.parseInt(date1[0]);
+                                    int day1 = Integer.parseInt(date1[1]);
+                                    
+                                    int month2 = Integer.parseInt(date2[0]);
+                                    int day2 = Integer.parseInt(date2[1]);
+                                    
+                                
                                     int selectedMonth = cmbMonth.getSelectedIndex() + 1;
                                     int selectedDay = cmbDay.getSelectedIndex() + 1;
-                                    
-                                    ///////////////////bug
-                                    if(month1 == month2){
-                                        if(day1 >= selectedDay && day2 <= selectedDay){
-                                            leaves.add(model.getRowCount() - 1);
-                                        }   
-                                    }else{ 
-                                        if(selectedMonth >= month1  && selectedMonth <= month2){
-                                            if(selectedMonth == month1){
-                                                if(selectedDay >= day1){
-                                                    leaves.add(model.getRowCount() - 1);
-                                                }
-                                            }else if(selectedMonth == month2){
-                                                if(selectedDay <= day2){
-                                                    leaves.add(model.getRowCount() - 1);
-                                                }
-                                            }else{
-                                                leaves.add(model.getRowCount() - 1);
-                                            }    
-                                        }
+
+                                    if (controllers.LeavesController.isOnLeave(selectedMonth, selectedDay, month1, month2, day1, day2)) {
+                                        leaves.add(model.getRowCount() - 1);
                                     }
                                 }
 

@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LeavesController {
 
@@ -45,10 +47,9 @@ public class LeavesController {
             return null;
         }
     }
-    
+
     ////
-    
-      public static ResultSet getLeavesList() {
+    public static ResultSet getLeavesList() {
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -63,10 +64,64 @@ public class LeavesController {
         }
     }
 
-      //////////////////////////
-      
-      
-      
-      
-      
+    //////////////////////////
+    public static boolean isOnLeave(int selectedMonth, int selectedDay, int month1, int month2, int day1, int day2) {
+
+        if (month1 == month2 && month1 == selectedMonth) {
+            if (day1 >= selectedDay && day2 <= selectedDay) {
+                return true;
+            }
+        } else {
+            if (selectedMonth >= month1 && selectedMonth <= month2) {
+                if (selectedMonth == month1) {
+                    if (selectedDay >= day1) {
+                        return true;
+                    }
+                } else if (selectedMonth == month2) {
+                    if (selectedDay <= day2) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /////////////////////////
+    public static boolean checkLeave(String ci) {
+        
+        ResultSet rs = controllers.GetTeachersController.getTeachers(ci);
+        
+        try {
+            if(rs.next()){
+                
+                String id = rs.getString("id");
+                
+                ResultSet rsLeaves = getLeaves(id);
+                
+                if(rsLeaves.next()){
+                    
+                    int currentMont = Integer.parseInt(libraries.GetDate.getCurrentMonth());
+                    int currentDay = Integer.parseInt(libraries.GetDate.getDayOfMonth());
+                    
+                    String date1[] = rsLeaves.getString("init").split("-");
+                    String date2[] = rsLeaves.getString("end").split("-");
+                    
+                    int month1 = Integer.parseInt(date1[0]);
+                    int day1 = Integer.parseInt(date1[1]);
+                    int month2 = Integer.parseInt(date2[0]);
+                    int day2 = Integer.parseInt(date2[1]);
+                    
+                    return isOnLeave(currentMont, currentDay, month1, month2, day1, day2);
+                }  
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return false;
+    }
+
 }

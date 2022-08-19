@@ -244,9 +244,13 @@ public class App extends javax.swing.JFrame {
         
         libraries.GetDate.compareDates();
         Day today = libraries.WorkingDays.isWorkingDay();
+        boolean isOnLeave = controllers.LeavesController.checkLeave(txtCI.getText());
+    
         
         if(!today.isWorkingDay()){
            JOptionPane.showMessageDialog(this, "Hoy no es un dia laboral, "+ today.getDesciption());
+        }else if(isOnLeave){
+           JOptionPane.showMessageDialog(this, "La asistencia no se ha registrado porque el usuario está de permiso");
         }else{
             String ci = txtCI.getText();
             String password = String.valueOf(txtPassword.getPassword());
