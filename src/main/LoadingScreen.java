@@ -48,7 +48,7 @@ public class LoadingScreen extends javax.swing.JFrame {
             addProgress(15);
             checkAdminContent();
             addProgress(19);
-
+            bitacora.Triggers.startTriggers();
             startApp();
 
             if (uses.equals("0")) {
