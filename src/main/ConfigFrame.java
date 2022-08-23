@@ -8,6 +8,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import pannels.BitacoraPanel;
 import pannels.EmisorPannel;
 import pannels.HollydayCalendar;
 import pannels.InsertAdmins;
@@ -66,6 +67,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btnCambiarLogo5 = new javax.swing.JButton();
         btnShowAdmins = new javax.swing.JButton();
         btnCambiarLogo6 = new javax.swing.JButton();
+        btnCambiarLogo7 = new javax.swing.JButton();
         btnStartApp = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -299,6 +301,16 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        btnCambiarLogo7.setBackground(new java.awt.Color(51, 102, 0));
+        btnCambiarLogo7.setForeground(new java.awt.Color(255, 255, 255));
+        btnCambiarLogo7.setText("Bitacora");
+        btnCambiarLogo7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btnCambiarLogo7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarLogo7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelReportesLayout = new javax.swing.GroupLayout(panelReportes);
         panelReportes.setLayout(panelReportesLayout);
         panelReportesLayout.setHorizontalGroup(
@@ -312,7 +324,8 @@ public class ConfigFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnShowAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCambiarLogo4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCambiarLogo4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiarLogo7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
         panelReportesLayout.setVerticalGroup(
@@ -327,7 +340,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(btnCambiarLogo4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCambiarLogo5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(btnCambiarLogo6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCambiarLogo6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiarLogo7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -525,6 +540,15 @@ public class ConfigFrame extends javax.swing.JFrame {
         llp.setVisible(true);
     }//GEN-LAST:event_btnCambiarLogo6ActionPerformed
 
+    private void btnCambiarLogo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarLogo7ActionPerformed
+        // TODO add your handling code here:
+        
+        BitacoraPanel bp = new BitacoraPanel();
+        bp.setLocationRelativeTo(this);
+        bp.setVisible(true);
+        
+    }//GEN-LAST:event_btnCambiarLogo7ActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -543,6 +567,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCambiarLogo4;
     private javax.swing.JButton btnCambiarLogo5;
     private javax.swing.JButton btnCambiarLogo6;
+    private javax.swing.JButton btnCambiarLogo7;
     private javax.swing.JButton btnEditCartaTrabajo;
     private javax.swing.JButton btnInsertAdmins;
     private javax.swing.JButton btnInsertTeacher;
