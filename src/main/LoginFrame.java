@@ -187,8 +187,10 @@ public class LoginFrame extends javax.swing.JFrame {
         
         String messaje = controllers.AutenticationController.autenticateAdmin(user, password);
         if(!messaje.equals("ACCESS-GRANTED")){
+            bitacora.Triggers.insertLog("Inicio de sección denegado", user);
             JOptionPane.showMessageDialog(getContentPane(), messaje);
         }else{
+            bitacora.Triggers.insertLog("Inicio de sección exitoso", user);
             ConfigFrame configuration = new ConfigFrame(this);
             configuration.setVisible(true);
             this.dispose();
