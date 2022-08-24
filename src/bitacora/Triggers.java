@@ -237,13 +237,13 @@ public class Triggers {
         try {
             if(rs.next()){
                 String id = rs.getString("id");
-                String sql = "INSERT INTO bitacora(userID, action, createdAt) VALUES(?,?, CURRENT_TIMESTAMP)";
+                String sql = "INSERT INTO bitacora(userID, action, admin, createdAt) VALUES(?,?, 1, CURRENT_TIMESTAMP)";
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, id);
                 st.setString(2, description); 
                 st.execute();
             }else{
-                String sql = "INSERT INTO bitacora(userID, action, createdAt) VALUES(0,CONCAT(?, ', Usuario: ', ?), CURRENT_TIMESTAMP)";
+                String sql = "INSERT INTO bitacora(userID, action, admin, createdAt) VALUES(0,CONCAT(?, ', Usuario: ', ?),1, CURRENT_TIMESTAMP)";
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, description); 
                 st.setString(2, user);

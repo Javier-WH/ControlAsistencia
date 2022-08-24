@@ -12,7 +12,7 @@ public class BitacoraController {
 
         Connection connection = env.ConnectionDB.getConnection();
         try {
-            String sql = ("SELECT * FROM bitacora order by id desc");
+            String sql = ("select bitacora.admin, bitacora.action, bitacora.createdAt as date, users.name, users.lastName, users.ci from bitacora inner join users on bitacora.userID = users.id where bitacora.admin = 0 union all select bitacora.admin, bitacora.action, bitacora.createdAt as date, admins.name, admins.user, admins.ci from bitacora inner join admins on bitacora.userID = admins.id where bitacora.admin =1 order by date desc");
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             return rs;

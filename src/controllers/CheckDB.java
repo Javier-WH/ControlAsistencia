@@ -93,7 +93,7 @@ public class CheckDB {
         }
         
           if(tableName.equals("bitacora")){
-            executeSQLQuery("CREATE TABLE `bitacora` (`id` INT NOT NULL AUTO_INCREMENT, `userID` INT NOT NULL, `action` VARCHAR(255) NOT NULL, `createdAt` TIMESTAMP(6) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_spanish_ci"); 
+            executeSQLQuery("CREATE TABLE `bitacora` (`id` INT NOT NULL AUTO_INCREMENT, `userID` INT NOT NULL, admin` TINYINT NULL DEFAULT 0, `action` VARCHAR(255) NOT NULL, `createdAt` TIMESTAMP(6) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_spanish_ci"); 
         }
 
 
