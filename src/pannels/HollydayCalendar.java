@@ -241,6 +241,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha");
 
+        btnCheck.setBackground(new java.awt.Color(51, 102, 0));
         btnCheck.setForeground(new java.awt.Color(255, 255, 255));
         btnCheck.setText("Hasta");
         btnCheck.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -365,7 +366,7 @@ public class HollydayCalendar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 690, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

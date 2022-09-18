@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+
 
 import javax.swing.JOptionPane;
 
@@ -92,7 +94,7 @@ public class HollydaysCalendar {
     }
     
     ///////
-    
+    /*
     public static String isHollyDay(String date){
         try {
             int month = Integer.parseInt(date.split("-")[0]);
@@ -129,5 +131,44 @@ public class HollydaysCalendar {
         }
         return "false";
     }
-
+*/
+///
+    public static int DayofMonthtoDayofYear(int month, int day){
+        Calendar currCal = Calendar.getInstance();
+        currCal.set(Calendar.MONTH, month - 1);
+        currCal.set(Calendar.DAY_OF_MONTH, day);
+        int currDayofYear = currCal.get(Calendar.DAY_OF_YEAR);
+        return currDayofYear;
+    }
+    ///
+    
+    public static String isHollyDay(String date){
+        int month = Integer.parseInt(date.split("-")[0]);
+        int day = Integer.parseInt(date.split("-")[1]);
+        int currDayOfyear = DayofMonthtoDayofYear(month, day);
+           
+    
+        try {
+            ResultSet rs = getHolydaysListRS();
+            while (rs.next()) { 
+                int monthInit = Integer.parseInt(rs.getString("init").split("-")[0]);
+                int dayInit = Integer.parseInt(rs.getString("init").split("-")[1]);
+                int monthEnd = Integer.parseInt(rs.getString("end").split("-")[0]);
+                int dayEnd = Integer.parseInt(rs.getString("end").split("-")[1]);
+           
+                int initDay = DayofMonthtoDayofYear(monthInit, dayInit);
+                int endDay = DayofMonthtoDayofYear(monthEnd, dayEnd);
+                
+                if(currDayOfyear >= initDay && currDayOfyear <= endDay){
+                   return rs.getString("description");
+                }
+            }   
+        } catch (NumberFormatException | SQLException e) {
+        }
+        
+        return "false";
+       
+    }
+    
+    
 }

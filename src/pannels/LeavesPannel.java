@@ -246,8 +246,8 @@ public class LeavesPannel extends javax.swing.JFrame {
         mainPannel.setLayout(mainPannelLayout);
         mainPannelLayout.setHorizontalGroup(
             mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPannelLayout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
+            .addGroup(mainPannelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPannelLayout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,7 +256,9 @@ public class LeavesPannel extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(optionalPannel, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(mainPannelLayout.createSequentialGroup()
+                            .addComponent(txtDescription)
+                            .addGap(34, 34, 34))
                         .addGroup(mainPannelLayout.createSequentialGroup()
                             .addGroup(mainPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -31,7 +31,8 @@ public class Main {
                 //System.out.println(controllers.HollydaysCalendar.isHollyDay("12-31"));
                 //System.out.println(controllers.HollydaysCalendar.getHolydaysList());
                 //System.out.println(libraries.GetDate.isWeekEnd());
-                //System.out.println(controllers.HollydaysCalendar.isHollyDay("11-11"));                
+                //System.out.println(controllers.HollydaysCalendar.isHollyDay("11-11")); 
+                //System.out.println(controllers.HollydaysCalendar.isHollyDay("9-18"));
             }
         });
         t1.start();
