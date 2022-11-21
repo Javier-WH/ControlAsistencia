@@ -1,6 +1,7 @@
 package main;
 
 import Actors.Admins;
+import Actors.Questions;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.logging.Level;

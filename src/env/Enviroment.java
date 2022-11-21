@@ -15,12 +15,17 @@ public class Enviroment {
     private static String dbPassword = GetLocalConfig.getDbPConfig();
     private static String logoIconPath = System.getProperty("user.dir") + "/src/images/logo.png";
     private static String venezuelaCoatOfArmsPath = System.getProperty("user.dir") + "/src/images/venezelaEscudo.png";
-    private static String BackgroundPath = System.getProperty("user.dir") + "/src/images/plazaBolivar1.jpg";
-    private static String Background2Path = System.getProperty("user.dir") + "/src/images/iglesia1.jpg";
-    private static String Background3Path = System.getProperty("user.dir") + "/src/images/plazaBolivar2.jpg";
+    //private static String BackgroundPath = System.getProperty("user.dir") + "/src/images/plazaBolivar1.jpg";
+    private static String BackgroundPath = System.getProperty("user.dir") + "/src/images/bg1.jpg";
+    //private static String Background2Path = System.getProperty("user.dir") + "/src/images/iglesia1.jpg";
+    private static String Background2Path = System.getProperty("user.dir") + "/src/images/bg3.jpg";
+   // private static String Background3Path = System.getProperty("user.dir") + "/src/images/plazaBolivar2.jpg";
+    private static String Background3Path = System.getProperty("user.dir") + "/src/images/bg2.jpg";
     private static String titlePath = System.getProperty("user.dir") + "/src/images/title.png";
     private static String logoCartaTrabajoPath = System.getProperty("user.dir") + "/src/images/logoCartaTrabajo.png";
-    private static String logoSpashScreen = System.getProperty("user.dir") + "/src/images/SplashScreen.jpg";
+   // private static String logoSpashScreen = System.getProperty("user.dir") + "/src/images/SplashScreen.jpg";
+    private static String logoSpashScreen = System.getProperty("user.dir") + "/src/images/bg2.jpg";
+
     private static String version = "Version 0.1";
 
     public static String getVersion() {

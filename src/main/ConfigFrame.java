@@ -152,7 +152,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         btnInsertTeacher.setBackground(new java.awt.Color(51, 102, 0));
         btnInsertTeacher.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsertTeacher.setText("Inscribir Docentes");
+        btnInsertTeacher.setText("Inscribir Usuario");
         btnInsertTeacher.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
         btnInsertTeacher.setPreferredSize(new java.awt.Dimension(74, 18));
         btnInsertTeacher.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +263,7 @@ public class ConfigFrame extends javax.swing.JFrame {
 
         btnCambiarLogo4.setBackground(new java.awt.Color(51, 102, 0));
         btnCambiarLogo4.setForeground(new java.awt.Color(255, 255, 255));
-        btnCambiarLogo4.setText("Mostrar docentes ");
+        btnCambiarLogo4.setText("Plantilla laboral");
         btnCambiarLogo4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
         btnCambiarLogo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

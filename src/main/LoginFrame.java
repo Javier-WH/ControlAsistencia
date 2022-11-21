@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import pannels.RestorePasswordPannel;
 
 
 public class LoginFrame extends javax.swing.JFrame {
@@ -56,6 +57,7 @@ public class LoginFrame extends javax.swing.JFrame {
         lblAdmin2 = new javax.swing.JLabel();
         ScrollTitle = new javax.swing.JScrollPane();
         txtTitle = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         lblClose = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
@@ -121,7 +123,17 @@ public class LoginFrame extends javax.swing.JFrame {
 
         inputContainer.add(ScrollTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 160, 80));
 
-        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 280, 320));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Recuperar contraseña");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        inputContainer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+
+        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 280, 330));
 
         lblClose.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblClose.setForeground(new java.awt.Color(153, 153, 153));
@@ -201,12 +213,21 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        
+        RestorePasswordPannel RPP = new RestorePasswordPannel();
+        RPP.setLocationRelativeTo(this);
+        RPP.setVisible(true);
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollTitle;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel inputContainer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAdmin1;

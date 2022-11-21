@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CheckDB {
-    private static  String[] list = {"admins", "assistance", "config", "users", "hollydays", "leaves", "bitacora"};
+    private static  String[] list = {"admins", "assistance", "config", "users", "hollydays", "leaves", "bitacora", "questionsandanswers"};
     
     
     public static ResultSet getTablesList() {
@@ -93,9 +93,13 @@ public class CheckDB {
         }
         
           if(tableName.equals("bitacora")){
-            executeSQLQuery("CREATE TABLE `bitacora` (`id` INT NOT NULL AUTO_INCREMENT, `userID` INT NOT NULL, admin` TINYINT NULL DEFAULT 0, `action` VARCHAR(255) NOT NULL, `createdAt` TIMESTAMP(6) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_spanish_ci"); 
+            executeSQLQuery("CREATE TABLE `bitacora` (`id` INT NOT NULL AUTO_INCREMENT,`userID` INT NOT NULL, `admin` TINYINT NULL DEFAULT 0, `action` VARCHAR(255) NOT NULL, `createdAt` TIMESTAMP(6) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_spanish_ci"); 
         }
-
+          
+          if(tableName.equals("questionsandanswers")){
+        	  executeSQLQuery("CREATE TABLE `questionsandanswers` ( `id` INT NOT NULL AUTO_INCREMENT, `question1` VARCHAR(255) NOT NULL,  `question2` VARCHAR(255) NOT NULL,  `answer1` VARCHAR(255) NOT NULL,  `answer2` VARCHAR(255) NOT NULL, `userId` INT NOT NULL, PRIMARY KEY (`id`))"); 
+          }
+          
 
     }
     
