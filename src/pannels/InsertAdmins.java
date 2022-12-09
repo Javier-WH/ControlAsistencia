@@ -54,6 +54,14 @@ public class InsertAdmins extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtQuestion1 = new javax.swing.JTextField();
         txtAnswer1 = new javax.swing.JTextField();
+        txtAnswer3 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtQuestion3 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtAnswer4 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtQuestion4 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,11 +103,11 @@ public class InsertAdmins extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Télefono");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 257, -1, -1));
-        jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 335, 334, -1));
+        jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 335, 710, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Pregunta secreta 2");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +115,7 @@ public class InsertAdmins extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 138, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 138, -1));
 
         btnInsert.setText("Inscribir");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +123,7 @@ public class InsertAdmins extends javax.swing.JFrame {
                 btnInsertActionPerformed(evt);
             }
         });
-        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 138, -1));
+        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 138, -1));
 
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +161,8 @@ public class InsertAdmins extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 410, 40));
-        jPanel1.add(txtQuestion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 156, -1));
-        jPanel1.add(txtAnswer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 156, -1));
+        jPanel1.add(txtQuestion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 156, -1));
+        jPanel1.add(txtAnswer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 156, -1));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Dirección");
@@ -162,17 +170,37 @@ public class InsertAdmins extends javax.swing.JFrame {
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Respuesta 2");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Pregunta secreta 1");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Respuesta 1");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
-        jPanel1.add(txtQuestion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 156, -1));
-        jPanel1.add(txtAnswer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 156, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        jPanel1.add(txtQuestion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 156, -1));
+        jPanel1.add(txtAnswer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 156, -1));
+        jPanel1.add(txtAnswer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 156, -1));
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Pregunta secreta 3");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        jPanel1.add(txtQuestion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 156, -1));
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Respuesta 3");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+        jPanel1.add(txtAnswer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 156, -1));
+
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Respuesta 4");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, -1, -1));
+        jPanel1.add(txtQuestion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 156, -1));
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Pregunta secreta 4");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -180,13 +208,13 @@ public class InsertAdmins extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -210,9 +238,12 @@ public class InsertAdmins extends javax.swing.JFrame {
                     address = txtAddress.getText(),
                     question1 = txtQuestion1.getText(),
                     question2 = txtQuestion2.getText(),
+                    question3 = txtQuestion3.getText(),
+                    question4 = txtQuestion4.getText(),
                     answer1 = txtAnswer1.getText(),
-                    answer2 = txtAnswer2.getText();
-        
+                    answer2 = txtAnswer2.getText(),
+                    answer3 = txtAnswer3.getText(),
+                    answer4 = txtAnswer4.getText();
           
            
            if(name.isEmpty() || CI.isEmpty() || user.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || question1.isEmpty() || question2.isEmpty() || answer1.isEmpty() || answer2.isEmpty()){
@@ -242,8 +273,12 @@ public class InsertAdmins extends javax.swing.JFrame {
                 Questions questionAndAnswers = new Questions();
                 questionAndAnswers.setQuestion1(question1);
                 questionAndAnswers.setQuestion2(question2);
+                questionAndAnswers.setQuestion3(question3);
+                questionAndAnswers.setQuestion4(question4);
                 questionAndAnswers.setAnswer1(answer1);
                 questionAndAnswers.setAnswer2(answer2);
+                questionAndAnswers.setAnswer3(answer3);
+                questionAndAnswers.setAnswer4(answer4);
 
                 boolean isAdminInserted =  controllers.InsertAdminController.insertAdmin(admin);
                 controllers.InsertAdminController.insertQuestions(CI, questionAndAnswers);
@@ -289,6 +324,10 @@ public class InsertAdmins extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -303,6 +342,8 @@ public class InsertAdmins extends javax.swing.JFrame {
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtAnswer1;
     private javax.swing.JTextField txtAnswer2;
+    private javax.swing.JTextField txtAnswer3;
+    private javax.swing.JTextField txtAnswer4;
     private javax.swing.JTextField txtCi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
@@ -311,6 +352,8 @@ public class InsertAdmins extends javax.swing.JFrame {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtQuestion1;
     private javax.swing.JTextField txtQuestion2;
+    private javax.swing.JTextField txtQuestion3;
+    private javax.swing.JTextField txtQuestion4;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

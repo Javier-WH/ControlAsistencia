@@ -97,7 +97,7 @@ public class CheckDB {
         }
           
           if(tableName.equals("questionsandanswers")){
-        	  executeSQLQuery("CREATE TABLE `questionsandanswers` ( `id` INT NOT NULL AUTO_INCREMENT, `question1` VARCHAR(255) NOT NULL,  `question2` VARCHAR(255) NOT NULL,  `answer1` VARCHAR(255) NOT NULL,  `answer2` VARCHAR(255) NOT NULL, `userId` INT NOT NULL, PRIMARY KEY (`id`))"); 
+        	  executeSQLQuery("CREATE TABLE `questionsandanswers` ( `id` INT NOT NULL AUTO_INCREMENT, `question1` VARCHAR(255) NOT NULL,  `question2` VARCHAR(255) NOT NULL, `question3` VARCHAR(255) NOT NULL, `question4` VARCHAR(255) NOT NULL,  `answer1` VARCHAR(255) NOT NULL,  `answer2` VARCHAR(255) NOT NULL,  `answer3` VARCHAR(255) NOT NULL,  `answer4` VARCHAR(255) NOT NULL, `userId` INT NOT NULL, PRIMARY KEY (`id`))"); 
           }
           
 

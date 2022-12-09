@@ -27,7 +27,6 @@ public class ShowAssitance extends javax.swing.JFrame {
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
         Asistencia.add(btnInasistente);
-     
 
         fillInputsCurrentDate();
         fillDaysOfMoth();
@@ -37,7 +36,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //int frameWidth = (int)(screenSize.width * 0.6);
         this.setSize(775, 550);
-  
+
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
 
     }
@@ -90,13 +89,38 @@ public class ShowAssitance extends javax.swing.JFrame {
         ResultSet rsPresent = controllers.AssistenceController.getAssistanceListByDate(date);
         ResultSet rsTeacherList = controllers.GetTeachersController.getTeachers();
 
+        ///(rsPresent * 100)/rsTeacherList = Porcentaje de asistentes
         if (rsPresent != null) {
+
             try {
+                ///esto calcula el procentaje
+                rsPresent.last();
+                int countPresent = rsPresent.getRow();
+                rsPresent.beforeFirst();
+                
+                rsTeacherList.last();
+                int countAll = rsTeacherList.getRow();
+                rsTeacherList.beforeFirst();
+                
+                if(countAll == 0){
+                    countAll = 1;
+                }
+                
+                
+                double asistencePercent = (countPresent*100)/countAll;
+               
+                LblPercent.setText(asistencePercent + "% de asistencias");
+                
+               // System.out.println((countPresent*100)/countAll);
+                
+////////////////////////////////////////////////////
                 if (btnPresente.isSelected()) {
+                    LblPercent.setText(asistencePercent + "% de asistencias");
                     while (rsPresent.next()) {
                         model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
                     }
                 } else {
+                       LblPercent.setText((100 - asistencePercent) + "% de inacistencias");
                     //se hizó así, porque fue la uníca solución que funcionó para resolver el bug que duplicaba los resultados.
                     ArrayList<String> presentsList = new ArrayList();
 
@@ -167,6 +191,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         cmbMonth = new javax.swing.JComboBox<>();
         cmbDay = new javax.swing.JComboBox<>();
+        LblPercent = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -290,6 +315,10 @@ public class ShowAssitance extends javax.swing.JFrame {
             }
         });
 
+        LblPercent.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblPercent.setForeground(new java.awt.Color(255, 255, 255));
+        LblPercent.setText("Asistencia");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -326,7 +355,10 @@ public class ShowAssitance extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(LblPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 643, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -355,7 +387,9 @@ public class ShowAssitance extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(LblPercent))
                 .addGap(431, 431, 431))
         );
 
@@ -468,6 +502,7 @@ public class ShowAssitance extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblPercent;
     private javax.swing.JRadioButton btnInasistente;
     private javax.swing.JRadioButton btnPresente;
     private javax.swing.JComboBox<String> cmbDay;

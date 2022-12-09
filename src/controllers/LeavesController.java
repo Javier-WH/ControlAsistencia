@@ -64,9 +64,13 @@ public class LeavesController {
 
     //////////////////////////
     public static boolean isOnLeave(int selectedMonth, int selectedDay, int month1, int month2, int day1, int day2) {
+        
 
+        
         if (month1 == month2 && month1 == selectedMonth) {
-            if (day1 >= selectedDay && day2 <= selectedDay) {
+                        
+            if (day1 >= selectedDay && selectedDay <= day2 ) {
+          
                 return true;
             }
         } else {
@@ -104,13 +108,20 @@ public class LeavesController {
                     int currentMont = Integer.parseInt(libraries.GetDate.getCurrentMonth());
                     int currentDay = Integer.parseInt(libraries.GetDate.getDayOfMonth());
                     
+               
+                    
                     String date1[] = rsLeaves.getString("init").split("-");
                     String date2[] = rsLeaves.getString("end").split("-");
                     
+                                       
                     int month1 = Integer.parseInt(date1[0]);
                     int day1 = Integer.parseInt(date1[1]);
                     int month2 = Integer.parseInt(date2[0]);
                     int day2 = Integer.parseInt(date2[1]);
+                    
+           
+                    
+                  
                     
                     return isOnLeave(currentMont, currentDay, month1, month2, day1, day2);
                 }  

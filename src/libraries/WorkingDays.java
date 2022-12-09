@@ -7,11 +7,14 @@ public class WorkingDays {
    
     public static Day isWorkingDay(){
         Day day = new Day();
-        String currentDay = libraries.GetDate.getCurrentDay();
+        String currentDay = libraries.GetDate.getDayOfMonth();
         String currentMonth = libraries.GetDate.getCurrentMonth();
         boolean isWeekend = GetDate.isWeekEnd();
         String isHolyDay = controllers.HollydaysCalendar.isHollyDay(currentMonth+"-"+currentDay);
- 
+        
+        System.out.println("mes "+currentMonth);
+        System.out.println("dia "+currentDay);
+        
         day.setDesciption("Dia se semana laboral");
  
         if(isWeekend){

@@ -300,7 +300,7 @@ public class TeacherDataPanel extends javax.swing.JFrame {
 
         lblName.setEnabled(enabled);
         lblLastName.setEnabled(enabled);
-        lblCi.setEnabled(enabled);
+        
         lblCharge.setEnabled(enabled);
         lblPhone.setEnabled(enabled);
         lblEmail.setEnabled(enabled);

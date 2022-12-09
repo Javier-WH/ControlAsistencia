@@ -1,8 +1,16 @@
 package pannels;
 
 import controllers.AnswersController;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 public class RestorePasswordPannel extends javax.swing.JFrame {
@@ -24,11 +32,15 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
         txtCi = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         questionsPanel = new javax.swing.JPanel();
-        btnSend = new javax.swing.JButton();
         lblQuestion1 = new javax.swing.JLabel();
-        txtAnswer1 = new javax.swing.JTextField();
         lblQuestion2 = new javax.swing.JLabel();
-        txtAnswer2 = new javax.swing.JTextField();
+        txtAnswer1 = new javax.swing.JPasswordField();
+        txtAnswer2 = new javax.swing.JPasswordField();
+        lblQuestion3 = new javax.swing.JLabel();
+        txtAnswer3 = new javax.swing.JPasswordField();
+        btnSend = new javax.swing.JButton();
+        txtAnswer4 = new javax.swing.JPasswordField();
+        lblQuestion4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,6 +68,15 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
             }
         });
 
+        lblQuestion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuestion1.setText("Pregunta numero 1");
+
+        lblQuestion2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuestion2.setText("Pregunta numero 2");
+
+        lblQuestion3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuestion3.setText("Pregunta numero 3");
+
         btnSend.setText("Enviar");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,11 +84,8 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
             }
         });
 
-        lblQuestion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblQuestion1.setText("Pregunta numero 1");
-
-        lblQuestion2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblQuestion2.setText("Pregunta numero 2");
+        lblQuestion4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuestion4.setText("Pregunta numero 4");
 
         javax.swing.GroupLayout questionsPanelLayout = new javax.swing.GroupLayout(questionsPanel);
         questionsPanel.setLayout(questionsPanelLayout);
@@ -77,25 +95,37 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
             .addComponent(txtAnswer1)
             .addComponent(lblQuestion2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txtAnswer2)
+            .addComponent(lblQuestion3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtAnswer3)
             .addGroup(questionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(btnSend)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lblQuestion4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtAnswer4)
         );
         questionsPanelLayout.setVerticalGroup(
             questionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, questionsPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+            .addGroup(questionsPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addComponent(lblQuestion1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAnswer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblQuestion2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblQuestion2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAnswer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblQuestion3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAnswer3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblQuestion4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAnswer4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnSend)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -146,9 +176,9 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(questionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(questionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,7 +189,9 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -179,9 +211,16 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
                 ResultSet questions = AnswersController.getQuestions(id);
 
                 if (questions.next()) {
-                    lblQuestion1.setText(questions.getString("question1"));
-                    lblQuestion2.setText(questions.getString("question2"));
-                    questionsPanel.setVisible(true);
+                    try {
+                        lblQuestion1.setText(libraries.Encript.desencriptar(questions.getString("question1"), env.GetLocalConfig.getKey()));
+                        lblQuestion2.setText(libraries.Encript.desencriptar(questions.getString("question2"), env.GetLocalConfig.getKey()));
+                        lblQuestion3.setText(libraries.Encript.desencriptar(questions.getString("question3"), env.GetLocalConfig.getKey()));
+                        lblQuestion4.setText(libraries.Encript.desencriptar(questions.getString("question4"), env.GetLocalConfig.getKey()));
+                        questionsPanel.setVisible(true);
+                    } catch (UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+                        Logger.getLogger(RestorePasswordPannel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Este administrador no tiene preguntas establecidas, no puede recuperar su contraseña");
                 }
@@ -206,12 +245,14 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
 
         String answer1 = txtAnswer1.getText();
         String answer2 = txtAnswer2.getText();
+        String answer3 = txtAnswer3.getText();
+        String answer4 = txtAnswer4.getText();
 
         if (answer1.isEmpty() || answer2.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe responder ambas preguntas para continuar");
         } else {
 
-            boolean isValid = controllers.AnswersController.validateAnswers(id, answer1, answer2);
+            boolean isValid = controllers.AnswersController.validateAnswers(id, answer1, answer2, answer3, answer4);
 
             if (isValid) {
                 RestorePasswordPanel2 RPP2 = new RestorePasswordPanel2(id);
@@ -222,6 +263,8 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Las respuestas no son correctas");
                 txtAnswer1.setText("");
                 txtAnswer2.setText("");
+                txtAnswer3.setText("");
+                txtAnswer4.setText("");
             }
 
         }
@@ -230,10 +273,12 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void txtCiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiKeyTyped
-          questionsPanel.setVisible(false);
-           txtAnswer1.setText("");
-           txtAnswer2.setText("");
-           id = "";
+        questionsPanel.setVisible(false);
+        txtAnswer1.setText("");
+        txtAnswer2.setText("");
+        txtAnswer3.setText("");
+        txtAnswer4.setText("");
+        id = "";
     }//GEN-LAST:event_txtCiKeyTyped
 
 
@@ -246,9 +291,13 @@ public class RestorePasswordPannel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblQuestion1;
     private javax.swing.JLabel lblQuestion2;
+    private javax.swing.JLabel lblQuestion3;
+    private javax.swing.JLabel lblQuestion4;
     private javax.swing.JPanel questionsPanel;
-    private javax.swing.JTextField txtAnswer1;
-    private javax.swing.JTextField txtAnswer2;
+    private javax.swing.JPasswordField txtAnswer1;
+    private javax.swing.JPasswordField txtAnswer2;
+    private javax.swing.JPasswordField txtAnswer3;
+    private javax.swing.JPasswordField txtAnswer4;
     private javax.swing.JTextField txtCi;
     // End of variables declaration//GEN-END:variables
 }

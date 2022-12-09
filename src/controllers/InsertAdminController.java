@@ -60,18 +60,22 @@ public class InsertAdminController {
             if (rsCi.next()) {
                 int id = rsCi.getInt("id");
                 
-                String sql = "INSERT INTO `questionsandanswers` (`question1`, `question2`, `answer1`, `answer2`, `userId`) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO `questionsandanswers` (`question1`, `question2`, `answer1`, `answer2`, `userId`, `question3`, `question4`, `answer3`, `answer4`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setString(1, questions.getQuestion1());
-                st.setString(2, questions.getQuestion2());
-                st.setString(3, questions.getAnswer1());
-                st.setString(4, questions.getAnswer2());
+                st.setString(1,  libraries.Encript.encriptar( questions.getQuestion1() , env.GetLocalConfig.getKey()));
+                st.setString(2,  libraries.Encript.encriptar( questions.getQuestion2() , env.GetLocalConfig.getKey()));
+                st.setString(3, libraries.Encript.encriptar( questions.getAnswer1(), env.GetLocalConfig.getKey()));
+                st.setString(4, libraries.Encript.encriptar( questions.getAnswer2(), env.GetLocalConfig.getKey()));
                 st.setString(5, String.valueOf(id));
+                st.setString(6, libraries.Encript.encriptar( questions.getQuestion3(), env.GetLocalConfig.getKey()));
+                st.setString(7, libraries.Encript.encriptar( questions.getQuestion4(), env.GetLocalConfig.getKey()));
+                st.setString(8, libraries.Encript.encriptar( questions.getAnswer3(), env.GetLocalConfig.getKey()));
+                st.setString(9, libraries.Encript.encriptar( questions.getAnswer4(), env.GetLocalConfig.getKey()));
                 st.execute();
                 return true;
             }
                 return false;
-        } catch (SQLException e) {
+        } catch (SQLException | UnsupportedEncodingException |NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException  e) {
             System.out.println(e.getMessage());
                return false;
         }
