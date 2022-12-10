@@ -24,6 +24,7 @@ public class ShowAssitance extends javax.swing.JFrame {
 
     public ShowAssitance() {
         initComponents();
+      
         ButtonGroup Asistencia = new ButtonGroup();
         Asistencia.add(btnPresente);
         Asistencia.add(btnInasistente);
@@ -79,6 +80,9 @@ public class ShowAssitance extends javax.swing.JFrame {
     }
 
     private void fillTable() {
+        int totalLeaves = 0;
+      
+ 
 
         ArrayList<Integer> leaves = new ArrayList();
 
@@ -102,6 +106,8 @@ public class ShowAssitance extends javax.swing.JFrame {
                 int countAll = rsTeacherList.getRow();
                 rsTeacherList.beforeFirst();
                 
+                lblTotal.setText("Personal total: " + String.valueOf(countAll));
+                
                 if(countAll == 0){
                     countAll = 1;
                 }
@@ -111,15 +117,26 @@ public class ShowAssitance extends javax.swing.JFrame {
                
                 LblPercent.setText(asistencePercent + "% de asistencias");
                 
+                ////
+                
+                lblPresentes.setText("Presentes: " + String.valueOf(countPresent));
+                lblAusentes.setText("Ausentes: "+ String.valueOf(countAll - countPresent));
+             
+               
+                ////1
+                
+                
                // System.out.println((countPresent*100)/countAll);
                 
 ////////////////////////////////////////////////////
                 if (btnPresente.isSelected()) {
+                       lblPermiso.setVisible(false);
                     LblPercent.setText(asistencePercent + "% de asistencias");
                     while (rsPresent.next()) {
                         model.addRow(new Object[]{rsPresent.getString("ci"), rsPresent.getString("name"), rsPresent.getString("lastName"), rsPresent.getString("charge")});
                     }
                 } else {
+                       lblPermiso.setVisible(true);
                        LblPercent.setText((100 - asistencePercent) + "% de inacistencias");
                     //se hizó así, porque fue la uníca solución que funcionó para resolver el bug que duplicaba los resultados.
                     ArrayList<String> presentsList = new ArrayList();
@@ -130,6 +147,7 @@ public class ShowAssitance extends javax.swing.JFrame {
 
                     while (rsTeacherList.next()) {
                         String teacherID = rsTeacherList.getString("id");
+                        
                         if (!presentsList.contains(teacherID)) {
                             model.addRow(new Object[]{rsTeacherList.getString("ci"), rsTeacherList.getString("name"), rsTeacherList.getString("lastName"), rsTeacherList.getString("charge")});
 
@@ -153,6 +171,8 @@ public class ShowAssitance extends javax.swing.JFrame {
 
                                     if (controllers.LeavesController.isOnLeave(selectedMonth, selectedDay, month1, month2, day1, day2)) {
                                         leaves.add(model.getRowCount() - 1);
+                                        totalLeaves++;
+                                            lblPermiso.setText("De permiso: " + String.valueOf(totalLeaves));
                                     }
                                 }
 
@@ -163,6 +183,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                     }
                 }
                 changeRowColor(leaves);
+                //lblPermiso.setText("De permiso: " + String.valueOf(totalLeaves));
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(getContentPane(), "Ha ocurrido un error al intentar llenar la tabla");
             }
@@ -192,6 +213,10 @@ public class ShowAssitance extends javax.swing.JFrame {
         cmbMonth = new javax.swing.JComboBox<>();
         cmbDay = new javax.swing.JComboBox<>();
         LblPercent = new javax.swing.JLabel();
+        lblPresentes = new javax.swing.JLabel();
+        lblAusentes = new javax.swing.JLabel();
+        lblPermiso = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -202,6 +227,7 @@ public class ShowAssitance extends javax.swing.JFrame {
         mainPanel.setBackground(new java.awt.Color(51, 102, 0));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         mainPanel.setMaximumSize(new java.awt.Dimension(32767, 600));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblAssistance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,11 +255,14 @@ public class ShowAssitance extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblAssistance);
 
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 100, 739, 384));
+
         jLabel1.setBackground(new java.awt.Color(204, 0, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Asitencia");
+        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, 757, -1));
 
         txtYear.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtYear.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -241,15 +270,19 @@ public class ShowAssitance extends javax.swing.JFrame {
                 txtYearKeyReleased(evt);
             }
         });
+        mainPanel.add(txtYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("dia");
+        mainPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 38, 34, -1));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("mes");
+        mainPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 38, 34, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("año");
+        mainPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 38, 34, -1));
 
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -257,6 +290,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        mainPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 496, 136, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,6 +301,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
+        mainPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1393, 7, 16, -1));
 
         btnPresente.setBackground(new java.awt.Color(51, 102, 0));
         btnPresente.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,6 +312,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 btnPresenteStateChanged(evt);
             }
         });
+        mainPanel.add(btnPresente, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 61, -1, -1));
 
         btnInasistente.setBackground(new java.awt.Color(51, 102, 0));
         btnInasistente.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,6 +322,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 btnInasistenteActionPerformed(evt);
             }
         });
+        mainPanel.add(btnInasistente, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 61, -1, -1));
 
         jButton1.setText("Hoy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -293,6 +330,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        mainPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 60, -1, -1));
 
         jButton3.setText("Imprimir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -300,6 +338,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        mainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 60, -1, -1));
 
         cmbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Frebro", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
         cmbMonth.addItemListener(new java.awt.event.ItemListener() {
@@ -307,6 +346,7 @@ public class ShowAssitance extends javax.swing.JFrame {
                 cmbMonthItemStateChanged(evt);
             }
         });
+        mainPanel.add(cmbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 60, -1, -1));
 
         cmbDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDay.addItemListener(new java.awt.event.ItemListener() {
@@ -314,84 +354,32 @@ public class ShowAssitance extends javax.swing.JFrame {
                 cmbDayItemStateChanged(evt);
             }
         });
+        mainPanel.add(cmbDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 60, -1, -1));
 
         LblPercent.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LblPercent.setForeground(new java.awt.Color(255, 255, 255));
         LblPercent.setText("Asistencia");
+        mainPanel.add(LblPercent, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 516, 161, -1));
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPresente)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInasistente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(LblPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 643, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPresente)
-                    .addComponent(btnInasistente)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(cmbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(LblPercent))
-                .addGap(431, 431, 431))
-        );
+        lblPresentes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPresentes.setForeground(new java.awt.Color(255, 255, 255));
+        lblPresentes.setText("Presentes: 0");
+        mainPanel.add(lblPresentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 486, 161, -1));
+
+        lblAusentes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAusentes.setForeground(new java.awt.Color(255, 255, 255));
+        lblAusentes.setText("Ausentes: 0");
+        mainPanel.add(lblAusentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 516, 161, -1));
+
+        lblPermiso.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPermiso.setForeground(new java.awt.Color(255, 255, 255));
+        lblPermiso.setText("De Permiso: 0");
+        mainPanel.add(lblPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 486, 161, -1));
+
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotal.setText("Personal total: 9999999");
+        mainPanel.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 486, 161, -1));
 
         jScrollPane2.setViewportView(mainPanel);
 
@@ -517,6 +505,10 @@ public class ShowAssitance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAusentes;
+    private javax.swing.JLabel lblPermiso;
+    private javax.swing.JLabel lblPresentes;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tblAssistance;
     private javax.swing.JTextField txtYear;

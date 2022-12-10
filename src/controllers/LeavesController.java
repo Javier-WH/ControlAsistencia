@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LeavesController {
 
@@ -44,6 +45,43 @@ public class LeavesController {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+    ///
+    
+    public static int getTotalLeaves(ResultSet fullList, ResultSet presentList){
+        
+        //String currentDay = libraries.GetDate.getDayOfMonth();
+        //String currentMonth = libraries.GetDate.getCurrentMonth();
+        
+        int totalLeaves = 0;
+        
+        ArrayList<String> presentsList = new ArrayList();
+
+            try {
+            
+                  while (presentList.next()) {
+                        presentsList.add(presentList.getString("id"));
+                    }
+
+                    while (fullList.next()) {
+                        String teacherID = fullList.getString("id");
+                        
+                        if (!presentsList.contains(teacherID)) {
+                             ResultSet leave = controllers.LeavesController.getLeaves(teacherID);
+
+                                if (leave.next()) {
+                                    totalLeaves++;
+                                }
+        
+                        }
+                    
+                    }
+        } catch (SQLException e) {
+            
+        }
+        
+  
+        return totalLeaves;
     }
 
     ////
