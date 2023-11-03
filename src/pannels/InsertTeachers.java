@@ -261,8 +261,8 @@ public class InsertTeachers extends javax.swing.JFrame {
            
            if(name.isEmpty()|| lastName.isEmpty() || CI.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
                 messaje = "Debe llenar correctamente todos los campos";
-      
-          
+           }else if(!utils.verifyPasswordFormat.isValidFormat(password)){
+               messaje = "la contraseña debe tener al menos una mayuscula, una minuscula, un caracter especial (@#$%^&+=) y no debe tener espacios";
            }else if(!password.equals(password2)){
                 messaje = "Las contraseñas no son iguales";
            }else if(!libraries.RegEx.isMatch("^[0-9]*$", CI)){

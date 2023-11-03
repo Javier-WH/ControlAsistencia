@@ -5,8 +5,7 @@ import Actors.Questions;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
+
 
 public class InsertAdmins extends javax.swing.JFrame {
 
@@ -246,10 +245,12 @@ public class InsertAdmins extends javax.swing.JFrame {
                     answer4 = txtAnswer4.getText();
           
            
-           if(name.isEmpty() || CI.isEmpty() || user.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || question1.isEmpty() || question2.isEmpty() || answer1.isEmpty() || answer2.isEmpty()){
-               
-                messaje = "Debe llenar correctamente todos los campos";
            
+           
+           if(name.isEmpty() || CI.isEmpty() || user.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || question1.isEmpty() || question2.isEmpty() || answer1.isEmpty() || answer2.isEmpty()){
+                messaje = "Debe llenar correctamente todos los campos";
+           }else if(!utils.verifyPasswordFormat.isValidFormat(password)){
+               messaje = "la contraseña debe tener al menos una mayuscula, una minuscula, un caracter especial (@#$%^&+=) y no debe tener espacios";
            }else if(!password.equals(password2)){
                 messaje = "Las contraseñas no son iguales";
            }else if(!libraries.RegEx.isMatch("^[0-9]*$", CI)){
