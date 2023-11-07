@@ -14,8 +14,8 @@ public class LeavesPannel extends javax.swing.JFrame {
         txtYear1.setText(libraries.GetDate.getCurrentYear());
         txtYear2.setText(txtYear1.getText());
 
-        fillDaysOfMoth();
-
+        fillDaysOfMoth(1);
+        fillDaysOfMoth(2);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
@@ -152,6 +152,11 @@ public class LeavesPannel extends javax.swing.JFrame {
         cmbMonth2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbMonth2ItemStateChanged(evt);
+            }
+        });
+        cmbMonth2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMonth2ActionPerformed(evt);
             }
         });
 
@@ -310,12 +315,12 @@ public class LeavesPannel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbMonth1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMonth1ItemStateChanged
-        fillDaysOfMoth();
+        fillDaysOfMoth(1);
     }//GEN-LAST:event_cmbMonth1ItemStateChanged
 
     private void cmbMonth2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMonth2ItemStateChanged
         // TODO add your handling code here:
-        fillDaysOfMoth();
+        fillDaysOfMoth(2);
     }//GEN-LAST:event_cmbMonth2ItemStateChanged
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -345,15 +350,18 @@ public class LeavesPannel extends javax.swing.JFrame {
         String ci = txtCI.getText();
         String type = String.valueOf(cmbType.getSelectedItem());
         String description = txtDescription.getText();
+        
         String year1 = txtYear1.getText();
         String month1 = String.valueOf(cmbMonth1.getSelectedIndex() +1);
         String day1 = String.valueOf(cmbDay1.getSelectedItem());
+        
         String year2 = txtYear2.getText();
         String month2 = String.valueOf(cmbMonth2.getSelectedIndex() +1);
         String day2 = String.valueOf(cmbDay2.getSelectedItem());
 
         String init = month1 + "-" + day1;
         String end = rdbTo.isSelected() ? month2 + "-" + day2 : init;
+        
         String userID = "";
         String userName = "";
 
@@ -385,28 +393,35 @@ public class LeavesPannel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAcceptActionPerformed
 
-    private void fillDaysOfMoth() {
+    private void cmbMonth2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMonth2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMonth2ActionPerformed
 
-        //fecha 1
-        DefaultComboBoxModel DCBM = (DefaultComboBoxModel) cmbDay1.getModel();
-        DCBM.removeAllElements();
+    private void fillDaysOfMoth(int type) {
 
-        int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear1.getText(), String.valueOf(cmbMonth1.getSelectedIndex() + 1));
+        if(type == 1){
+            //fecha 1
+            DefaultComboBoxModel DCBM = (DefaultComboBoxModel) cmbDay1.getModel();
+            DCBM.removeAllElements();
 
-        for (int i = 1; i <= days; i++) {
-            DCBM.addElement(i);
+            int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear1.getText(), String.valueOf(cmbMonth1.getSelectedIndex() + 1));
+
+            for (int i = 1; i <= days; i++) {
+                DCBM.addElement(i);
+            }
         }
+        
+        if(type == 2){
+            //fecha 2
+            DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) cmbDay2.getModel();
+            DCBM2.removeAllElements();
 
-        ///////////
-        DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) cmbDay2.getModel();
-        DCBM2.removeAllElements();
+            int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(cmbMonth2.getSelectedIndex() + 1));
 
-        int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(cmbMonth2.getSelectedIndex() + 1));
-
-        for (int i = 1; i <= days2; i++) {
-            DCBM2.addElement(i);
+            for (int i = 1; i <= days2; i++) {
+                DCBM2.addElement(i);
+            }
         }
-
     }
 
 
