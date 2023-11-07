@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 public class Triggers {
 
@@ -39,7 +38,7 @@ public class Triggers {
     public static void onInsertTeacher() {
 
         String triggerName = "onInsertTeacher";
-        String description = "Inscripcion de usuario";
+
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -52,10 +51,10 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(NEW.id, ?, CURRENT_TIMESTAMP); "
+                    + "VALUES(NEW.id, CONCAT('Se ha inscrito el usuario: ', NEW.name, ' ',NEW.lastName , NEW.ci), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
+
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -66,7 +65,6 @@ public class Triggers {
     public static void onDeleteTeacher() {
 
         String triggerName = "onDeleteTeacher";
-        String description = "Eliminación de usuario";
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -79,10 +77,9 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(OLD.id, ?, CURRENT_TIMESTAMP); "
+                    + "VALUES(OLD.id, CONCAT('Se ha eliminado el usuario: ', OLD.name, ' ',OLD.lastName , OLD.ci), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -93,7 +90,6 @@ public class Triggers {
     public static void onInsertAdmin() {
 
         String triggerName = "onInsertAdmin";
-        String description = "Inscripcion de Administrador";
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -106,10 +102,9 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(NEW.id, ?, CURRENT_TIMESTAMP); "
+                    + "VALUES(NEW.id, CONCAT('Se ha agregado el administrador: ', NEW.name, ' ', NEW.ci), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -120,7 +115,6 @@ public class Triggers {
     public static void onDeleteAdmin() {
 
         String triggerName = "onDeleteAdmin";
-        String description = "Eliminación de Administrador";
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -133,10 +127,10 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(OLD.id, ?, CURRENT_TIMESTAMP); "
+                    + "VALUES(OLD.id, CONCAT('Se ha eliminado el administrador: ', OLD.name, ' ', OLD.ci), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
+  
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -147,7 +141,7 @@ public class Triggers {
     public static void onInsertHollyday() {
 
         String triggerName = "onInsertHollyday";
-        String description = "Agregado dia feriado";
+
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -160,10 +154,9 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(NEW.id, CONCAT(? , ': ', ' fecha: ', NEW.init, ' hasta ', NEW.end ), CURRENT_TIMESTAMP); "
+                    + "VALUES(NEW.id, CONCAT('Se gragó dia feriado ', NEW.description, ': ', ' fecha: ', NEW.init, ' hasta ', NEW.end ), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -174,7 +167,7 @@ public class Triggers {
     public static void onDeleteHollyday() {
 
         String triggerName = "onDeleteHollyday";
-        String description = "Eliminado dia feriado";
+  
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -187,10 +180,10 @@ public class Triggers {
                     + "FOR EACH ROW "
                     + "BEGIN "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(OLD.id, CONCAT(? , ': ', ' fecha: ', OLD.init, ' hasta ', OLD.end ), CURRENT_TIMESTAMP); "
+                    + "VALUES(OLD.id, CONCAT('Se eliminó dia feriado ', OLD.description, ': ', ' fecha: ', OLD.init, ' hasta ', OLD.end ), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
+ 
             st.execute();
 
         } catch (HeadlessException | SQLException e) {

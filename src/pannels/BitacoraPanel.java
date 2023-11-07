@@ -25,18 +25,13 @@ public class BitacoraPanel extends javax.swing.JFrame {
         
         try {
             while(rs.next()){
-                String userName = rs.getString("name");
-                String userLastName = rs.getString("lastName");
-                String ci = rs.getString("ci");
-                String date = rs.getString("date");
+          ;
+                String date = rs.getString("createdAt");
                 String action = rs.getString("action");
-                Boolean isAdmin = rs.getBoolean("admin");
-               
-                if(isAdmin){
-                    model.addRow(new Object[]{userName, userLastName, ci, action , date });
-                }else{
-                    model.addRow(new Object[]{userName + " "+userLastName, "Ninguno", ci, action , date });
-                }
+     
+              
+                model.addRow(new Object[]{action, date });
+            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -63,17 +58,17 @@ public class BitacoraPanel extends javax.swing.JFrame {
 
         tblBitacora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nombre", "Nombre de Usuario", "Cédula", "Acción", "Fecha"
+                "Acción", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -81,9 +76,6 @@ public class BitacoraPanel extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblBitacora);
-        if (tblBitacora.getColumnModel().getColumnCount() > 0) {
-            tblBitacora.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
