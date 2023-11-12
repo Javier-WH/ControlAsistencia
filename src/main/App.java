@@ -29,6 +29,7 @@ public class App extends javax.swing.JFrame {
             btnAccept.setVisible(false);
             lblMessage.setText("Hoy no es un dia laboral");
             lblMessage1.setText(today.getDesciption());
+            chkPass.setVisible(false);
         } else{
             jLabel1.setVisible(true);
             jLabel2.setVisible(true);
@@ -37,6 +38,7 @@ public class App extends javax.swing.JFrame {
             btnAccept.setVisible(true);
             lblMessage.setText("");
             lblMessage1.setText("");
+             chkPass.setVisible(true);
         }
        
          this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
@@ -149,6 +151,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        chkPass.setBackground(new java.awt.Color(51, 102, 0));
         chkPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/closedEyeWhite.png"))); // NOI18N
         chkPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/openEyeWhite.png"))); // NOI18N
         chkPass.addActionListener(new java.awt.event.ActionListener() {
