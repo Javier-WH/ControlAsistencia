@@ -32,7 +32,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 
        
         inputContainer.setBackground(new Color(2, 77, 16));
-        
+        chkPass.setBackground(new Color(2, 77, 16));
         lblVersion.setText(env.Enviroment.getVersion());
         
          this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
@@ -58,6 +58,7 @@ public class LoginFrame extends javax.swing.JFrame {
         ScrollTitle = new javax.swing.JScrollPane();
         txtTitle = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        chkPass = new javax.swing.JCheckBox();
         lblClose = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
@@ -133,7 +134,16 @@ public class LoginFrame extends javax.swing.JFrame {
         });
         inputContainer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
-        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 280, 330));
+        chkPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/closedEyeWhite.png"))); // NOI18N
+        chkPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/openEyeWhite.png"))); // NOI18N
+        chkPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPassActionPerformed(evt);
+            }
+        });
+        inputContainer.add(chkPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+
+        jPanel1.add(inputContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 310, 330));
 
         lblClose.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblClose.setForeground(new java.awt.Color(153, 153, 153));
@@ -178,7 +188,7 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,11 +231,16 @@ public class LoginFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void chkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPassActionPerformed
+        txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
+    }//GEN-LAST:event_chkPassActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollTitle;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JCheckBox chkPass;
     private javax.swing.JPanel inputContainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

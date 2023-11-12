@@ -9,14 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class GetTeachersController {
 
+    
     public static ResultSet getTeachers() {
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -77,8 +76,30 @@ public class GetTeachersController {
             }
             return true;
         } catch (HeadlessException | SQLException | UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+           
+            System.out.println(e);
+            return false;
+        }
+    }
+    
+    
+    
+     public static boolean updateTeachersPassword(Users user) {
+        Connection connection = env.ConnectionDB.getConnection();
+       
+        try {
+            String sql = ("update users set password = ? where ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, libraries.Encript.encriptar(user.getPassword(), env.GetLocalConfig.getKey()));
+            st.setString(2, user.getCI());
+            st.execute();
+            return true;
+        } catch (HeadlessException | SQLException | UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+            System.out.println(e);
             return false;
         }
     }
 
 }
+
+

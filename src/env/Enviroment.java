@@ -142,7 +142,6 @@ public class Enviroment {
     }
 
     public static String getContectionString() {
-
         String dbName = getDatabaseName();
 //"jdbc:mysql://localhost/assistcontrol?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
         return getDatabaseAddress() + dbName + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";

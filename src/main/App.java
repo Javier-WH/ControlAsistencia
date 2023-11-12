@@ -80,6 +80,7 @@ public class App extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnAccept = new javax.swing.JButton();
+        chkPass = new javax.swing.JCheckBox();
         btnStop = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
@@ -148,6 +149,14 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        chkPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/closedEyeWhite.png"))); // NOI18N
+        chkPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/openEyeWhite.png"))); // NOI18N
+        chkPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
@@ -158,9 +167,12 @@ public class App extends javax.swing.JFrame {
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(inputPanelLayout.createSequentialGroup()
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkPass))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,13 +194,17 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .addComponent(chkPass)
+                        .addGap(20, 20, 20)))
                 .addGap(18, 18, 18)
                 .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
         );
 
-        jPanel2.add(inputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 340, 350));
+        jPanel2.add(inputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 380, 350));
 
         btnStop.setBackground(new java.awt.Color(204, 0, 0));
         btnStop.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,7 +243,7 @@ public class App extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 270, 410, 70));
         jPanel2.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 470));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 470));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -313,12 +329,17 @@ public class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
+    private void chkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPassActionPerformed
+        txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
+    }//GEN-LAST:event_chkPassActionPerformed
+
  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnStop;
+    private javax.swing.JCheckBox chkPass;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
