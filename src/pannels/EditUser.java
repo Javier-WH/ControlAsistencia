@@ -45,7 +45,10 @@ public class EditUser extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         btnAccept = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Datos de Usuario");
+        setAlwaysOnTop(true);
+        setLocationByPlatform(true);
 
         lblname.setText("Nomrbes");
 

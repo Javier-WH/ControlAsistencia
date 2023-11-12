@@ -61,6 +61,7 @@ public class InsertAdmins extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtQuestion4 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        chkPass = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -73,7 +74,7 @@ public class InsertAdmins extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre y apellidos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 85, -1, -1));
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 105, 334, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 105, 390, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cédula de identidad");
@@ -106,7 +107,7 @@ public class InsertAdmins extends javax.swing.JFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Pregunta secreta 2");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
 
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -160,8 +161,8 @@ public class InsertAdmins extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 410, 40));
-        jPanel1.add(txtQuestion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 156, -1));
-        jPanel1.add(txtAnswer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 156, -1));
+        jPanel1.add(txtQuestion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 156, -1));
+        jPanel1.add(txtAnswer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 156, -1));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Dirección");
@@ -169,37 +170,47 @@ public class InsertAdmins extends javax.swing.JFrame {
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Respuesta 2");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Pregunta secreta 1");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
 
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Respuesta 1");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
-        jPanel1.add(txtQuestion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 156, -1));
-        jPanel1.add(txtAnswer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 156, -1));
-        jPanel1.add(txtAnswer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 156, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, -1, -1));
+        jPanel1.add(txtQuestion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 156, -1));
+        jPanel1.add(txtAnswer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 156, -1));
+        jPanel1.add(txtAnswer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 156, -1));
 
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Pregunta secreta 3");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
-        jPanel1.add(txtQuestion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 156, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
+        jPanel1.add(txtQuestion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 156, -1));
 
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Respuesta 3");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
-        jPanel1.add(txtAnswer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 156, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
+        jPanel1.add(txtAnswer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 156, -1));
 
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Respuesta 4");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, -1, -1));
-        jPanel1.add(txtQuestion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 156, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
+        jPanel1.add(txtQuestion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 156, -1));
 
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Pregunta secreta 4");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+
+        chkPass.setBackground(new java.awt.Color(51, 102, 0));
+        chkPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/closedEyeWhite.png"))); // NOI18N
+        chkPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/openEyeWhite.png"))); // NOI18N
+        chkPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPassActionPerformed(evt);
+            }
+        });
+        jPanel1.add(chkPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -207,9 +218,7 @@ public class InsertAdmins extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,6 +307,10 @@ public class InsertAdmins extends javax.swing.JFrame {
                    txtQuestion2.setText("");
                    txtAnswer1.setText("");
                    txtAnswer2.setText("");
+                   txtQuestion3.setText("");
+                   txtQuestion4.setText("");
+                   txtAnswer3.setText("");
+                   txtAnswer4.setText("");
                }else{
                  messaje = "Ha ocurrido un error y no se ha podido insertar el administrador en la base de datos";
                }
@@ -316,9 +329,15 @@ public class InsertAdmins extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassword2ActionPerformed
 
+    private void chkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPassActionPerformed
+        txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
+        txtPassword2.setEchoChar(chkPass.isSelected() ? '\0' : '•');
+    }//GEN-LAST:event_chkPassActionPerformed
+
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsert;
+    private javax.swing.JCheckBox chkPass;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
