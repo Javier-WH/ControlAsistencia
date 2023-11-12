@@ -3,6 +3,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import pannels.RestorePasswordPannel;
@@ -86,12 +87,23 @@ public class LoginFrame extends javax.swing.JFrame {
                 txtUserActionPerformed(evt);
             }
         });
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUserKeyReleased(evt);
+            }
+        });
         inputContainer.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 140, 180, 32));
 
         lblAdmin1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblAdmin1.setForeground(new java.awt.Color(255, 255, 255));
         lblAdmin1.setText("Contraseña");
         inputContainer.add(lblAdmin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 181, 30));
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
         inputContainer.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 181, 32));
 
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -203,7 +215,12 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-            
+        login();
+    
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void login(){
+    
         String user = txtUser.getText();
         String password = String.valueOf(txtPassword.getPassword());
         
@@ -217,8 +234,11 @@ public class LoginFrame extends javax.swing.JFrame {
             configuration.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
+    
+    
+    
+    }
+    
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
@@ -234,6 +254,18 @@ public class LoginFrame extends javax.swing.JFrame {
     private void chkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPassActionPerformed
         txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
     }//GEN-LAST:event_chkPassActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              login();
+          }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
+           if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              login();
+          }
+    }//GEN-LAST:event_txtUserKeyReleased
 
 
 

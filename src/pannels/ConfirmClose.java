@@ -1,23 +1,23 @@
 package pannels;
 
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.ConfigFrame;
 
-
 public class ConfirmClose extends javax.swing.JFrame {
+
     private JFrame configWindow;
-  
+
     public ConfirmClose(JFrame configWindow) {
-         initComponents();
-   
+        initComponents();
+
         this.configWindow = configWindow;
-        
-         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
+
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/icons/icon.png")));
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,6 +109,18 @@ public class ConfirmClose extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 430, -1));
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
+
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUserKeyReleased(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Contraseña");
 
@@ -149,10 +161,11 @@ public class ConfirmClose extends javax.swing.JFrame {
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(chkPass))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkPass)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addContainerGap())
         );
 
@@ -162,9 +175,7 @@ public class ConfirmClose extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,25 +192,40 @@ public class ConfirmClose extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String user = txtUser.getText();
-        String password = String.valueOf(txtPassword.getPassword());
-        
-        String messaje = controllers.AutenticationController.autenticateAdmin(user, password);
-        if(!messaje.equals("ACCESS-GRANTED")){
-            JOptionPane.showMessageDialog(getContentPane(), messaje);
-        }else{
-          ConfigFrame CF = new ConfigFrame(this);
-          CF.setVisible(true);
-          configWindow.dispose();
-          this.dispose();
-        }
-        
+        close();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void close() {
+        String user = txtUser.getText();
+        String password = String.valueOf(txtPassword.getPassword());
+
+        String messaje = controllers.AutenticationController.autenticateAdmin(user, password);
+        if (!messaje.equals("ACCESS-GRANTED")) {
+            JOptionPane.showMessageDialog(getContentPane(), messaje);
+        } else {
+            ConfigFrame CF = new ConfigFrame(this);
+            CF.setVisible(true);
+            configWindow.dispose();
+            this.dispose();
+        }
+    }
+
     private void chkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPassActionPerformed
-       txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
+        txtPassword.setEchoChar(chkPass.isSelected() ? '\0' : '•');
     }//GEN-LAST:event_chkPassActionPerformed
 
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            close();
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              close();
+          }
+    }//GEN-LAST:event_txtUserKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
