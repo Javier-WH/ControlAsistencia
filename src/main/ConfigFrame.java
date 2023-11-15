@@ -16,6 +16,7 @@ import pannels.InsertTeachers;
 import pannels.InstitutionDataForm;
 import pannels.LeavesListPanel;
 import pannels.LeavesPannel;
+import pannels.MonitorPanel;
 import pannels.ShowAdmins;
 import pannels.ShowAssitance;
 import pannels.ShowTeachers;
@@ -63,6 +64,7 @@ public class ConfigFrame extends javax.swing.JFrame {
         btbCalendar = new javax.swing.JButton();
         btbLeaves = new javax.swing.JButton();
         btnEditUser = new javax.swing.JButton();
+        btnMonitor = new javax.swing.JButton();
         panelReportes = new javax.swing.JPanel();
         printConstancia = new javax.swing.JButton();
         btnCambiarLogo4 = new javax.swing.JButton();
@@ -207,6 +209,17 @@ public class ConfigFrame extends javax.swing.JFrame {
             }
         });
 
+        btnMonitor.setBackground(new java.awt.Color(51, 102, 0));
+        btnMonitor.setForeground(new java.awt.Color(255, 255, 255));
+        btnMonitor.setText("Monitor");
+        btnMonitor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 0)));
+        btnMonitor.setPreferredSize(new java.awt.Dimension(74, 18));
+        btnMonitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonitorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
         panelGeneralLayout.setHorizontalGroup(
@@ -217,8 +230,11 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btbLeaves, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 165, Short.MAX_VALUE))
+                            .addGroup(panelGeneralLayout.createSequentialGroup()
+                                .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMonitor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,7 +275,9 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addComponent(btbInstitucionData, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btbCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btbLeaves, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(11, Short.MAX_VALUE))
@@ -577,6 +595,12 @@ public class ConfigFrame extends javax.swing.JFrame {
       EU.setVisible(true);
     }//GEN-LAST:event_btnEditUserActionPerformed
 
+    private void btnMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonitorActionPerformed
+        MonitorPanel MP = new MonitorPanel();
+        MP.setLocationRelativeTo(this);
+        MP.setVisible(true);
+    }//GEN-LAST:event_btnMonitorActionPerformed
+
     
     public void updateAlllogos(){
         lblLogo.setIcon(env.Enviroment.getLogoIcon(logoWidth, logoHeight));
@@ -601,6 +625,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnInsertAdmins;
     private javax.swing.JButton btnInsertTeacher;
     private javax.swing.JButton btnLogoRestore;
+    private javax.swing.JButton btnMonitor;
     private javax.swing.JButton btnShowAdmins;
     private javax.swing.JButton btnStartApp;
     private javax.swing.JLabel jLabel2;
