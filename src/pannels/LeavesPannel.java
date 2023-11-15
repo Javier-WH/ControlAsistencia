@@ -76,6 +76,12 @@ public class LeavesPannel extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 0));
 
+        txtYear1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtYear1KeyReleased(evt);
+            }
+        });
+
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Año");
 
@@ -143,6 +149,11 @@ public class LeavesPannel extends javax.swing.JFrame {
         optionalPannel.setEnabled(false);
 
         txtYear2.setEnabled(false);
+        txtYear2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtYear2KeyReleased(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Año");
@@ -297,7 +308,7 @@ public class LeavesPannel extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionalPannel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -378,6 +389,9 @@ public class LeavesPannel extends javax.swing.JFrame {
 
                     if (controllers.LeavesController.RegisterLeave(userID, init, end, type, description)) {
                         JOptionPane.showMessageDialog(this, "Se ha registrado un permiso para el profesor " + userName);
+                        cleanInputs();
+                        
+                        
                     } else {
                         JOptionPane.showMessageDialog(this, "Ha ocurrido un error al registrar el permiso");
                     }
@@ -393,10 +407,33 @@ public class LeavesPannel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAcceptActionPerformed
 
+    private void cleanInputs(){
+        txtCI.setText("");
+        cmbType.setSelectedIndex(-1);
+        txtDescription.setText("");
+        txtYear1.setText(libraries.GetDate.getCurrentYear());
+        cmbMonth1.setSelectedIndex(-1);
+        cmbDay1.setSelectedIndex(-1);
+        rdbTo.setSelected(false);
+        txtYear2.setText(txtYear1.getText());
+        cmbMonth2.setSelectedIndex(-1);
+        cmbDay2.setSelectedIndex(-1);
+    
+    }
+    
     private void cmbMonth2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMonth2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbMonth2ActionPerformed
 
+    private void txtYear1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYear1KeyReleased
+        fillDaysOfMoth(1);
+    }//GEN-LAST:event_txtYear1KeyReleased
+
+    private void txtYear2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYear2KeyReleased
+        fillDaysOfMoth(2);
+    }//GEN-LAST:event_txtYear2KeyReleased
+
+    
     private void fillDaysOfMoth(int type) {
 
         if(type == 1){
@@ -404,6 +441,10 @@ public class LeavesPannel extends javax.swing.JFrame {
             DefaultComboBoxModel DCBM = (DefaultComboBoxModel) cmbDay1.getModel();
             DCBM.removeAllElements();
 
+             if(!utils.ValidateYearFormat.isValidYear(txtYear1.getText())){
+                 return;
+             }
+            
             int days = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear1.getText(), String.valueOf(cmbMonth1.getSelectedIndex() + 1));
 
             for (int i = 1; i <= days; i++) {
@@ -415,6 +456,10 @@ public class LeavesPannel extends javax.swing.JFrame {
             //fecha 2
             DefaultComboBoxModel DCBM2 = (DefaultComboBoxModel) cmbDay2.getModel();
             DCBM2.removeAllElements();
+            
+              if(!utils.ValidateYearFormat.isValidYear(txtYear2.getText())){
+                 return;
+             }
 
             int days2 = libraries.CreateDaysOfMonth.crateDaysMonth(txtYear2.getText(), String.valueOf(cmbMonth2.getSelectedIndex() + 1));
 

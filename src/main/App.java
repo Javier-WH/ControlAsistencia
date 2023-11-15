@@ -284,6 +284,7 @@ public class App extends javax.swing.JFrame {
                     if (res) {
                       clean();
                     } else {
+                     
                         JOptionPane.showMessageDialog(this, "No se pudo registrar la asistencia");
                     }
                 }else{

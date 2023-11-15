@@ -22,6 +22,7 @@ public class AssistenceController {
             return true;
 
         } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
             return false;
         }
     }

@@ -11,7 +11,7 @@ public class Triggers {
     public static void onAssist() {
 
         String triggerName = "onAssist";
-        String description = "Registro de asistencia";
+
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -20,14 +20,21 @@ public class Triggers {
             PreparedStatement drop_st = connection.prepareStatement(drop_sql);
             drop_st.execute();
 
-            String sql = "CREATE TRIGGER " + triggerName + " AFTER INSERT ON assistance "
-                    + "FOR EACH ROW "
-                    + "BEGIN "
-                    + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(NEW.userID, ?, CURRENT_TIMESTAMP); "
-                    + "END";
+            
+        String sql = "CREATE TRIGGER " + triggerName + " AFTER INSERT ON assistance "
+            + "FOR EACH ROW "
+            + "BEGIN "
+            + "DECLARE userName VARCHAR(255); "
+            + "DECLARE userLastName VARCHAR(255); "
+            + "DECLARE userCi VARCHAR(255); "
+            + "SELECT name, lastName, ci INTO userName, userLastName, userCi "
+            + "FROM users "
+            + "WHERE id = NEW.userID; "
+            + "INSERT INTO bitacora(userID, action, createdAt) "
+            + "VALUES(NEW.userID, CONCAT('Registro de asistencia del usuario ', userName, ' ', userLastName, ' C.I.: ', userCi), CURRENT_TIMESTAMP); "
+            + "END";
+            
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
@@ -236,11 +243,14 @@ public class Triggers {
                 st.setString(2, description); 
                 st.execute();
             }else{
-                String sql = "INSERT INTO bitacora(userID, action, admin, createdAt) VALUES(0,CONCAT(?, ', Usuario: ', ?),1, CURRENT_TIMESTAMP)";
+            
+                String sql = "INSERT INTO bitacora(userID, action, admin, createdAt) VALUES(?,?, 1, CURRENT_TIMESTAMP)";
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setString(1, description); 
-                st.setString(2, user);
+                st.setString(1, "0");
+                st.setString(2, description); 
                 st.execute();
+            
+            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
