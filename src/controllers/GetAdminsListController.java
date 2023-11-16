@@ -20,7 +20,20 @@ public class GetAdminsListController {
         } catch (HeadlessException | SQLException e) {
             return null;
         }
- 
+    }
+    
+     public static ResultSet getAdmin( String ci ){
+        Connection connection  = env.ConnectionDB.getConnection();
+                
+        try {
+            String sql = ("SELECT * FROM `admins` WHERE ci = ?");
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ci);
+            return st.executeQuery();
+
+        } catch (HeadlessException | SQLException e) {
+            return null;
+        }
     }
     
 }

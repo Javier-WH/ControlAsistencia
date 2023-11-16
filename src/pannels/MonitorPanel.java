@@ -1,10 +1,18 @@
 package pannels;
 
-public class MonitorPanel extends javax.swing.JFrame {
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
+public class MonitorPanel extends javax.swing.JFrame {
+    DefaultTableModel tableModel;
+               
     public MonitorPanel() {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        tableModel = (DefaultTableModel) tabla.getModel();
+        tableModel.setNumRows(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,6 +30,7 @@ public class MonitorPanel extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rdbUser = new javax.swing.JRadioButton();
         rdbAdmin = new javax.swing.JRadioButton();
+        txtName = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnAcept = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -48,13 +57,28 @@ public class MonitorPanel extends javax.swing.JFrame {
         jPanel2.add(title, gridBagConstraints);
 
         txtCi.setMinimumSize(new java.awt.Dimension(150, 100));
+        txtCi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCiKeyReleased(evt);
+            }
+        });
 
         btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Cédula");
 
         rdbUser.setSelected(true);
         rdbUser.setText("Usuario");
+        rdbUser.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rdbUserStateChanged(evt);
+            }
+        });
 
         rdbAdmin.setText("Administrador");
 
@@ -94,20 +118,27 @@ public class MonitorPanel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(303, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -134,17 +165,17 @@ public class MonitorPanel extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Usuario", "Acción", "Fecha"
+                "Acción", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -164,6 +195,73 @@ public class MonitorPanel extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAceptActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        search();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void rdbUserStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdbUserStateChanged
+        search();
+    }//GEN-LAST:event_rdbUserStateChanged
+
+    private void txtCiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            search();
+        }
+    }//GEN-LAST:event_txtCiKeyReleased
+
+    private void search(){
+    String ci = txtCi.getText();
+        String id = null;
+        ResultSet register = null;
+        String admin = null;
+        String name = null;
+
+        try {
+            if (rdbUser.isSelected()) {
+                register = controllers.GetTeachersController.getTeachers(ci);
+                admin = "0";
+            } else {
+                register = controllers.GetAdminsListController.getAdmin(ci);
+                admin = "1";
+            }
+
+            if (register.next()) {
+                id = register.getString("id");
+                if (rdbUser.isSelected()) {
+                    name = register.getString("name") + " " + register.getString("lastName");
+                } else {
+                    name = register.getString("name");
+                }
+                txtName.setText(name);
+            } else {
+                txtName.setText("No se ha encontrado el usuario o administrador");
+                tableModel.setNumRows(0);
+            }
+
+            if (id != null) {
+                ResultSet data = controllers.BitacoraController.getBitacora(id, admin);
+                tableModel.setNumRows(0);
+                boolean hasData = false; 
+                
+                
+                while (data.next()) {
+                    String action = data.getString("action");
+                    String date = data.getString("createdAt");
+                    tableModel.addRow(new Object[]{action, date});
+                    hasData = true;
+                }
+                
+                if(!hasData){
+                  tableModel.addRow(new Object[]{"No se encontraron registros", ""});
+                }
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcept;
@@ -181,5 +279,6 @@ public class MonitorPanel extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtCi;
+    private javax.swing.JLabel txtName;
     // End of variables declaration//GEN-END:variables
 }
