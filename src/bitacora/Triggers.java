@@ -199,9 +199,9 @@ public class Triggers {
     }
 
     public static void onInsertLeaves() {
-
+        
         String triggerName = "onInsertLeaves";
-        String description = "Permiso agregado";
+      
 
         Connection connection = env.ConnectionDB.getConnection();
 
@@ -213,11 +213,26 @@ public class Triggers {
             String sql = "CREATE TRIGGER " + triggerName + " AFTER INSERT ON leaves "
                     + "FOR EACH ROW "
                     + "BEGIN "
+                    + "DECLARE userName VARCHAR(255); "
+                    + "DECLARE userLastName VARCHAR(255); "
+                    + "DECLARE userCi VARCHAR(255); "
+                    + "SELECT name, lastName, ci INTO userName, userLastName, userCi "
+                    + "FROM users "
+                    + "WHERE id = NEW.userID; "
                     + "INSERT INTO bitacora(userID, action, createdAt) "
-                    + "VALUES(NEW.id,CONCAT(? , ' al usuario ID: ', NEW.userID, ', desde ', NEW.init, ' hasta ', NEW.end), CURRENT_TIMESTAMP); "
+                    + "VALUES(NEW.userID, CONCAT("
+                    + "'Permiso registrado al usuario: ',"
+                    + " userName, ' ', "
+                    + "userLastName, ', ',"
+                    + "'C.I. ',"
+                    + " userCi, "
+                    + "', desde ', "
+                    + "NEW.init, "
+                    + "' hasta '"
+                    + ", NEW.end"
+                    + "), CURRENT_TIMESTAMP); "
                     + "END";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, description);
             st.execute();
 
         } catch (HeadlessException | SQLException e) {
